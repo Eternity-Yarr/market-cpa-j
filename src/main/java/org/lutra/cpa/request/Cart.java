@@ -1,0 +1,18 @@
+package org.lutra.cpa.request;
+
+import org.lutra.cpa.model.Currency;
+import org.lutra.cpa.model.Delivery;
+import org.lutra.cpa.model.Item;
+
+import java.util.List;
+
+/**
+ * Structure of POST /cart request
+ * @see <a href="http://api.yandex.ru/market/partner/doc/dg/reference/post-cart.xml">reference</a>
+ */
+public class Cart
+{
+    public Currency currency;
+    public List<Item> items;
+    public Delivery delivery;
+}
