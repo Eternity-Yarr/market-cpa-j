@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNotNull;
 public class OrderTest
 {
     @Test
-    public void testORderResponseDeserialize() throws Exception
+    public void testOrderResponseDeserialize() throws Exception
     {
         URL url = OrderTest.class.getResource("orderResponse.json");
         String json = Helpers.readFile(url, StandardCharsets.UTF_8);
