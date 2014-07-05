@@ -7,7 +7,7 @@ public class OrderEntry {
 
     int id;
     Status status;
-    SubStatus substatus;
+    OrderSubstatus substatus;
     Date creationDate;
     Currency currency;
     double itemsTotal;

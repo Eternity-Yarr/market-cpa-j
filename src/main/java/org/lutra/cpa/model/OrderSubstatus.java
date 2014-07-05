@@ -1,6 +1,6 @@
 package org.lutra.cpa.model;
 
-public enum SubStatus
+public enum OrderSubstatus
 {
     RESERVATION_EXPIRED     ("Покупатель не завершил оформление зарезервированного заказа вовремя"),
     USER_NOT_PAID           ("Покупатель не оплатил заказ"),
@@ -14,7 +14,7 @@ public enum SubStatus
     PROCESSING_EXPIRED      ("Магазин не обработал заказ вовремя");
 
     final String desc;
-    SubStatus(String desc)
+    OrderSubstatus(String desc)
     {
         this.desc = desc;
     }
