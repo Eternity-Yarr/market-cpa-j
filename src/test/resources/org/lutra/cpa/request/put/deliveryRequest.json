@@ -1,0 +1,8 @@
+{
+  "delivery":
+     {
+     "type":"DELIVERY", "serviceName":"Собственная служба доставки", "price":13810,
+     "address":{"country":"Россия", "postcode":"119313", "city":"Москва", "subway":"Проспект Вернадского", "street":"Ленинский проспект", "house":"90", "entrance":"10", "entryphone":"289", "floor":"6", "apartment":"289", "recipient": "Иванов Иван", "phone": "+71234567890"},
+     "dates":{"fromDate":"03-02-2013"}
+     }
+}
