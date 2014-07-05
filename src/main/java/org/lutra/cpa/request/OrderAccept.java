@@ -5,7 +5,7 @@ import org.lutra.cpa.model.*;
 import java.util.List;
 
 /**
- * Structure of POST /order/accept response
+ * Structure of POST /order/accept request
  * @see <a href="http://api.yandex.ru/market/partner/doc/dg/reference/post-order-accept.xml">reference</a>
  */
 public class OrderAccept
