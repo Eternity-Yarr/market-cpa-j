@@ -1,8 +1,5 @@
-package com.ll.market;
+package org.lutra.cpa.model;
 
-/**
- * Created by dvrbuntu on 28.02.14.
- */
 public class Item {
 
     int feedId;

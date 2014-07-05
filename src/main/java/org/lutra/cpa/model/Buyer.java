@@ -1,4 +1,4 @@
-package com.ll.market;
+package org.lutra.cpa.model;
 
 public class Buyer {
 

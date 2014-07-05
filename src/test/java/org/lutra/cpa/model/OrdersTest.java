@@ -1,4 +1,4 @@
-package com.ll.market;
+package org.lutra.cpa.model;
 
 import com.google.gson.*;
 import org.junit.Test;
