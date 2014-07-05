@@ -4,3 +4,4 @@ out/
 config/
 target/
 src/main/java/org/lutra/cpa/Config.java
+dump.json
