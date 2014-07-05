@@ -12,12 +12,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-/**
- * 21.05.2014 at 15:42
- * mobile.Overrides.MyHandlebars of m.c2y project
- *
- * @author Dmitry V. (savraz [at] gmail.com)
- */
 public class MyHandlebars extends Handlebars
 {
 	private static Logger log = LoggerFactory.getLogger("HBS");

@@ -8,12 +8,6 @@ import org.webbitserver.WebServer;
 import org.webbitserver.WebServers;
 import org.webbitserver.handler.StaticFileHandler;
 
-/**
- * 01.07.2014 at 10:01
- * Ws of m.c2y project
- *
- * @author Dmitry V. (savraz [at] gmail.com)
- */
 public class Ws
 {
 	public static WebServer ws;
