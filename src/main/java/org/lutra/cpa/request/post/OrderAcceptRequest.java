@@ -1,4 +1,4 @@
-package org.lutra.cpa.request;
+package org.lutra.cpa.request.post;
 
 /**
  * Structure of POST /order/accept response
