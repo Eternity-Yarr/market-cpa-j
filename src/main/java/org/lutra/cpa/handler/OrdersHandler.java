@@ -6,6 +6,8 @@ import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.context.FieldValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
+import org.lutra.cpa.Helpers;
+import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.response.get.OrdersResponse;
 import org.lutra.cpa.service.OrdersService;
 import org.lutra.cpa.wrapper.MyHandlebars;
@@ -45,9 +47,20 @@ public class OrdersHandler implements HttpHandler
         public void run()
         {
             Map<String, Object> data = new HashMap<>();
-            OrdersResponse or = OrdersService.get();
+            int pageSize = Helpers.queryGetInt(rx, "pageSize", 25);
+            int page = Helpers.queryGetInt(rx, "page", 1);
+
+            OrderStatus status = null;
+            try
+            {
+                status = OrderStatus.valueOf(Helpers.queryGetString(rx, "status", ""));
+            }
+            catch(IllegalArgumentException e){ /* dont care. that's perfectly fine. FIXME: however */ }
+
+            OrdersResponse or = OrdersService.get(status, pageSize, page);
             Handlebars h = new MyHandlebars();
             data.put("orders", or);
+            data.put("order_status", OrderStatus.values());
             Context c = Context
                     .newBuilder(data)
                     .resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)
