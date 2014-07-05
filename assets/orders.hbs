@@ -117,10 +117,15 @@
                 <tr>
                   <td>{{id}}</td>
                   <td>{{creationDate}}</td>
-                  <td>{{status.desc}}</td>
+                  <td>
+                      <span class="visible-md visible-lg hidden-sm hidden-xs">{{status.desc}}</span>
+                      <span class="hidden-md hidden-lg visible-sm visible-xs">{{status.brief}}</span>
                   <td>{{currency total}}&nbsp;руб.</td>
                   <td>{{delivery.type.desc}}</td>
-                  <td>{{paymentMethod.desc}}</td>
+                  <td>
+                      <span class="visible-md visible-lg hidden-sm hidden-xs">{{paymentMethod.desc}}</span>
+                      <span class="hidden-md hidden-lg visible-sm visible-xs">{{paymentMethod.brief}}</span>
+                  </td>
                   <td><a class="btn btn-small btn-default">Подробнее</a></td>
                 </tr>
               {{/orders.orders}}

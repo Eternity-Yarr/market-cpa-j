@@ -91,9 +91,6 @@ public class OrdersTest {
             }
         );
         Gson g = gb.create();
-        Orders o = g.fromJson(s, Orders.class);
-        System.out.println(o);
-        assertTrue(o!=null);
-        System.out.println(g.toJson(o));
+
     }
 }
