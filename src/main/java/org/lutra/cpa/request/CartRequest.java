@@ -1,5 +1,9 @@
 package org.lutra.cpa.request;
 
+/**
+ * Structure of POST /cart request
+ * @see <a href="http://api.yandex.ru/market/partner/doc/dg/reference/post-cart.xml">reference</a>
+ */
 public class CartRequest
 {
     Cart cart;
