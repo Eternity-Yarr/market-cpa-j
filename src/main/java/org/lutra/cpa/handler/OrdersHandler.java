@@ -6,6 +6,8 @@ import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.context.FieldValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
+import org.lutra.cpa.response.get.OrdersResponse;
+import org.lutra.cpa.service.OrdersService;
 import org.lutra.cpa.wrapper.MyHandlebars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +45,9 @@ public class OrdersHandler implements HttpHandler
         public void run()
         {
             Map<String, Object> data = new HashMap<>();
+            OrdersResponse or = OrdersService.get();
             Handlebars h = new MyHandlebars();
+            data.put("orders", or);
             Context c = Context
                     .newBuilder(data)
                     .resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)

@@ -112,15 +112,17 @@
                 </tr>
               </thead>
               <tbody>
+              {{#orders.orders}}
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                  <td>blah</td>
+                  <td>{{id}}</td>
+                  <td>{{creationDate}}</td>
+                  <td>{{status.desc}}</td>
+                  <td>{{currency total}}&nbsp;руб.</td>
+                  <td>{{delivery.type.desc}}</td>
+                  <td>{{paymentMethod.desc}} {{paymentMethod.name}}</td>
                   <td><a class="btn btn-small btn-default">Подробнее</a></td>
                 </tr>
+              {{/orders.orders}}
              </tbody>
             </table>
           </div>
