@@ -29,4 +29,9 @@ public class Order
     {
         return id;
     }
+
+    public OrderStatus getStatus()
+    {
+        return status;
+    }
 }

@@ -119,6 +119,7 @@
                   <td>
                       <span class="visible-md visible-lg hidden-sm hidden-xs">{{status.desc}}</span>
                       <span class="hidden-md hidden-lg visible-sm visible-xs">{{status.brief}}</span>
+                      {{#if fake}}[ТЕСТОВЫЙ]{{/if}}
                   <td>{{currency total}}&nbsp;руб.</td>
                   <td>{{delivery.type.desc}}</td>
                   <td>

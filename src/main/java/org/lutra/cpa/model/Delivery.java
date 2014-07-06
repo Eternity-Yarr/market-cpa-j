@@ -5,8 +5,27 @@ public class Delivery
     String id;
     DeliveryType type;
     String serviceName;
-    int price;
+    double price;
     int outletId;
     Address address;
     Dates dates;
+
+    public boolean is_post()
+    {
+        return type == DeliveryType.POST;
+    }
+    public boolean is_pickup()
+    {
+        return type == DeliveryType.PICKUP;
+    }
+    public boolean is_delivery()
+    {
+        return type == DeliveryType.DELIVERY;
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("Delivery#%s price=%s name=%s", type, price, serviceName);
+    }
 }

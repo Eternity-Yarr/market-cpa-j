@@ -84,7 +84,15 @@
                     <div class="panel-heading text-center"><h3 class="panel-title"><strong>Информация о покупателе</strong></h3></div>
                     <div class="panel-body">
                         <dl class="dl-horizontal">
-                            <dt>ФИО:</dt><dd>{{buyer.firstName}} {{buyer.middleName}} {{buyer.lastName}}</dd>
+                            {{#buyer.firstName}}
+                                <dt>Имя</dt><dd>{{buyer.firstName}}</dd>
+                            {{/buyer.firstName}}
+                            {{#buyer.middleName}}
+                            <dt>Отчество</dt><dd>{{buyer.middleName}}</dd>
+                            {{/buyer.middleName}}
+                            {{#buyer.lastName}}
+                            <dt>Фамилия</dt><dd>{{buyer.lastName}}</dd>
+                            {{/buyer.lastName}}
                             {{#buyer.phone}}
                                 <dt>Телефон</dt><dd>{{buyer.phone}}</dd>
                             {{/buyer.phone}}
@@ -94,6 +102,11 @@
                         </dl>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-6">
+            {{#if delivery.is_delivery}}
+                {{>widget/delivery}}
+            {{/if}}
             </div>
                 <table class="table table-striped table-hover table-condensed">
                     <tbody><tr class="row">

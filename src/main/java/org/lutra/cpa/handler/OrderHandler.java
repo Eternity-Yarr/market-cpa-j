@@ -10,10 +10,7 @@ import org.lutra.cpa.Helpers;
 import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.response.get.Order;
-import org.lutra.cpa.response.get.OrderResponse;
-import org.lutra.cpa.response.get.OrdersResponse;
-import org.lutra.cpa.service.OrderService;
-import org.lutra.cpa.service.OrdersService;
+import org.lutra.cpa.service.OrderStatusService;
 import org.lutra.cpa.wrapper.MyHandlebars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +59,8 @@ public class OrderHandler implements HttpHandler
             data.put("back_url", back_url);
             data.put("order", o);
             data.put("order_status", OrderStatus.values());
+            data.put("status_transitions", OrderStatusService.possibleTransitions(o.getStatus()));
+            data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
             Context c = Context
                     .newBuilder(data)
                     .resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)
