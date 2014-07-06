@@ -7,8 +7,12 @@ import com.github.jknack.handlebars.context.FieldValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.model.OrderStatus;
+import org.lutra.cpa.response.get.Order;
+import org.lutra.cpa.response.get.OrderResponse;
 import org.lutra.cpa.response.get.OrdersResponse;
+import org.lutra.cpa.service.OrderService;
 import org.lutra.cpa.service.OrdersService;
 import org.lutra.cpa.wrapper.MyHandlebars;
 import org.slf4j.Logger;
@@ -18,26 +22,25 @@ import org.webbitserver.HttpHandler;
 import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrdersHandler implements HttpHandler
+public class OrderHandler implements HttpHandler
 {
-    private static Logger log = LoggerFactory.getLogger("Orders");
+    private static Logger log = LoggerFactory.getLogger("Order");
     @Override
     public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
     {
-        new Thread(new OrdersRunner(request,response,control)).start();
+        new Thread(new OrderRunner(request,response,control)).start();
         log.info("leaving");
     }
-    public static class OrdersRunner implements Runnable
+    public static class OrderRunner implements Runnable
     {
         HttpRequest rx;
         HttpResponse tx;
         HttpControl ct;
 
-        public OrdersRunner(HttpRequest rx, HttpResponse tx, HttpControl ct)
+        public OrderRunner(HttpRequest rx, HttpResponse tx, HttpControl ct)
         {
             this.rx = rx;
             this.tx = tx;
@@ -47,28 +50,17 @@ public class OrdersHandler implements HttpHandler
         @Override
         public void run()
         {
+            log.info("working");
             Map<String, Object> data = new HashMap<>();
-            int pageSize = Helpers.queryGetInt(rx, "pageSize", 25);
-            int page = Helpers.queryGetInt(rx, "page", 1);
+            int id = Helpers.queryGetInt(rx, "id", 0); //TODO: default? i dont think so. Spit an error.
+            String back_url = Helpers.queryGetString(rx, "back_url", "/orders");
 
-            OrderStatus status = null;
-            try
-            {
-                status = OrderStatus.valueOf(Helpers.queryGetString(rx, "status", ""));
-            }
-            catch(IllegalArgumentException e){ /* dont care. that's perfectly fine. FIXME: however */ }
 
-            OrdersResponse or = OrdersService.get(status, pageSize, page);
+            Order o = OrdersCache.get(id);
             Handlebars h = new MyHandlebars();
-            try
-            {
-                data.put("back_url", URLEncoder.encode(rx.uri(), "UTF-8"));
-            }
-            catch(Exception e)
-            {
-                log.error(e.toString(), e);
-            }
-            data.put("orders", or);
+
+            data.put("back_url", back_url);
+            data.put("order", o);
             data.put("order_status", OrderStatus.values());
             Context c = Context
                     .newBuilder(data)
@@ -76,7 +68,7 @@ public class OrdersHandler implements HttpHandler
                     .build();
             try
             {
-                Template t = h.compile("orders");
+                Template t = h.compile("order");
                 String s = t.apply(c);
                 tx.content(s);
             }
@@ -84,7 +76,6 @@ public class OrdersHandler implements HttpHandler
             {
                 log.error(e.toString(), e);
             }
-            log.info("working");
             tx.status(200);
             tx.end();
         }

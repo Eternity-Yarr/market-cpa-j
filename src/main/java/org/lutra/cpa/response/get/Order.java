@@ -24,4 +24,9 @@ public class Order
     List<Item> items;
     Delivery delivery;
     Buyer buyer;
+
+    public int getId()
+    {
+        return id;
+    }
 }

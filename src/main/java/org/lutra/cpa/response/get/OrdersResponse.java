@@ -12,4 +12,14 @@ public class OrdersResponse
 {
     Pager pager;
     List<Order> orders;
+
+    public Pager getPager()
+    {
+        return pager;
+    }
+
+    public List<Order> getOrders()
+    {
+        return orders;
+    }
 }

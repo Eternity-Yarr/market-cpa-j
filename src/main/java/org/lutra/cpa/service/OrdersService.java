@@ -2,8 +2,12 @@ package org.lutra.cpa.service;
 
 import org.lutra.cpa.Config;
 import org.lutra.cpa.Main;
+import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.model.OrderStatus;
+import org.lutra.cpa.response.get.Order;
 import org.lutra.cpa.response.get.OrdersResponse;
+
+import java.util.List;
 
 public class OrdersService
 {
@@ -20,6 +24,15 @@ public class OrdersService
         if(status != null)
             path += "&status=" + status.name();
         String json = Market.request(path);
-        return Main.g.fromJson(json, OrdersResponse.class);
+        OrdersResponse or =  Main.g.fromJson(json, OrdersResponse.class);
+
+        if(or != null)
+        {
+            List<Order> os = or.getOrders();
+            for(Order o : os)
+                OrdersCache.put(o);
+        }
+
+        return or;
     }
 }

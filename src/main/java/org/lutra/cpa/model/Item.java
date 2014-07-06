@@ -6,7 +6,7 @@ public class Item {
     String offerId;
     String feedCategoryId;
     String offerName;
-    int price;
+    double price;
     int count;
 
 }

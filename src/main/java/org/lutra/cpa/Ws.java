@@ -1,6 +1,7 @@
 package org.lutra.cpa;
 
 import org.lutra.cpa.handler.NotFoundHandler;
+import org.lutra.cpa.handler.OrderHandler;
 import org.lutra.cpa.handler.OrdersHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ public class Ws
 		;
 		ws
 			.add("/orders", new OrdersHandler())
+            .add("/order", new OrderHandler())
 			.add(new NotFoundHandler())
 		;
 		try

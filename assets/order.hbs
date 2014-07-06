@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+
       <style>
           .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td { vertical-align: middle; }
       </style>
@@ -72,65 +73,45 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
-
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+            {{#order}}
+          <h1 class="page-header"><a href="{{back_url}}"><i class="glyphicon glyphicon-arrow-left"></i></a>&nbsp;Заказ N{{id}} от {{creationDate}}</h1>
+            <p>
+                Статус: {{status.desc}}
+                {{#substatus}}Подстатус: {{substatus.desc}}{{/substatus}}
+            </p>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><h3 class="panel-title"><strong>Информация о покупателе</strong></h3></div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            <dt>ФИО:</dt><dd>{{buyer.firstName}} {{buyer.middleName}} {{buyer.lastName}}</dd>
+                            {{#buyer.phone}}
+                                <dt>Телефон</dt><dd>{{buyer.phone}}</dd>
+                            {{/buyer.phone}}
+                            {{#buyer.email}}
+                                <dt>e-mail</dt><dd>{{buyer.email}}</dd>
+                            {{/buyer.email}}
+                        </dl>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </div>
-
-          <h2 class="sub-header">Заказы</h2>
-          <div class="table-responsive">
-            <table class="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Дата</th>
-                  <th>Статус</th>
-                  <th>Сумма</th>
-                  <th>Доставка</th>
-                  <th>Оплата</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-              {{#orders.orders}}
-                <tr>
-                  <td>{{id}}</td>
-                  <td>{{creationDate}}</td>
-                  <td>
-                      <span class="visible-md visible-lg hidden-sm hidden-xs">{{status.desc}}</span>
-                      <span class="hidden-md hidden-lg visible-sm visible-xs">{{status.brief}}</span>
-                  <td>{{currency total}}&nbsp;руб.</td>
-                  <td>{{delivery.type.desc}}</td>
-                  <td>
-                      <span class="visible-md visible-lg hidden-sm hidden-xs">{{paymentMethod.desc}}</span>
-                      <span class="hidden-md hidden-lg visible-sm visible-xs">{{paymentMethod.brief}}</span>
-                  </td>
-                  <td><a class="btn btn-small btn-default" href="/order?id={{id}}&back_url={{back_url}}">Подробнее</a></td>
-                </tr>
-              {{/orders.orders}}
-             </tbody>
-            </table>
-          </div>
+                <table class="table table-striped table-hover table-condensed">
+                    <tbody><tr class="row">
+                        <th>Наименование</th>
+                        <th>Кол-во</th>
+                        <th>Цена</th>
+                    </tr>
+                    {{#items}}
+                    <tr class="row">
+                        <td class="col-md-9 word-wrapped">[{{offerId}}] {{offerName}}</td>
+                        <td class="col-md-1 text-center">{{count}}</td>
+                        <td class="col-md-2 text-right">{{currency price}}&nbsp;руб.</td>
+                    </tr>
+                    {{/items}}
+                    <tr class="row"> <td colspan="3" class="text-right">Итого:&nbsp;<strong>{{currency total}}&nbsp;руб.</strong></td></tr>
+                    </tbody>
+                </table>
+            {{/order}}
         </div>
       </div>
     </div>
