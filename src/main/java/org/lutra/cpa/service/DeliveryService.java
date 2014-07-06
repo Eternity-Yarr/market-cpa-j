@@ -8,8 +8,15 @@ import java.util.List;
 
 public class DeliveryService
 {
-    public static List<DeliveryOption> getAll(Delivery target)
+    static DeliveryRepository dr = new DeliveryRepository(); //TODO: interface
+
+    /**
+     * @param target destination of delivery
+     * @param total total sum of order
+     * @return list of all available delivery options
+     */
+    public static List<DeliveryOption> getAll(Delivery target, double total)
     {
-        return DeliveryRepository.getAll(target);
+        return dr.getAll(target, total);
     }
 }

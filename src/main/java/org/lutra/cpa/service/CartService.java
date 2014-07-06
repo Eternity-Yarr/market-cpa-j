@@ -17,13 +17,13 @@ public class CartService
     {
         Delivery target = cr.uw().delivery;
         Cart cart = new Cart();
-        List<DeliveryOption> deliveryOptions = DeliveryService.getAll(target);
+        List<DeliveryOption> deliveryOptions = DeliveryService.getAll(target, cr.uw().getTotal());
         Set<DeliveryOption> feasibleDeliveryOptions = new HashSet<>(deliveryOptions);
         for(Item i : cr.uw().items)
         {
             for(DeliveryOption o : deliveryOptions)
             {
-                /*if(!DeliveryService.feasible(i,o))
+/*                if(!DeliveryService.feasible(i,o))
                     feasibleDeliveryOptions.remove()*/
             }
         }

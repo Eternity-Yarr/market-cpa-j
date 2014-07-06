@@ -3,6 +3,7 @@ package org.lutra.cpa.response;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.Main;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +20,7 @@ public class CartTest
     {
         URL url = CartTest.class.getResource("cartResponse.json");
         String json = Helpers.readFile(url, StandardCharsets.UTF_8);
-        Cart c = new Gson().fromJson(json, CartResponse.class).uw();
+        Cart c = Main.g.fromJson(json, CartResponse.class).uw();
         assertNotNull(c);
     }
 }

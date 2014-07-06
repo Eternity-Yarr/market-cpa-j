@@ -33,4 +33,9 @@ public class Delivery
     {
         return outletId;
     }
+
+    public Address getAddress()
+    {
+        return address;
+    }
 }

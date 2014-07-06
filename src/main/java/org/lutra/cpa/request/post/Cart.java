@@ -15,4 +15,15 @@ public class Cart
     public Currency currency;
     public List<Item> items;
     public Delivery delivery;
+    private double total;
+
+    public double getTotal()
+    {
+        double ret = 0;
+        for(Item i : items)
+        {
+            ret = i.getCount() * i.getPrice();
+        }
+        return total;
+    }
 }

@@ -9,4 +9,13 @@ public class Item {
     double price;
     int count;
 
+    public double getPrice()
+    {
+        return price;
+    }
+
+    public double getCount()
+    {
+        return count;
+    }
 }

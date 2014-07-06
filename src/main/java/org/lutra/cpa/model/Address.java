@@ -16,4 +16,8 @@ public class Address {
     String recipient;
     String phone;
 
+    public String getCity()
+    {
+        return city;
+    }
 }

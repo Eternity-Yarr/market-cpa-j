@@ -1,6 +1,5 @@
 package org.lutra.cpa;
 
-import org.lutra.cpa.response.CartResponse;
 import org.lutra.cpa.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,10 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Date;
 
 public class Helpers
 {
@@ -80,5 +83,27 @@ public class Helpers
         tx.header("Content-Type","application/json;charset=utf-8");
         tx.content(Main.g.toJson(response));
         tx.end();
+    }
+
+    public static PreparedStatement createStatement(Connection con, String query, Object... params) throws SQLException
+    {
+        PreparedStatement ps = con.prepareStatement(query);
+
+        int index = 0;
+        for(Object o: params)
+        {
+            index++;
+            if(o instanceof Integer)
+                ps.setInt(index, (Integer)o);
+            else if(o instanceof Double)
+                ps.setDouble(index, (Double)o);
+            else if(o instanceof String)
+                ps.setString(index, (String)o);
+            else if(o instanceof Date)
+                ps.setDate(index, (Date)o);
+            else throw new SQLException(String.format("Unsupported argument class %s", o.getClass()));
+        }
+
+        return ps;
     }
 }
