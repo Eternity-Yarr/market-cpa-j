@@ -1,6 +1,6 @@
 package org.lutra.cpa.service;
 
-import org.lutra.cpa.model.Delivery;
+import org.lutra.cpa.model.DeliveryRequest;
 import org.lutra.cpa.model.DeliveryOption;
 import org.lutra.cpa.repository.DeliveryRepository;
 
@@ -15,7 +15,7 @@ public class DeliveryService
      * @param total total sum of order
      * @return list of all available delivery options
      */
-    public static List<DeliveryOption> getAll(Delivery target, double total)
+    public static List<DeliveryOption> getAll(DeliveryRequest target, double total)
     {
         return dr.getAll(target, total);
     }

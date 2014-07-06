@@ -1,6 +1,6 @@
 package org.lutra.cpa.service;
 
-import org.lutra.cpa.model.Delivery;
+import org.lutra.cpa.model.DeliveryRequest;
 import org.lutra.cpa.model.DeliveryOption;
 import org.lutra.cpa.model.Item;
 import org.lutra.cpa.request.post.CartRequest;
@@ -15,7 +15,7 @@ public class CartService
 {
     public static CartResponse process(CartRequest cr)
     {
-        Delivery target = cr.uw().delivery;
+        DeliveryRequest target = cr.uw().delivery;
         Cart cart = new Cart();
         List<DeliveryOption> deliveryOptions = DeliveryService.getAll(target, cr.uw().getTotal());
         Set<DeliveryOption> feasibleDeliveryOptions = new HashSet<>(deliveryOptions);

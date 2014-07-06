@@ -18,7 +18,7 @@ import java.util.List;
 public class DeliveryRepository
 {
     private static Logger log = LoggerFactory.getLogger("DeliveryRepo");
-    public List<DeliveryOption> getAll(Delivery target, double total)
+    public List<DeliveryOption> getAll(DeliveryRequest target, double total)
     {
         List<DeliveryOption> options = new ArrayList<>();
         //1. Pickup
@@ -33,9 +33,7 @@ public class DeliveryRepository
     {
         List<DeliveryOption> ret = new ArrayList<>();
         String q =
-            "SELECT " +
-            "id, name, description, price, order_price_from, order_price_to, period_from, period_to " +
-            "FROM b_sale_delivery WHERE ACTIVE = 'Y' AND order_price_from < ? AND id IN (?,?)";
+            "SELECT id FROM b_iblock_element WHERE IBLOCK_ID = 8";
         Object[] params = {total, 1, 4};
         try
         (

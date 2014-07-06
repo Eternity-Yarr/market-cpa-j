@@ -1,7 +1,7 @@
 package org.lutra.cpa.request.post;
 
 import org.lutra.cpa.model.Currency;
-import org.lutra.cpa.model.Delivery;
+import org.lutra.cpa.model.DeliveryRequest;
 import org.lutra.cpa.model.Item;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class Cart
 {
     public Currency currency;
     public List<Item> items;
-    public Delivery delivery;
+    public DeliveryRequest delivery;
     private double total;
 
     public double getTotal()
