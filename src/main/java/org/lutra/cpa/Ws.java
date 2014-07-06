@@ -1,5 +1,6 @@
 package org.lutra.cpa;
 
+import org.lutra.cpa.handler.CartHandler;
 import org.lutra.cpa.handler.NotFoundHandler;
 import org.lutra.cpa.handler.OrderHandler;
 import org.lutra.cpa.handler.OrdersHandler;
@@ -23,6 +24,7 @@ public class Ws
 		ws
 			.add("/orders", new OrdersHandler())
             .add("/order", new OrderHandler())
+            .add("/cart", new CartHandler())
 			.add(new NotFoundHandler())
 		;
 		try
