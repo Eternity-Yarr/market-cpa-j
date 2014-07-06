@@ -3,8 +3,7 @@ package org.lutra.cpa.response.get;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.lutra.cpa.Helpers;
-import org.lutra.cpa.response.Cart;
-import org.lutra.cpa.response.CartResponse;
+import org.lutra.cpa.model.Order;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;

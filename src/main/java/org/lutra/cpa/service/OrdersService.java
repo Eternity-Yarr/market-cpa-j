@@ -4,7 +4,7 @@ import org.lutra.cpa.Config;
 import org.lutra.cpa.Main;
 import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.model.OrderStatus;
-import org.lutra.cpa.response.get.Order;
+import org.lutra.cpa.model.Order;
 import org.lutra.cpa.response.get.OrdersResponse;
 
 import java.util.List;

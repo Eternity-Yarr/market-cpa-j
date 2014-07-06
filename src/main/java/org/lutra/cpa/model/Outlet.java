@@ -12,6 +12,11 @@ public class Outlet
     String workingTime;
     String shopOutletId;
     OutletAddress address;
+
+    public int getId()
+    {
+        return id;
+    }
     // TODO: devliery-rules, emails, phones
     //List<DeliveryRules> deliveryRules;
     //List<Email> emails;

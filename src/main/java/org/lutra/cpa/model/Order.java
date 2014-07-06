@@ -1,6 +1,4 @@
-package org.lutra.cpa.response.get;
-
-import org.lutra.cpa.model.*;
+package org.lutra.cpa.model;
 
 import java.util.List;
 

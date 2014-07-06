@@ -2,24 +2,24 @@ package org.lutra.cpa.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import org.lutra.cpa.model.Order;
-import org.lutra.cpa.response.get.OrderResponse;
-import org.lutra.cpa.service.OrderService;
+import org.lutra.cpa.model.Outlet;
+import org.lutra.cpa.response.get.OutletResponse;
+import org.lutra.cpa.service.OutletService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-public class OrdersCache
+public class OutletsCache
 {
-    final private static Logger log = LoggerFactory.getLogger("OrdersCache");
-    final private static Cache<Integer, Order> cache = CacheBuilder
+    final private static Logger log = LoggerFactory.getLogger("OutletsCache");
+    final private static Cache<Integer, Outlet> cache = CacheBuilder
             .newBuilder()
-            .expireAfterWrite(3, TimeUnit.MINUTES)
+            .expireAfterWrite(60, TimeUnit.MINUTES)
             .build()
             ;
-    public static void put(Order o)
+    public static void put(Outlet o)
     {
         assert(o != null);
         assert(o.getId() != 0); //TODO: Meh..
@@ -27,21 +27,21 @@ public class OrdersCache
         cache.put(o.getId(), o);
     }
 
-    public static Order get(final int id)
+    public static Outlet get(final int id)
     {
-        Order o = null;
+        Outlet o = null;
         try
         {
             o = cache.get
-            (id, new Callable<Order>()
+            (id, new Callable<Outlet>()
                 {
                     @Override
-                    public Order call() throws Exception
+                    public Outlet call() throws Exception
                     {
                         log.info("Querying API for {}", id);
-                        OrderResponse or =  OrderService.get(id);
-                        if(or != null)
-                            return or.uw();
+                        OutletResponse o =  OutletService.get(id);
+                        if(o != null)
+                            return o.uw();
                         else
                             return null; //TODO: Meh..
                     }

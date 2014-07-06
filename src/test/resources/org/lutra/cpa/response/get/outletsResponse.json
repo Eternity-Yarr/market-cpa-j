@@ -1,0 +1,32 @@
+{
+  "pager":
+  {
+    "from":1, "to":2, "currentPage":1, "pageSize":2
+  },
+  "outlets":
+  [
+  {
+    "id":164406, "name":"Точка на Московском проспекте", "type":"MIXED", "isMain":true, "status":"AT_MODERATION", "visibility":"VISIBLE", "workingTime":"пн-пт 10:00-22:00, сб 12:00-18:00", "shopOutletId":"2657434", "address":
+    {
+      "city":"Санкт-Петербург", "street":"Дальневосточный", "number":"20", "building":"2", "estate":"15", "block":"Б", "km":12, "additional":"во дворе"
+    },
+    "emails":["example-shop@yandex.ru"],
+    "phones":
+    [
+      "+ 7 (900) 123-4567 доб. 055",
+      "+ 7 (812) 987-6543 доб. 066"
+    ],
+    "deliveryRules":
+    [
+    {"cost":110}
+    ]
+  },
+  {
+     "id":164426, "name":"Точка на Ленинском проспекте", "type":"DEPOT", "isMain":false, "status":"AT_MODERATION", "visibility":"VISIBLE", "workingTime":"пн-вс круглосуточно", "shopOutletId":"1645426", "address":
+     {
+       "city":"Санкт-Петербург", "street":"Турухтанные острова", "number":"22", "block":"1"
+     },
+     "phones":["+7 812 123-4567 доб. 444"]
+  }
+  ]
+}
