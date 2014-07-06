@@ -13,6 +13,7 @@ public class NotFoundHandler implements HttpHandler
     @Override
     public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
     {
+        log.info(request.uri());
         response.content("NOT FOUND");
         response.status(404);
         response.end();

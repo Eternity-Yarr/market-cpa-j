@@ -11,7 +11,7 @@ import java.util.List;
 
 public class OutletsService
 {
-    public List<Outlet> get()
+    public static List<Outlet> get()
     {
         List<Outlet> ret = new ArrayList<>();
         int ps = 50;

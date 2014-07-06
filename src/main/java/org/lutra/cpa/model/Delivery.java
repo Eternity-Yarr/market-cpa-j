@@ -28,4 +28,9 @@ public class Delivery
     {
         return String.format("Delivery#%s price=%s name=%s", type, price, serviceName);
     }
+
+    public int getOutletId()
+    {
+        return outletId;
+    }
 }

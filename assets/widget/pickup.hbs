@@ -4,5 +4,23 @@
             <strong>Самовывоз {{delivery.dates.fromDate}} - {{delivery.dates.toDate}}</strong>
         </h3>
     </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            {{#outlet}}
+                {{#name}}
+                    <dt>Название</dt><dd>{{name}}</dd>
+                {{/name}}
+                {{#type}}
+                    <dt>Тип</dt><dd>{{type.desc}}</dd>
+                {{/type}}
+                {{#workingTime}}
+                    <dt>Время рабоы</dt><dd>{{workingTime}}</dd>
+                {{/workingTime}}
+                {{#address}}
+                    <dt>Адрес</dt><dd>{{address}}</dd>
+                {{/address}}
+            {{/outlet}}
+        </dl>
+    </div>
 
 </div>

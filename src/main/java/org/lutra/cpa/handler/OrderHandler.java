@@ -8,6 +8,7 @@ import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.cache.OrdersCache;
+import org.lutra.cpa.cache.OutletsCache;
 import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.model.Order;
 import org.lutra.cpa.service.OrderStatusService;
@@ -57,10 +58,15 @@ public class OrderHandler implements HttpHandler
             Handlebars h = new MyHandlebars();
 
             data.put("back_url", back_url);
-            data.put("order", o);
-            data.put("order_status", OrderStatus.values());
-            data.put("status_transitions", OrderStatusService.possibleTransitions(o.getStatus()));
-            data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
+            if(o != null)
+            {
+                data.put("order", o);
+                data.put("order_status", OrderStatus.values());
+                if(o.getDelivery().is_pickup())
+                    data.put("outlet", OutletsCache.get(o.getDelivery().getOutletId()));
+                data.put("status_transitions", OrderStatusService.possibleTransitions(o.getStatus()));
+                data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
+            }
             Context c = Context
                     .newBuilder(data)
                     .resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)

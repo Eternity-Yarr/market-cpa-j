@@ -10,4 +10,10 @@ public class OutletAddress
     String building;
     String estate;
     String additional;
+
+    @Override
+    public String toString()
+    {
+        return String.format("%s %s %s (%s)", city, street, building, additional); //TODO: Meh..
+    }
 }

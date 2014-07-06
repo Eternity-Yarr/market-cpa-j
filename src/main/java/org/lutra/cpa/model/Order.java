@@ -32,4 +32,9 @@ public class Order
     {
         return status;
     }
+
+    public Delivery getDelivery()
+    {
+        return delivery;
+    }
 }
