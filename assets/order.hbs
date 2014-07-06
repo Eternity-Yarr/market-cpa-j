@@ -107,6 +107,12 @@
             {{#if delivery.is_delivery}}
                 {{>widget/delivery}}
             {{/if}}
+            {{#if delivery.is_post}}
+                {{>widget/post}}
+            {{/if}}
+            {{#if devliery.is_pickup}}
+                {{>widget/pickup}}
+            {{/if}}
             </div>
                 <table class="table table-striped table-hover table-condensed">
                     <tbody><tr class="row">

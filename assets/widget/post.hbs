@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title text-center">
+            <strong>Почтовая пересылка на {{delivery.dates.toDate}}</strong>&nbsp;({{currency delivery.price}}&nbsp;руб.)
+        </h3>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            {{#delivery}}
+                {{#address.country}}
+                    <dt>Страна</dt><dd>{{address.country}}</dd>
+                {{/address.country}}
+                {{#address.postcode}}
+                    <dt>Почтовый индекс</dt><dd>{{address.postcode}}</dd>
+                {{/address.postcode}}
+                {{#address.city}}
+                    <dt>Город/село</dt><dd>{{address.city}}</dd>
+                {{/address.city}}
+                {{#address.subway}}
+                    <dt>Метро</dt><dd>{{address.subway}}</dd>
+                {{/address.subway}}
+                {{#address.street}}
+                    <dt>Улица</dt><dd>{{address.street}}</dd>
+                {{/address.street}}
+                {{#address.house}}
+                    <dt>Номер дома</dt><dd>{{address.house}}</dd>
+                {{/address.house}}
+                {{#address.block}}
+                    <dt>Корпус</dt><dd>{{address.block}}</dd>
+                {{/address.block}}
+                {{#address.floor}}
+                    <dt>Этаж</dt><dd>{{address.floor}}</dd>
+                {{/address.floor}}
+                {{#address.apartment}}
+                    <dt>Квартира</dt><dd>{{address.apartment}}</dd>
+                {{/address.apartment}}
+                {{#address.recipient}}
+                    <dt>Получатель</dt><dd>{{address.recipient}}</dd>
+                {{/address.recipient}}
+                {{#address.phone}}
+                    <dt>Телефон</dt><dd>{{address.phone}}</dd>
+                {{/address.phone}}
+            {{/delivery}}
+        </dl>
+    </div>
+</div>
