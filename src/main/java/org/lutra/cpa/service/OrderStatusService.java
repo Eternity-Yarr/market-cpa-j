@@ -3,28 +3,26 @@ package org.lutra.cpa.service;
 import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.model.OrderSubstatus;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.lutra.cpa.model.OrderStatus.*;
 import static org.lutra.cpa.model.OrderSubstatus.*;
 
 public class OrderStatusService
 {
-    public static List<OrderStatus> possibleTransitions(OrderStatus from_status)
+    public static Set<OrderStatus> possibleTransitions(OrderStatus from_status)
     {
-        List<OrderStatus> ret = new ArrayList<>();
+        Set<OrderStatus> ret = new HashSet<>();
         switch(from_status)
         {
             case PROCESSING:
-                ret = Arrays.asList(DELIVERY, CANCELLED);
+                ret.addAll(Arrays.asList(DELIVERY, CANCELLED));
                 break;
             case DELIVERY:
-                ret = Arrays.asList(PICKUP, DELIVERED, CANCELLED);
+                ret.addAll(Arrays.asList(PICKUP, DELIVERED, CANCELLED));
                 break;
             case PICKUP:
-                ret = Arrays.asList(DELIVERED, CANCELLED);
+                ret.addAll(Arrays.asList(DELIVERED, CANCELLED));
             default:
                 break;
         }

@@ -2,6 +2,8 @@ package org.lutra.cpa.service;
 
 
 import org.lutra.cpa.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -11,6 +13,7 @@ import java.net.URL;
 public class Market
 {
     final static String BaseURL = "https://api.partner.market.yandex.ru/v2";
+		final static Logger log = LoggerFactory.getLogger(Market.class);
 
     public static String request(String path)
     {
@@ -33,17 +36,22 @@ public class Market
             con.setDoOutput(true);
             BufferedReader br;
             if(con.getResponseCode() != 200)
-                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+						{
+							log.info("Failed request to {}", path);
+							br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+						}
             else
-                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+						{
+							log.info("Succeed request to {}", path);
+							br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+						}
             String input;
             while((input = br.readLine()) != null)
-            {
                 content.append(input);
-            }
         }
         catch(Exception e)
         {
+					log.error(e.toString(), e);
         }
 
         return content.toString();

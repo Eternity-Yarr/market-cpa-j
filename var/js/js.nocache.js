@@ -1,0 +1,15 @@
+$(document).ready
+(
+	function()
+	{
+		$(".modal-hook").click
+		(
+			function()
+			{
+				$("#proceed_link").attr("href",$(this).data("href"));
+				$("#new_status").text($(this).data("desc"));
+				$("#yesno").modal('show');
+			}
+		)
+	}
+)

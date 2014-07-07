@@ -46,10 +46,47 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             {{#order}}
-          <h1 class="page-header"><a href="{{back_url}}"><i class="glyphicon glyphicon-arrow-left"></i></a>&nbsp;Заказ N{{id}} от {{creationDate}}</h1>
-            <p>
-                Статус: {{status.desc}}
-                {{#substatus}}Подстатус: {{substatus.desc}}{{/substatus}}
+          <h1 class="page-header"><a href="{{raw_back_url}}"><i class="glyphicon glyphicon-arrow-left"></i></a>&nbsp;Заказ N{{id}} от {{creationDate}}</h1>
+							<div class="btn-group btn-group-justified">
+								{{#status_transitions}}
+								<a class="btn btn-default modal-hook" role="button" title="{{desc}}" data-href="/change_status?id={{id}}&status={{.}}&back_url={{back_url}}" data-desc="{{desc}}" data-target="#yesno">{{brief}}</a>
+								{{/status_transitions}}
+								{{#if cancellable}}
+								<div class="btn-group">
+									<a class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+										Отменить <span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu" role="menu">
+										{{#cancellation_reasons}}
+										<li><a class="modal-hook" data-href="/change_status?id={{id}}&status=CANCELLED&substatus={{.}}&back_url={{back_url}}" data-desc="{{desc}}">{{desc}}</a></li>
+										{{/cancellation_reasons}}
+									</ul>
+								</div>
+								{{/if}}
+							</div>
+							<!-- Modal -->
+							<div class="modal fade" id="yesno" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+											<h4 class="modal-title text-danger" id="ModalLabel">Внимание!</h4>
+										</div>
+										<div class="modal-body">
+											Изменить статус заказа N{{id}}?<br/>
+											Новый статус: <strong><span id="new_status">?</span></strong>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+											<button id="proceed_link" type="button" class="btn btn-primary">Да</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						<p>
+
+							Статус: {{status.desc}}
+							{{#substatus}}Подстатус: {{substatus.desc}}{{/substatus}}
             </p>
             <div class="col-md-6">
                 <div class="panel panel-default">

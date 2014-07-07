@@ -20,8 +20,11 @@ import org.webbitserver.HttpHandler;
 import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class OrderHandler implements HttpHandler
 {
@@ -57,15 +60,28 @@ public class OrderHandler implements HttpHandler
             Order o = OrdersCache.get(id);
             Handlebars h = new MyHandlebars();
 
-            data.put("back_url", back_url);
+						data.put("raw_back_url", back_url);
+						try
+						{
+							data.put("back_url", URLEncoder.encode(back_url, "UTF-8"));
+						}
+						catch(Exception e)
+						{
+							log.error(e.toString(), e);
+						}
             if(o != null)
             {
-                data.put("order", o);
-                data.put("order_status", OrderStatus.values());
-                if(o.getDelivery().is_pickup())
-                    data.put("outlet", OutletsCache.get(o.getDelivery().getOutletId()));
-                data.put("status_transitions", OrderStatusService.possibleTransitions(o.getStatus()));
-                data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
+							data.put("order", o);
+							data.put("order_status", OrderStatus.values());
+							if(o.getDelivery().is_pickup())
+									data.put("outlet", OutletsCache.get(o.getDelivery().getOutletId()));
+							Set<OrderStatus> status_transitions = OrderStatusService.possibleTransitions(o.getStatus());
+							if(status_transitions.contains(OrderStatus.CANCELLED))
+								data.put("cancellable", true);
+							status_transitions.remove(OrderStatus.CANCELLED);
+
+							data.put("status_transitions", status_transitions);
+							data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
             }
             Context c = Context
                     .newBuilder(data)
