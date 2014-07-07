@@ -26,7 +26,6 @@
         </div>
       </div>
     </div>
-
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -46,7 +45,7 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             {{#order}}
-          <h1 class="page-header"><a href="{{raw_back_url}}"><i class="glyphicon glyphicon-arrow-left"></i></a>&nbsp;Заказ N{{id}} от {{creationDate}}</h1>
+          <h1 class="page-header"><a href="{{raw_back_url}}"><i class="glyphicon glyphicon-arrow-left"></i></a>&nbsp;Заказ N{{id}} от {{creationDate}} {{#if fake}}[ТЕСТОВЫЙ]{{/if}}</h1>
 							<div class="btn-group btn-group-justified">
 								{{#status_transitions}}
 								<a class="btn btn-default modal-hook" role="button" title="{{desc}}" data-href="/change_status?id={{id}}&status={{.}}&back_url={{back_url}}" data-desc="{{desc}}" data-target="#yesno">{{brief}}</a>
@@ -69,7 +68,7 @@
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+											<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Отмена</span></button>
 											<h4 class="modal-title text-danger" id="ModalLabel">Внимание!</h4>
 										</div>
 										<div class="modal-body">
@@ -84,7 +83,6 @@
 								</div>
 							</div>
 						<p>
-
 							Статус: {{status.desc}}
 							{{#substatus}}Подстатус: {{substatus.desc}}{{/substatus}}
             </p>

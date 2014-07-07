@@ -47,7 +47,9 @@ public class Market
 						}
             String input;
             while((input = br.readLine()) != null)
-                content.append(input);
+							content.append(input);
+						if(con.getResponseCode()!=200)
+							log.error(content.toString());
         }
         catch(Exception e)
         {
