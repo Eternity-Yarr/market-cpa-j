@@ -1,6 +1,5 @@
 package org.lutra.cpa.response;
 
-import com.google.gson.Gson;
 import org.junit.Test;
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.Main;

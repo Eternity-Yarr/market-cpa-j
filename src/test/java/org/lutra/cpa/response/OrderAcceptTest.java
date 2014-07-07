@@ -1,8 +1,8 @@
 package org.lutra.cpa.response;
 
-import com.google.gson.Gson;
 import org.junit.Test;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.Main;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +20,7 @@ public class OrderAcceptTest
     {
         URL url = OrderAcceptTest.class.getResource("orderAcceptResponse.json");
         String json = Helpers.readFile(url, StandardCharsets.UTF_8);
-        OrderAccept o = new Gson().fromJson(json, OrderAcceptResponse.class).uw();
+        OrderAccept o = Main.g.fromJson(json, OrderAcceptResponse.class).uw();
         assertTrue(o.accepted);
         assertEquals(o.id, "12345");
     }

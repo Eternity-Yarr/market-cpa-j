@@ -1,8 +1,8 @@
 package org.lutra.cpa.request.put;
 
-import com.google.gson.Gson;
 import org.junit.Test;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.Main;
 import org.lutra.cpa.model.OrderStatus;
 
 import java.net.URL;
@@ -21,7 +21,7 @@ public class StatusTest
     {
         URL url = StatusTest.class.getResource("statusRequest.json");
         String json = Helpers.readFile(url, StandardCharsets.UTF_8);
-        Status o = new Gson().fromJson(json, StatusRequest.class).uw();
+        Status o = Main.g.fromJson(json, StatusRequest.class).uw();
         assertEquals(OrderStatus.DELIVERY, o.status);
         assertNotNull(o);
     }

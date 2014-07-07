@@ -1,8 +1,8 @@
 package org.lutra.cpa.request.put;
 
-import com.google.gson.Gson;
 import org.junit.Test;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.Main;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +19,7 @@ public class DeliveryTest
     {
         URL url = StatusTest.class.getResource("deliveryRequest.json");
         String json = Helpers.readFile(url, StandardCharsets.UTF_8);
-        DeliveryRequest dr = new Gson().fromJson(json, DeliveryRequest.class);
+        DeliveryRequest dr = Main.g.fromJson(json, DeliveryRequest.class);
         assertNotNull(dr);
     }
 }

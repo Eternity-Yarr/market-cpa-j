@@ -1,8 +1,8 @@
 package org.lutra.cpa.response.get;
 
-import com.google.gson.Gson;
 import org.junit.Test;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.Main;
 import org.lutra.cpa.model.Order;
 
 import java.net.URL;
@@ -20,7 +20,7 @@ public class OrderTest
     {
         URL url = OrderTest.class.getResource("orderResponse.json");
         String json = Helpers.readFile(url, StandardCharsets.UTF_8);
-        Order o = new Gson().fromJson(json, OrderResponse.class).uw();
+        Order o = Main.g.fromJson(json, OrderResponse.class).uw();
         assertNotNull(o);
     }
 }

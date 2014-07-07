@@ -2,8 +2,6 @@ package org.lutra.cpa.service;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class MarketTest
 {
     @Test

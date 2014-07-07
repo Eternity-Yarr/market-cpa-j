@@ -1,8 +1,8 @@
 package org.lutra.cpa.response.get;
 
-import com.google.gson.Gson;
 import org.junit.Test;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.Main;
 import org.lutra.cpa.model.Outlet;
 
 import java.net.URL;
@@ -20,7 +20,7 @@ public class OutletTest
     {
         URL url = OutletTest.class.getResource("outletResponse.json");
         String json = Helpers.readFile(url, StandardCharsets.UTF_8);
-        Outlet o = new Gson().fromJson(json, OutletResponse.class).uw();
+        Outlet o = Main.g.fromJson(json, OutletResponse.class).uw();
         assertNotNull(o);
     }
 }

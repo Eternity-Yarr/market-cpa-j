@@ -3,7 +3,6 @@ package org.lutra.cpa.service;
 
 import org.lutra.cpa.Config;
 
-import javax.crypto.spec.OAEPParameterSpec;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

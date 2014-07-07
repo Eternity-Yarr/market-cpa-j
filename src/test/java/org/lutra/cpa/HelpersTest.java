@@ -5,11 +5,6 @@ import org.junit.Test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-
-import static org.junit.Assert.*;
 
 public class HelpersTest
 {

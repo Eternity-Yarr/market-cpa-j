@@ -1,9 +1,6 @@
 package org.lutra.cpa.response.get;
 
 import org.lutra.cpa.model.Outlet;
-import org.lutra.cpa.model.Pager;
-
-import java.util.List;
 
 /**
  * Structure of GET /campaigns/{campaignId}/outlet/{outletId} response

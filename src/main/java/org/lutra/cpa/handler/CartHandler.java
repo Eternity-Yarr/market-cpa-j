@@ -1,31 +1,16 @@
 package org.lutra.cpa.handler;
 
-import com.github.jknack.handlebars.Context;
-import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.Template;
-import com.github.jknack.handlebars.context.FieldValueResolver;
-import com.github.jknack.handlebars.context.MapValueResolver;
-import com.github.jknack.handlebars.context.MethodValueResolver;
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.Main;
-import org.lutra.cpa.cache.OrdersCache;
-import org.lutra.cpa.cache.OutletsCache;
-import org.lutra.cpa.model.Order;
-import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.request.post.CartRequest;
 import org.lutra.cpa.response.CartResponse;
 import org.lutra.cpa.service.CartService;
-import org.lutra.cpa.service.OrderStatusService;
-import org.lutra.cpa.wrapper.MyHandlebars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.webbitserver.HttpControl;
 import org.webbitserver.HttpHandler;
 import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class CartHandler implements HttpHandler
 {

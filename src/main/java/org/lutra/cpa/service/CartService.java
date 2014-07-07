@@ -1,7 +1,7 @@
 package org.lutra.cpa.service;
 
-import org.lutra.cpa.model.DeliveryRequest;
 import org.lutra.cpa.model.DeliveryOption;
+import org.lutra.cpa.model.DeliveryRequest;
 import org.lutra.cpa.model.Item;
 import org.lutra.cpa.request.post.CartRequest;
 import org.lutra.cpa.response.Cart;
