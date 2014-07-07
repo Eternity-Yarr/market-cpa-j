@@ -55,8 +55,9 @@ public class Main
 
     public static void main(String[] args)
     {
-        DateTime dt = new DateTime();
-        List<Outlet> os = OutletsService.get();
-        Ws.run();
+			log.info("Started");
+			DateTime dt = new DateTime();
+			List<Outlet> os = OutletsService.get();
+			Ws.run();
     }
 }
