@@ -9,8 +9,9 @@ public class Delivery
     int outletId;
     Address address;
     Dates dates;
+	private DeliveryType deliveryType;
 
-    public boolean is_post()
+	public boolean is_post()
     {
         return type == DeliveryType.POST;
     }
@@ -38,4 +39,8 @@ public class Delivery
     {
         return address;
     }
+	public DeliveryType getDeliveryType()
+	{
+		return deliveryType;
+	}
 }

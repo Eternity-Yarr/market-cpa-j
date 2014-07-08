@@ -39,8 +39,9 @@ public class CartHandler implements HttpHandler
         {
             log.info("working");
 
-            if(rx.method().equals("POST"))
+            if(rx.method().equals("POST") && Helpers.authorize(rx))
             {
+
                 String raw_post = rx.body();
                 CartRequest cr = null;
                 try

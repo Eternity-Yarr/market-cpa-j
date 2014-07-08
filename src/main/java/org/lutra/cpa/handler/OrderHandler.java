@@ -11,7 +11,6 @@ import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.cache.OutletsCache;
 import org.lutra.cpa.model.Order;
 import org.lutra.cpa.model.OrderStatus;
-import org.lutra.cpa.service.OrderService;
 import org.lutra.cpa.service.OrderStatusService;
 import org.lutra.cpa.wrapper.MyHandlebars;
 import org.slf4j.Logger;
@@ -23,7 +22,6 @@ import org.webbitserver.HttpResponse;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -76,7 +74,11 @@ public class OrderHandler implements HttpHandler
 							data.put("order_status", OrderStatus.values());
 							if(o.getDelivery().is_pickup())
 									data.put("outlet", OutletsCache.get(o.getDelivery().getOutletId()));
-							Set<OrderStatus> status_transitions = OrderStatusService.possibleTransitions(o.getStatus());
+							Set<OrderStatus> status_transitions =	OrderStatusService.possibleTransitions
+							(
+								o.getStatus(),
+								o.getDelivery().getDeliveryType()
+							);
 							if(status_transitions.contains(OrderStatus.CANCELLED))
 								data.put("cancellable", true);
 							status_transitions.remove(OrderStatus.CANCELLED);
@@ -101,5 +103,5 @@ public class OrderHandler implements HttpHandler
             tx.status(200);
             tx.end();
         }
-    }
+		}
 }

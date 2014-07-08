@@ -29,26 +29,24 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-           <hr />
-          <ul class="nav nav-sidebar">
-              <li><a href="/orders">Все</a></li>
-            {{#order_status}}
-            <li><a href="/orders?status={{name}}">{{brief}}</a></li>
-            {{/order_status}}
-          </ul>
+					<ul class="nav nav-sidebar" id="navigation">
+						<li class="text-center">Заказы</li>
+						<hr />
+						<li><a href="/orders">Все</a></li>
+						{{#order_status}}
+							<li><a href="/orders?status={{name}}">{{brief}}</a></li>
+						{{/order_status}}
+					</ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             {{#order}}
           <h1 class="page-header"><a href="{{raw_back_url}}"><i class="glyphicon glyphicon-arrow-left"></i></a>&nbsp;Заказ N{{id}} от {{creationDate}} {{#if fake}}[ТЕСТОВЫЙ]{{/if}}</h1>
 							<div class="btn-group btn-group-justified">
 								{{#status_transitions}}
-								<a class="btn btn-default modal-hook" role="button" title="{{desc}}" data-href="/change_status?id={{id}}&status={{.}}&back_url={{back_url}}" data-desc="{{desc}}" data-target="#yesno">{{brief}}</a>
+								<a class="btn btn-default modal-hook" role="button" title="{{desc}}" data-href="/change_status?id={{id}}&status={{.}}&back_url={{back_url}}" data-desc="{{desc}}" data-target="#yesno">
+									<span class="visible-md visible-lg hidden-sm hidden-xs">{{desc}}</span>
+									<span class="hidden-md hidden-lg visible-sm visible-xs">{{brief}}</span>
+								</a>
 								{{/status_transitions}}
 								{{#if cancellable}}
 								<div class="btn-group">
@@ -82,17 +80,22 @@
 									</div>
 								</div>
 							</div>
-						<p>
-							Статус: {{status.desc}}
-							{{#substatus}}Подстатус: {{substatus.desc}}{{/substatus}}
-            </p>
+						<div class="panel panel-default">
+							<div class="panel-body text-center">
+							<h3>
+								{{status.desc}}
+							</h3>
+							{{#substatus}}Причина: {{substatus.desc}}{{/substatus}}
+
+							</div>
+            </div>
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center"><h3 class="panel-title"><strong>Информация о покупателе</strong></h3></div>
                     <div class="panel-body">
                         <dl class="dl-horizontal">
                             {{#buyer.firstName}}
-                                <dt>Имя</dt><dd>{{buyer.firstName}}</dd>
+														<dt>Имя</dt><dd>{{buyer.firstName}}</dd>
                             {{/buyer.firstName}}
                             {{#buyer.middleName}}
                             <dt>Отчество</dt><dd>{{buyer.middleName}}</dd>
@@ -101,10 +104,10 @@
                             <dt>Фамилия</dt><dd>{{buyer.lastName}}</dd>
                             {{/buyer.lastName}}
                             {{#buyer.phone}}
-                                <dt>Телефон</dt><dd>{{buyer.phone}}</dd>
+														<dt>Телефон</dt><dd>{{buyer.phone}}</dd>
                             {{/buyer.phone}}
                             {{#buyer.email}}
-                                <dt>e-mail</dt><dd>{{buyer.email}}</dd>
+														<dt>e-mail</dt><dd>{{buyer.email}}</dd>
                             {{/buyer.email}}
                         </dl>
                     </div>

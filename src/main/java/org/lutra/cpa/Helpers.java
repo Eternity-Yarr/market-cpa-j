@@ -106,4 +106,8 @@ public class Helpers
 
         return ps;
     }
+	public static boolean authorize(HttpRequest rx)
+	{
+		return rx.hasHeader("Authorization") && rx.header("Authorization").equals(Config.oauth_token);
+	}
 }

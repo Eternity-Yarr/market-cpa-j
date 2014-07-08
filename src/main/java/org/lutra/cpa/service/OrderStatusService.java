@@ -1,5 +1,6 @@
 package org.lutra.cpa.service;
 
+import org.lutra.cpa.model.DeliveryType;
 import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.model.OrderSubstatus;
 
@@ -10,7 +11,7 @@ import static org.lutra.cpa.model.OrderSubstatus.*;
 
 public class OrderStatusService
 {
-    public static Set<OrderStatus> possibleTransitions(OrderStatus from_status)
+    public static Set<OrderStatus> possibleTransitions(OrderStatus from_status, DeliveryType for_deliveryType)
     {
         Set<OrderStatus> ret = new HashSet<>();
         switch(from_status)
@@ -19,7 +20,10 @@ public class OrderStatusService
                 ret.addAll(Arrays.asList(DELIVERY, CANCELLED));
                 break;
             case DELIVERY:
-                ret.addAll(Arrays.asList(PICKUP, DELIVERED, CANCELLED));
+							if(for_deliveryType == DeliveryType.PICKUP)
+                ret.addAll(Arrays.asList(PICKUP, CANCELLED));
+							else if(for_deliveryType == DeliveryType.DELIVERY)
+								ret.addAll(Arrays.asList(DELIVERED, CANCELLED));
                 break;
             case PICKUP:
                 ret.addAll(Arrays.asList(DELIVERED, CANCELLED));
