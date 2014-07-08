@@ -10,7 +10,7 @@ public class OrderService
     {
         assert(id != 0); //TODO: Meh..
         String path = String.format("/campaigns/%s/orders/%s.json", Config.campaignId, id);
-        String json = Market.request(path);
+        String json = Market.getRequest(path);
 
         return Main.g.fromJson(json, OrderResponse.class);
     }

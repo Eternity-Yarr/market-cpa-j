@@ -7,7 +7,7 @@ public class MarketTest
     @Test
     public void testConnection()
     {
-        String reply = Market.request("/campaigns.json");
+        String reply = Market.getRequest("/campaigns.json");
         System.out.println(reply);
     }
 }

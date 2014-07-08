@@ -23,7 +23,7 @@ public class OrdersService
         String path = String.format("/campaigns/%s/orders.json?pageSize=%s&page=%s", Config.campaignId, ps, p);
         if(status != null)
             path += "&status=" + status.name();
-        String json = Market.request(path);
+        String json = Market.getRequest(path);
         OrdersResponse or =  Main.g.fromJson(json, OrdersResponse.class);
 
         if(or != null)

@@ -11,4 +11,18 @@ public class Status
 {
     OrderStatus status;
     OrderSubstatus substatus;
+
+	public Status setStatus(OrderStatus status)
+	{
+		this.status = status;
+
+		return this;
+	}
+
+	public Status setSubstatus(OrderSubstatus substatus)
+	{
+		this.substatus = substatus;
+
+		return this;
+	}
 }

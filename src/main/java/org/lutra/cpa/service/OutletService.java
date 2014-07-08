@@ -10,7 +10,7 @@ public class OutletService
     {
         assert(id != 0); //TODO: Meh..
         String path = String.format("/campaigns/%s/outlets/%s.json", Config.campaignId, id);
-        String json = Market.request(path);
+        String json = Market.getRequest(path);
 
         return Main.g.fromJson(json, OutletResponse.class);
     }

@@ -1,9 +1,6 @@
 package org.lutra.cpa;
 
-import org.lutra.cpa.handler.CartHandler;
-import org.lutra.cpa.handler.NotFoundHandler;
-import org.lutra.cpa.handler.OrderHandler;
-import org.lutra.cpa.handler.OrdersHandler;
+import org.lutra.cpa.handler.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.webbitserver.WebServer;
@@ -14,6 +11,21 @@ import java.io.FileInputStream;
 
 public class Ws
 {
+	static
+	{
+		//for localhost testing only
+		javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier
+		(
+			new javax.net.ssl.HostnameVerifier()
+			{
+				public boolean verify(String hostname, javax.net.ssl.SSLSession sslSession)
+				{
+					return hostname.equals("localhost");
+				}
+			}
+		);
+	}
+
 	public static WebServer ws;
 	final static Logger log = LoggerFactory.getLogger("WS");
 
@@ -36,8 +48,10 @@ public class Ws
 		;
 		ws
 			.add("/orders", new OrdersHandler())
-            .add("/order", new OrderHandler())
-            .add("/cart", new CartHandler())
+			.add("/order", new OrderHandler())
+			.add("/cart", new CartHandler())
+			.add("/change_status", new ChangeStatusHandler())
+			.add("/loopback", new LoopbackHandler())  //TODO: Delete me
 			.add(new NotFoundHandler())
 		;
 		try
