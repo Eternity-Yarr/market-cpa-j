@@ -142,12 +142,20 @@ public class Helpers
 					continue;
 				try
 				{
-					if(t == int.class)
+					if(t == int.class || t == Integer.class)
 						f.setInt(ret, Integer.parseInt(value));
-					else if(t == double.class)
+					else if(t == double.class || t == Double.class)
 						f.setDouble(ret, Double.parseDouble(value));
-					else if(t == boolean.class)
+					else if(t == boolean.class || t == Boolean.class)
 						f.setBoolean(ret, Boolean.valueOf(value));
+					else if(t == char.class || t == Character.class)
+						f.setChar(ret, value.charAt(0));
+					else if(t == long.class || t == Long.class)
+						f.setLong(ret, Long.parseLong(value));
+					else if(t == float.class || t == Float.class)
+						f.setFloat(ret, Float.parseFloat(value));
+					else if(t == short.class || t == Short.class)
+						f.setShort(ret, Short.parseShort(value));
 					else
 						f.set(ret, value);
 				}
