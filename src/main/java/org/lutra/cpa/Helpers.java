@@ -116,17 +116,17 @@ public class Helpers
 
 	public static <T> T castMap(Map<String, String> fromMap, Class<T> clazz)
 	{
-		return castMap(fromMap, "", clazz);
+		return castMap(fromMap, "", "-", clazz);
 	}
 
 	/**
-	 * Assigns values of HashMap to arbitrary class object
+	 * Assigns values of HashMap to arbitrary class object fields
 	 * @param fromMap  source map file
 	 * @param key_prefix prefix of map key
 	 * @param clazz destination class
 	 * @return instance of clazz class
 	 */
-	public static <T> T castMap(Map<String, String> fromMap, String key_prefix, Class<T> clazz)
+	public static <T> T castMap(Map<String, String> fromMap, String key_prefix, String separator, Class<T> clazz)
 	{
 		T ret = null;
 		try
@@ -137,9 +137,7 @@ public class Helpers
 			{
 				Type t = f.getType();
 				String key = f.getName();
-				String value = fromMap.get(key_prefix + key);
-				if(value == null)
-					continue;
+				String value = fromMap.get(key_prefix + separator + key);
 				try
 				{
 					if(t == int.class || t == Integer.class)
@@ -156,8 +154,21 @@ public class Helpers
 						f.setFloat(ret, Float.parseFloat(value));
 					else if(t == short.class || t == Short.class)
 						f.setShort(ret, Short.parseShort(value));
-					else
+					else if(t == String.class)
 						f.set(ret, value);
+					else
+					{
+						Class	subClass = null;
+						try
+						{
+							subClass = Class.forName(f.getType().getName());
+						}
+						catch(ClassNotFoundException e)
+						{
+							log.error(e.toString(), e);
+						}
+						f.set(ret,castMap(fromMap, key_prefix + separator + key, separator, subClass));
+					}
 				}
 				catch(NumberFormatException e)
 				{

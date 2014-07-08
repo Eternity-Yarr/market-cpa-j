@@ -13,20 +13,27 @@ public class HelpersTest
 
 	public static class TestClass
 	{
+		public TestSubClass d;
 		public String a;
 		public String b;
 		public int c;
+	}
+	public static class TestSubClass
+	{
+		public String dd;
 	}
 	@Test
 	public void testdeserializeMap() throws  Exception
 	{
 
 		Map<String,String> testMap = new HashMap<>();
-		testMap.put("a", "blah");
-		testMap.put("c", "123");
-		testMap.put("b", "sdfdsfd");
+		testMap.put("prefix-a", "blah");
+		testMap.put("prefix-c", "123");
+		testMap.put("prefix-b", "sdfdsfd");
+		testMap.put("prefix-d-dd", "blabab");
 
-		TestClass ts = Helpers.castMap(testMap, TestClass.class);
+
+		TestClass ts = Helpers.castMap(testMap, "prefix", "-", TestClass.class);
 		System.out.println(ts);
 	}
 
