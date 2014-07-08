@@ -45,10 +45,10 @@
 					<h3>Изменение условий доставки заказа {{order.id}}</h3>
 					<hr/>
 					{{#order}}
-					<form role="form" method="POST">
+					<form role="form" method="POST" action="/loopback">
 						<div class="form-group col-md-12">
 							<label for="delivery-type">Способ доставки</label>
-							<select id="delivery-type" class="form-control">
+							<select id="delivery-type" class="form-control" name="delivery-type">
 								{{#delivery_type}}
 									<option value="{{.}}">{{desc}}</option>
 								{{/delivery_type}}
@@ -56,7 +56,7 @@
 						</div>
 						<div class="form-group col-md-12">
 							<label for="delivery-outlet">Точка самовывоза</label>
-							<select id="delivery-outlet" class="form-control">
+							<select id="delivery-outlet" class="form-control" name="delivery-outletId">
 								{{#each outlets}}
 									<option value="{{this.id}}">{{this.name}}</option>
 								{{/each}}

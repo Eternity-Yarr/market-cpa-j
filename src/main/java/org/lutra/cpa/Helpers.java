@@ -7,6 +7,8 @@ import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -15,6 +17,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class Helpers
 {
@@ -110,4 +113,48 @@ public class Helpers
 	{
 		return rx.hasHeader("Authorization") && rx.header("Authorization").equals(Config.oauth_token);
 	}
+
+	public static <T> T castMap(Map<String, String> fromMap, Class<T> clazz)
+	{
+		return castMap(fromMap, "", clazz);
+	}
+
+	/**
+	 * Assigns values of HashMap to arbitrary class object
+	 * @param fromMap  source map file
+	 * @param key_prefix prefix of map key
+	 * @param clazz destination class
+	 * @return instance of clazz class
+	 */
+	public static <T> T castMap(Map<String, String> fromMap, String key_prefix, Class<T> clazz)
+	{
+		T ret = null;
+		try
+		{
+			ret =  clazz.newInstance();
+			Field[] fields = clazz.getFields();
+			for(Field f: fields)
+			{
+				Type t = f.getType();
+				String key = f.getName();
+				String value = fromMap.get(key_prefix + key);
+				if(value == null)
+					continue;
+				if(t == int.class)
+					f.setInt(ret, Integer.parseInt(value));
+				else if(t == double.class)
+					f.setDouble(ret, Double.parseDouble(value));
+				else if(t == boolean.class)
+					f.setBoolean(ret, Boolean.valueOf(value));
+				else
+					f.set(ret, value);
+			}
+		}
+		catch(Exception e)
+		{
+			log.error(e.toString(), e);
+		}
+		return ret;
+	}
 }
+
