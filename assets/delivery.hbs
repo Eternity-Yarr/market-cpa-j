@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  {{>head}}
+	<head>
+		{{>head}}
+		<link href="/css/datepicker3.css" rel="stylesheet">
+	</head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -41,8 +44,8 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h3>Изменение условий доставки заказа {{order.id}}</h3>
 					<hr/>
-					<form role="form">
-						<div class="form-group">
+					<form role="form" method="POST">
+						<div class="form-group col-md-12">
 							<label for="delivery-type">Способ доставки</label>
 							<select id="delivery-type" class="form-control">
 								{{#delivery_type}}
@@ -50,19 +53,7 @@
 								{{/delivery_type}}
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="delivery-price">Стоимость</label>
-							<input type="text" class="form-control" id="delivery-price" placeholder="Стоимость доставки">
-						</div>
-						<div class="form-group">
-							<label for="delivery-type">Способ доставки</label>
-							<select id="delivery-type" class="form-control">
-								{{#delivery_type}}
-									<option value="{{value}}">{{desc}}</option>
-								{{/delivery_type}}
-							</select>
-						</div>
-						<div class="form-group">
+						<div class="form-group col-md-12">
 							<label for="delivery-outlet">Точка самовывоза</label>
 							<select id="delivery-outlet" class="form-control">
 								{{#each outlets}}
@@ -70,19 +61,66 @@
 								{{/each}}
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Password</label>
-							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						<div class="form-group col-md-12">
+							<label for="delivery-address-country">Страна</label>
+							<input type="text" class="form-control" name="delivery-address-country">
 						</div>
-						<div class="form-group">
-							<label for="exampleInputFile">File input</label>
-							<input type="file" id="exampleInputFile">
-							<p class="help-block">Example block-level help text here.</p>
+						<div class="form-group col-md-6">
+							<label for="delivery-address-postcode">Индекс</label>
+							<input type="text" class="form-control" name="delivery-address-postcode">
 						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox"> Check me out
-							</label>
+						<div class="form-group col-md-6">
+							<label for="delivery-address-city">Город</label>
+							<input type="text" class="form-control" name="delivery-address-city">
+						</div>
+						<div class="form-group col-md-12">
+							<label for="delivery-address-subway">Станция метро</label>
+							<input type="text" class="form-control" name="delivery-address-subway">
+						</div>
+						<div class="form-group col-md-12">
+							<label for="delivery-address-street">Улица</label>
+							<input type="text" class="form-control" name="delivery-address-street">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="delivery-address-house">Номер дома/владения</label>
+							<input type="text" class="form-control" name="delivery-address-house">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="delivery-address-block">Номер корпуса/строения</label>
+							<input type="text" class="form-control" name="delivery-address-block">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="delivery-address-entrance">Номер подъезда</label>
+							<input type="text" class="form-control" name="delivery-address-entrance">
+						</div>
+
+						<div class="form-group col-md-4">
+							<label for="delivery-address-entryphone">Код домофона</label>
+							<input type="text" class="form-control" name="delivery-address-entryphone">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="delivery-address-floor">Этаж</label>
+							<input type="text" class="form-control" name="delivery-address-floor">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="delivery-address-apartment">Номер квартиры или офиса</label>
+							<input type="text" class="form-control" name="delivery-address-apartment">
+						</div>
+
+						<div class="form-group col-md-12">
+							<label for="delivery-address-recipient">Получатель заказа</label>
+							<input type="text" class="form-control" name="delivery-address-floor">
+						</div>
+						<div class="form-group col-md-12">
+							<label for="delivery-address-phone">Телефон получателя</label>
+							<input type="text" class="form-control" name="delivery-address-apartment">
+						</div>
+						<div class="form-group input-daterange col-md-12" id="datepicker">
+							<div class="input-group">
+								<input type="text" class="input-md form-control" name="delivery-fromDate" />
+								<span class="input-group-addon">&nbsp;--&nbsp;</span>
+								<input type="text" class="input-md form-control" name="delivery-toDate" />
+							</div>
 						</div>
 						<button type="submit" class="btn btn-default">Submit</button>
 					</form>
@@ -90,5 +128,18 @@
       </div>
     </div>
   {{>scripts}}
+	<script src="/js/bootstrap-datepicker.js"></script>
+		<script src="/js/bootstrap-datepicker.ru.js"></script>
+	<script>
+		$('.input-daterange').datepicker
+		(
+			{
+				format: "mm-dd-yyyy",
+				weekStart: 1,
+				todayBtn: "linked",
+				language: "ru"
+			}
+		);
+	</script>
   </body>
 </html>
