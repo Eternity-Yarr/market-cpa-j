@@ -124,6 +124,16 @@
                 {{>widget/pickup}}
             {{/if}}
             </div>
+							{{#notes}}
+								<div class="col-md-12">
+								<div class="panel panel-warning">
+									<div class="panel-heading">Комментарий покупателя:</div>
+									<div class="panel-body text-center">
+										{{notes}}
+									</div>
+								</div>
+								</div>
+							{{/notes}}
                 <table class="table table-striped table-hover table-condensed">
                     <tbody><tr class="row">
                         <th>Наименование</th>
