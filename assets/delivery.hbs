@@ -44,12 +44,13 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h3>Изменение условий доставки заказа {{order.id}}</h3>
 					<hr/>
+					{{#order}}
 					<form role="form" method="POST">
 						<div class="form-group col-md-12">
 							<label for="delivery-type">Способ доставки</label>
 							<select id="delivery-type" class="form-control">
 								{{#delivery_type}}
-									<option value="{{value}}">{{desc}}</option>
+									<option value="{{.}}">{{desc}}</option>
 								{{/delivery_type}}
 							</select>
 						</div>
@@ -63,67 +64,70 @@
 						</div>
 						<div class="form-group col-md-12">
 							<label for="delivery-address-country">Страна</label>
-							<input type="text" class="form-control" name="delivery-address-country">
+							<input type="text" class="form-control" name="delivery-address-country" value="{{delivery.address.country}}">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="delivery-address-postcode">Индекс</label>
-							<input type="text" class="form-control" name="delivery-address-postcode">
+							<input type="text" class="form-control" name="delivery-address-postcode" value="{{delivery.address.postcode}}">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="delivery-address-city">Город</label>
-							<input type="text" class="form-control" name="delivery-address-city">
+							<input type="text" class="form-control" name="delivery-address-city" value="{{delivery.address.city}}">
 						</div>
 						<div class="form-group col-md-12">
 							<label for="delivery-address-subway">Станция метро</label>
-							<input type="text" class="form-control" name="delivery-address-subway">
+							<input type="text" class="form-control" name="delivery-address-subway" value="{{delivery.address.subway}}">
 						</div>
 						<div class="form-group col-md-12">
 							<label for="delivery-address-street">Улица</label>
-							<input type="text" class="form-control" name="delivery-address-street">
+							<input type="text" class="form-control" name="delivery-address-street" value="{{delivery.address.street}}">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="delivery-address-house">Номер дома/владения</label>
-							<input type="text" class="form-control" name="delivery-address-house">
+							<input type="text" class="form-control" name="delivery-address-house" value="{{delivery.address.house}}">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="delivery-address-block">Номер корпуса/строения</label>
-							<input type="text" class="form-control" name="delivery-address-block">
+							<input type="text" class="form-control" name="delivery-address-block" value="{{delivery.address.block}}">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="delivery-address-entrance">Номер подъезда</label>
-							<input type="text" class="form-control" name="delivery-address-entrance">
+							<input type="text" class="form-control" name="delivery-address-entrance" value="{{delivery.address.entrance}}">
 						</div>
 
 						<div class="form-group col-md-4">
 							<label for="delivery-address-entryphone">Код домофона</label>
-							<input type="text" class="form-control" name="delivery-address-entryphone">
+							<input type="text" class="form-control" name="delivery-address-entryphone" value="{{delivery.address.entryphone}}">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="delivery-address-floor">Этаж</label>
-							<input type="text" class="form-control" name="delivery-address-floor">
+							<input type="text" class="form-control" name="delivery-address-floor" value="{{delivery.address.floor}}">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="delivery-address-apartment">Номер квартиры или офиса</label>
-							<input type="text" class="form-control" name="delivery-address-apartment">
+							<input type="text" class="form-control" name="delivery-address-apartment" value="{{delivery.address.apartment}}">
 						</div>
 
 						<div class="form-group col-md-12">
 							<label for="delivery-address-recipient">Получатель заказа</label>
-							<input type="text" class="form-control" name="delivery-address-floor">
+							<input type="text" class="form-control" name="delivery-address-recipient" value="{{delivery.address.recipient}}">
 						</div>
 						<div class="form-group col-md-12">
 							<label for="delivery-address-phone">Телефон получателя</label>
-							<input type="text" class="form-control" name="delivery-address-apartment">
+							<input type="text" class="form-control" name="delivery-address-phone" value="{{delivery.address.phone}}">
 						</div>
 						<div class="form-group input-daterange col-md-12" id="datepicker">
 							<div class="input-group">
-								<input type="text" class="input-md form-control" name="delivery-fromDate" />
+								<input type="text" class="input-md form-control" name="delivery-fromDate"  value="{{delivery.fromDate}}"/>
 								<span class="input-group-addon">&nbsp;--&nbsp;</span>
-								<input type="text" class="input-md form-control" name="delivery-toDate" />
+								<input type="text" class="input-md form-control" name="delivery-toDate" value="{{delivery.toDate}}"/>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
+						<div class="form-group col-md-12">
+							<input type="submit" class="form-control btn-warning col-md-6"><div class="col-md-3">
+						</div>
 					</form>
+					{{/order}}
         </div>
       </div>
     </div>
