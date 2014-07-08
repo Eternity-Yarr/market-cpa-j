@@ -122,11 +122,11 @@ public class Helpers
 	/**
 	 * Assigns values of HashMap to arbitrary class object fields
 	 * @param fromMap  source map file
-	 * @param key_prefix prefix of map key
+	 * @param keyPrefix prefix of map key
 	 * @param clazz destination class
 	 * @return instance of clazz class
 	 */
-	public static <T> T castMap(Map<String, String> fromMap, String key_prefix, String separator, Class<T> clazz)
+	public static <T> T castMap(Map<String, String> fromMap, String keyPrefix, String separator, Class<T> clazz)
 	{
 		T ret = null;
 		try
@@ -137,7 +137,7 @@ public class Helpers
 			{
 				Type t = f.getType();
 				String key = f.getName();
-				String value = fromMap.get(key_prefix + separator + key);
+				String value = fromMap.get(keyPrefix + separator + key);
 				try
 				{
 					if(t == int.class || t == Integer.class)
@@ -167,7 +167,7 @@ public class Helpers
 						{
 							log.error(e.toString(), e);
 						}
-						f.set(ret,castMap(fromMap, key_prefix + separator + key, separator, subClass));
+						f.set(ret,castMap(fromMap, keyPrefix + separator + key, separator, subClass));
 					}
 				}
 				catch(NumberFormatException e)
