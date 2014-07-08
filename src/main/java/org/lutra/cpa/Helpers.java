@@ -131,26 +131,33 @@ public class Helpers
 		T ret = null;
 		try
 		{
-			ret =  clazz.newInstance();
+			ret = clazz.newInstance();
 			Field[] fields = clazz.getFields();
-			for(Field f: fields)
+			for(Field f : fields)
 			{
 				Type t = f.getType();
 				String key = f.getName();
 				String value = fromMap.get(key_prefix + key);
 				if(value == null)
 					continue;
-				if(t == int.class)
-					f.setInt(ret, Integer.parseInt(value));
-				else if(t == double.class)
-					f.setDouble(ret, Double.parseDouble(value));
-				else if(t == boolean.class)
-					f.setBoolean(ret, Boolean.valueOf(value));
-				else
-					f.set(ret, value);
+				try
+				{
+					if(t == int.class)
+						f.setInt(ret, Integer.parseInt(value));
+					else if(t == double.class)
+						f.setDouble(ret, Double.parseDouble(value));
+					else if(t == boolean.class)
+						f.setBoolean(ret, Boolean.valueOf(value));
+					else
+						f.set(ret, value);
+				}
+				catch(NumberFormatException e)
+				{
+					log.error(e.toString(), e);
+				}
 			}
 		}
-		catch(Exception e)
+		catch(InstantiationException | IllegalAccessException e)
 		{
 			log.error(e.toString(), e);
 		}
