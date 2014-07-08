@@ -52,6 +52,7 @@ public class Ws
 			.add("/order", new OrderHandler())
 			.add("/cart", new CartHandler())
 			.add("/change_status", new ChangeStatusHandler())
+			.add("/change_delivery", new ChangeDeliveryHandler())
 			.add("/loopback", new LoopbackHandler())  //TODO: Delete me
 			.add(new NotFoundHandler())
 		;

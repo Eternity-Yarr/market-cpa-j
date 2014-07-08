@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  {{>head}}
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/orders">Покупка на маркете</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar" id="navigation">
+						<li class="text-center">Заказы</li>
+						<hr />
+						<li><a href="/orders">Все</a></li>
+						{{#order_status}}
+							<li><a href="/orders?status={{name}}">{{brief}}</a></li>
+						{{/order_status}}
+					</ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					<h3>Изменение условий доставки заказа {{order.id}}</h3>
+					<hr/>
+					<form role="form">
+						<div class="form-group">
+							<label for="delivery-type">Способ доставки</label>
+							<select id="delivery-type" class="form-control">
+								{{#delivery_type}}
+									<option value="{{value}}">{{desc}}</option>
+								{{/delivery_type}}
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="delivery-price">Стоимость</label>
+							<input type="text" class="form-control" id="delivery-price" placeholder="Стоимость доставки">
+						</div>
+						<div class="form-group">
+							<label for="delivery-type">Способ доставки</label>
+							<select id="delivery-type" class="form-control">
+								{{#delivery_type}}
+									<option value="{{value}}">{{desc}}</option>
+								{{/delivery_type}}
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="delivery-outlet">Точка самовывоза</label>
+							<select id="delivery-outlet" class="form-control">
+								{{#each outlets}}
+									<option value="{{this.id}}">{{this.name}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Password</label>
+							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputFile">File input</label>
+							<input type="file" id="exampleInputFile">
+							<p class="help-block">Example block-level help text here.</p>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> Check me out
+							</label>
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+        </div>
+      </div>
+    </div>
+  {{>scripts}}
+  </body>
+</html>

@@ -13,13 +13,13 @@ public class OrdersService
 {
     public static OrdersResponse get()
     {
-        return get(null, 50, 1);
+        return get(null, 50, 0);
     }
 
     public static OrdersResponse get(OrderStatus status, int pageSize, int page)
     {
         int ps = pageSize > 50 || pageSize < 1 ? 50 : pageSize;
-        int p = page < 1 || page > 100 ? 1 : page;
+        int p = page < 0 || page > 100 ? 0 : page;
         String path = String.format("/campaigns/%s/orders.json?pageSize=%s&page=%s", Config.campaignId, ps, p);
         if(status != null)
             path += "&status=" + status.name();

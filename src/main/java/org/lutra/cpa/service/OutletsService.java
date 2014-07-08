@@ -15,7 +15,7 @@ public class OutletsService
     {
         List<Outlet> ret = new ArrayList<>();
         int ps = 50;
-        int p = 1;
+        int p = 0;
         String path = String.format("/campaigns/%s/outlets.json?pageSize=%s&page=%s", Config.campaignId, ps, p);
         String json = Market.getRequest(path);
         OutletsResponse or =  Main.g.fromJson(json, OutletsResponse.class);

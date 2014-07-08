@@ -17,7 +17,11 @@ public class Outlet
     {
         return id;
     }
-    // TODO: devliery-rules, emails, phones
+		public String getName()
+		{
+			return name;
+		}
+		// TODO: devliery-rules, emails, phones
     //List<DeliveryRules> deliveryRules;
     //List<Email> emails;
     //List<Phone> phones;
