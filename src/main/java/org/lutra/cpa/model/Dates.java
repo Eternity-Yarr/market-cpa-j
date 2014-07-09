@@ -4,7 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Dates {
+public class Dates
+{
 
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -13,15 +14,15 @@ public class Dates {
 
 	public Dates setFromDate(Date fromDate)
 	{
-			this.fromDate = fromDate;
+		this.fromDate = fromDate;
 
-			return this;
+		return this;
 	}
 	public Dates setToDate(Date toDate)
 	{
-			this.toDate = toDate;
+		this.toDate = toDate;
 
-			return this;
+		return this;
 	}
 	public String getFromDate()
 	{

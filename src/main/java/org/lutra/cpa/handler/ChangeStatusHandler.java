@@ -49,7 +49,7 @@ public class ChangeStatusHandler implements HttpHandler
 		public void run()
 		{
 			{
-				String back_url = Helpers.queryGetString(rx,"back_url", "/orders");
+				String back_url = Helpers.queryGetString(rx, "back_url", "/orders");
 				int id = Helpers.queryGetInt(rx, "id", -1);
 				String path = String.format("/campaigns/%s/orders/%s/status.json", Config.campaignId, id);
 				OrderStatus status = null;
@@ -71,7 +71,7 @@ public class ChangeStatusHandler implements HttpHandler
 				StatusRequest sr = new StatusRequest();
 				boolean has_error = id == -1;
 				Status s = new Status();
-				if(status != null && status != OrderStatus.CANCELLED )
+				if(status != null && status != OrderStatus.CANCELLED)
 					s.setStatus(status);
 				else if(status != null && substatus != null)
 				{

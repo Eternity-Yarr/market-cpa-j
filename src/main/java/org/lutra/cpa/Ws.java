@@ -1,7 +1,6 @@
 package org.lutra.cpa;
 
 import org.lutra.cpa.handler.*;
-import org.lutra.cpa.wrapper.AuthorizedHttpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.webbitserver.WebServer;
@@ -16,15 +15,15 @@ public class Ws
 	{
 		//for localhost testing only
 		javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier
-		(
-			new javax.net.ssl.HostnameVerifier()
-			{
-				public boolean verify(String hostname, javax.net.ssl.SSLSession sslSession)
+			(
+				new javax.net.ssl.HostnameVerifier()
 				{
-					return hostname.equals("localhost");
+					public boolean verify(String hostname, javax.net.ssl.SSLSession sslSession)
+					{
+						return hostname.equals("localhost");
+					}
 				}
-			}
-		);
+			);
 	}
 
 	public static WebServer ws;
@@ -45,7 +44,7 @@ public class Ws
 			ws = WebServers.createWebServer(9888);
 		}
 		ws
-            .add(new StaticFileHandler("./var"))
+			.add(new StaticFileHandler("./var"))
 		;
 		ws
 			.add("/orders", new OrdersHandler())

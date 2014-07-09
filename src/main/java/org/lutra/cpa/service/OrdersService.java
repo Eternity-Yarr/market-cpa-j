@@ -11,28 +11,28 @@ import java.util.List;
 
 public class OrdersService
 {
-    public static OrdersResponse get()
-    {
-        return get(null, 50, 0);
-    }
+	public static OrdersResponse get()
+	{
+		return get(null, 50, 0);
+	}
 
-    public static OrdersResponse get(OrderStatus status, int pageSize, int page)
-    {
-        int ps = pageSize > 50 || pageSize < 1 ? 50 : pageSize;
-        int p = page < 0 || page > 100 ? 0 : page;
-        String path = String.format("/campaigns/%s/orders.json?pageSize=%s&page=%s", Config.campaignId, ps, p);
-        if(status != null)
-            path += "&status=" + status.name();
-        String json = Market.getRequest(path);
-        OrdersResponse or =  Main.g.fromJson(json, OrdersResponse.class);
+	public static OrdersResponse get(OrderStatus status, int pageSize, int page)
+	{
+		int ps = pageSize > 50 || pageSize < 1 ? 50 : pageSize;
+		int p = page < 0 || page > 100 ? 0 : page;
+		String path = String.format("/campaigns/%s/orders.json?pageSize=%s&page=%s", Config.campaignId, ps, p);
+		if(status != null)
+			path += "&status=" + status.name();
+		String json = Market.getRequest(path);
+		OrdersResponse or = Main.g.fromJson(json, OrdersResponse.class);
 
-        if(or != null)
-        {
-            List<Order> os = or.getOrders();
-            for(Order o : os)
-                OrdersCache.put(o);
-        }
+		if(or != null)
+		{
+			List<Order> os = or.getOrders();
+			for(Order o : os)
+				OrdersCache.put(o);
+		}
 
-        return or;
-    }
+		return or;
+	}
 }

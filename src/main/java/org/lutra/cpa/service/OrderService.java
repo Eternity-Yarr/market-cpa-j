@@ -6,12 +6,12 @@ import org.lutra.cpa.response.get.OrderResponse;
 
 public class OrderService
 {
-    public static OrderResponse get(int id)
-    {
-        assert(id != 0); //TODO: Meh..
-        String path = String.format("/campaigns/%s/orders/%s.json", Config.campaignId, id);
-        String json = Market.getRequest(path);
+	public static OrderResponse get(int id)
+	{
+		assert (id != 0); //TODO: Meh..
+		String path = String.format("/campaigns/%s/orders/%s.json", Config.campaignId, id);
+		String json = Market.getRequest(path);
 
-        return Main.g.fromJson(json, OrderResponse.class);
-    }
+		return Main.g.fromJson(json, OrderResponse.class);
+	}
 }

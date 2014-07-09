@@ -1,8 +1,9 @@
 package org.lutra.cpa.model;
 
-public class Address {
+public class Address
+{
 
-  public String country;
+	public String country;
 	public String postcode;
 	public String city;
 	public String subway;
@@ -16,8 +17,8 @@ public class Address {
 	public String recipient;
 	public String phone;
 
-  public String getCity()
-    {
-        return city;
-    }
+	public String getCity()
+	{
+		return city;
+	}
 }

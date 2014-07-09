@@ -1,11 +1,12 @@
 package org.lutra.cpa.model;
 
-public class Pager {
+public class Pager
+{
 
-    int total;
-    int from;
-    int to;
-    int pageSize;
-    int pagesCount;
-    int currentPage;
+	public int total;
+	public int from;
+	public int to;
+	public int pageSize;
+	public int pagesCount;
+	public int currentPage;
 }

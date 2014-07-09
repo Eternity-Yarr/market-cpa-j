@@ -7,20 +7,21 @@ import java.util.List;
 
 /**
  * Structure of GET /campaigns/{campaignId}/orders response
+ *
  * @see <a href="http://api.yandex.ru/market/partner/doc/dg/reference/get-campaigns-id-orders.xml">reference</a>
  */
 public class OrdersResponse
 {
-    Pager pager;
-    List<Order> orders;
+	Pager pager;
+	List<Order> orders;
 
-    public Pager getPager()
-    {
-        return pager;
-    }
+	public Pager getPager()
+	{
+		return pager;
+	}
 
-    public List<Order> getOrders()
-    {
-        return orders;
-    }
+	public List<Order> getOrders()
+	{
+		return orders;
+	}
 }

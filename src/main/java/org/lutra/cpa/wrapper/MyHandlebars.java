@@ -40,7 +40,7 @@ public class MyHandlebars extends Handlebars
 					String ret = "";
 					try
 					{
-                        ret = Helpers.readFile(String.format("./var%s", path), StandardCharsets.UTF_8);
+						ret = Helpers.readFile(String.format("./var%s", path), StandardCharsets.UTF_8);
 					}
 					catch(Exception e)
 					{

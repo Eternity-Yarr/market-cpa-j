@@ -27,81 +27,81 @@ import java.util.Set;
 
 public class OrderHandler implements HttpHandler
 {
-    private static Logger log = LoggerFactory.getLogger("Order");
-    @Override
-    public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
-    {
-        new Thread(new OrderRunner(request,response,control)).start();
-        log.info("leaving");
-    }
-    public static class OrderRunner implements Runnable
-    {
-        HttpRequest rx;
-        HttpResponse tx;
-        HttpControl ct;
+	private static Logger log = LoggerFactory.getLogger("Order");
+	@Override
+	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
+	{
+		new Thread(new OrderRunner(request, response, control)).start();
+		log.info("leaving");
+	}
+	public static class OrderRunner implements Runnable
+	{
+		HttpRequest rx;
+		HttpResponse tx;
+		HttpControl ct;
 
-        public OrderRunner(HttpRequest rx, HttpResponse tx, HttpControl ct)
-        {
-            this.rx = rx;
-            this.tx = tx;
-            this.ct = ct;
-        }
-
-        @Override
-        public void run()
-        {
-            log.info("working");
-            Map<String, Object> data = new HashMap<>();
-            int id = Helpers.queryGetInt(rx, "id", 0); //TODO: default? i dont think so. Spit an error.
-            String back_url = Helpers.queryGetString(rx, "back_url", "/orders");
-
-
-            Order o = OrdersCache.get(id);
-            Handlebars h = new MyHandlebars();
-
-						data.put("raw_back_url", back_url);
-						try
-						{
-							data.put("back_url", URLEncoder.encode(back_url, "UTF-8"));
-						}
-						catch(Exception e)
-						{
-							log.error(e.toString(), e);
-						}
-            if(o != null)
-            {
-							data.put("order", o);
-							data.put("order_status", OrderStatus.values());
-							if(o.getDelivery().is_pickup())
-									data.put("outlet", OutletsCache.get(o.getDelivery().getOutletId()));
-							Set<OrderStatus> status_transitions =	OrderStatusService.possibleTransitions
-							(
-								o.getStatus(),
-								o.getDelivery().getType()
-							);
-							if(status_transitions.contains(OrderStatus.CANCELLED))
-								data.put("cancellable", true);
-							status_transitions.remove(OrderStatus.CANCELLED);
-
-							data.put("status_transitions", status_transitions);
-							data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
-            }
-            Context c = Context
-                    .newBuilder(data)
-                    .resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)
-                    .build();
-            try
-            {
-                Template t = h.compile("order");
-                String s = t.apply(c);
-                tx.content(s);
-            }
-            catch(Exception e)
-            {
-                log.error(e.toString(), e);
-            }
-            tx.status(200);
-            tx.end();
-        }
+		public OrderRunner(HttpRequest rx, HttpResponse tx, HttpControl ct)
+		{
+			this.rx = rx;
+			this.tx = tx;
+			this.ct = ct;
 		}
+
+		@Override
+		public void run()
+		{
+			log.info("working");
+			Map<String, Object> data = new HashMap<>();
+			int id = Helpers.queryGetInt(rx, "id", 0); //TODO: default? i dont think so. Spit an error.
+			String back_url = Helpers.queryGetString(rx, "back_url", "/orders");
+
+
+			Order o = OrdersCache.get(id);
+			Handlebars h = new MyHandlebars();
+
+			data.put("raw_back_url", back_url);
+			try
+			{
+				data.put("back_url", URLEncoder.encode(back_url, "UTF-8"));
+			}
+			catch(Exception e)
+			{
+				log.error(e.toString(), e);
+			}
+			if(o != null)
+			{
+				data.put("order", o);
+				data.put("order_status", OrderStatus.values());
+				if(o.getDelivery().is_pickup())
+					data.put("outlet", OutletsCache.get(o.getDelivery().getOutletId()));
+				Set<OrderStatus> status_transitions = OrderStatusService.possibleTransitions
+					(
+						o.getStatus(),
+						o.getDelivery().getType()
+					);
+				if(status_transitions.contains(OrderStatus.CANCELLED))
+					data.put("cancellable", true);
+				status_transitions.remove(OrderStatus.CANCELLED);
+
+				data.put("status_transitions", status_transitions);
+				data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
+			}
+			Context c = Context
+				.newBuilder(data)
+				.resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)
+				.build();
+			try
+			{
+				Template t = h.compile("order");
+				String s = t.apply(c);
+				tx.content(s);
+			}
+			catch(Exception e)
+			{
+				log.error(e.toString(), e);
+			}
+			tx.status(200);
+			tx.end();
+		}
+	}
 }

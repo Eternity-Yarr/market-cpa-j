@@ -9,14 +9,14 @@ import org.webbitserver.HttpResponse;
 
 public class NotFoundHandler implements HttpHandler
 {
-    private static Logger log = LoggerFactory.getLogger("404");
-    @Override
-    public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
-    {
-        log.info(request.uri());
-        response.content("NOT FOUND");
-        response.status(404);
-        response.end();
-        log.info("leaving");
-    }
+	private static Logger log = LoggerFactory.getLogger("404");
+	@Override
+	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
+	{
+		log.info(request.uri());
+		response.content("NOT FOUND");
+		response.status(404);
+		response.end();
+		log.info("leaving");
+	}
 }

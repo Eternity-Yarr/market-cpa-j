@@ -24,69 +24,70 @@ import java.util.Map;
 
 public class OrdersHandler implements HttpHandler
 {
-    private static Logger log = LoggerFactory.getLogger("Orders");
-    @Override
-    public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
-    {
-        new Thread(new OrdersRunner(request,response,control)).start();
-        log.info("leaving");
-    }
-    public static class OrdersRunner implements Runnable
-    {
-        HttpRequest rx;
-        HttpResponse tx;
-        HttpControl ct;
+	private static Logger log = LoggerFactory.getLogger("Orders");
+	@Override
+	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
+	{
+		new Thread(new OrdersRunner(request, response, control)).start();
+		log.info("leaving");
+	}
+	public static class OrdersRunner implements Runnable
+	{
+		HttpRequest rx;
+		HttpResponse tx;
+		HttpControl ct;
 
-        public OrdersRunner(HttpRequest rx, HttpResponse tx, HttpControl ct)
-        {
-            this.rx = rx;
-            this.tx = tx;
-            this.ct = ct;
-        }
+		public OrdersRunner(HttpRequest rx, HttpResponse tx, HttpControl ct)
+		{
+			this.rx = rx;
+			this.tx = tx;
+			this.ct = ct;
+		}
 
-        @Override
-        public void run()
-        {
-            Map<String, Object> data = new HashMap<>();
-            int pageSize = Helpers.queryGetInt(rx, "pageSize", 25);
-            int page = Helpers.queryGetInt(rx, "page", 1);
+		@Override
+		public void run()
+		{
+			Map<String, Object> data = new HashMap<>();
+			int pageSize = Helpers.queryGetInt(rx, "pageSize", 25);
+			int page = Helpers.queryGetInt(rx, "page", 1);
 
-            OrderStatus status = null;
-            try
-            {
-                status = OrderStatus.valueOf(Helpers.queryGetString(rx, "status", ""));
-            }
-            catch(IllegalArgumentException e){ /* dont care. that's perfectly fine. FIXME: however */ }
+			OrderStatus status = null;
+			try
+			{
+				status = OrderStatus.valueOf(Helpers.queryGetString(rx, "status", ""));
+			}
+			catch(IllegalArgumentException e)
+			{ /* dont care. that's perfectly fine. FIXME: however */ }
 
-            OrdersResponse or = OrdersService.get(status, pageSize, page);
-            Handlebars h = new MyHandlebars();
-            try
-            {
-                data.put("back_url", URLEncoder.encode(rx.uri(), "UTF-8"));
-            }
-            catch(Exception e)
-            {
-                log.error(e.toString(), e);
-            }
-            data.put("orders", or);
-            data.put("order_status", OrderStatus.values());
-            Context c = Context
-                    .newBuilder(data)
-                    .resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)
-                    .build();
-            try
-            {
-                Template t = h.compile("orders");
-                String s = t.apply(c);
-                tx.content(s);
-            }
-            catch(Exception e)
-            {
-                log.error(e.toString(), e);
-            }
-            log.info("working");
-            tx.status(200);
-            tx.end();
-        }
-    }
+			OrdersResponse or = OrdersService.get(status, pageSize, page);
+			Handlebars h = new MyHandlebars();
+			try
+			{
+				data.put("back_url", URLEncoder.encode(rx.uri(), "UTF-8"));
+			}
+			catch(Exception e)
+			{
+				log.error(e.toString(), e);
+			}
+			data.put("orders", or);
+			data.put("order_status", OrderStatus.values());
+			Context c = Context
+				.newBuilder(data)
+				.resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)
+				.build();
+			try
+			{
+				Template t = h.compile("orders");
+				String s = t.apply(c);
+				tx.content(s);
+			}
+			catch(Exception e)
+			{
+				log.error(e.toString(), e);
+			}
+			log.info("working");
+			tx.status(200);
+			tx.end();
+		}
+	}
 }
