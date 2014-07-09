@@ -12,6 +12,9 @@ import org.lutra.cpa.Main;
 import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.cache.OutletsCache;
 import org.lutra.cpa.model.*;
+import org.lutra.cpa.model.deliveries.DeliveryDelivery;
+import org.lutra.cpa.model.deliveries.DeliveryPickup;
+import org.lutra.cpa.model.deliveries.DeliveryPost;
 import org.lutra.cpa.response.get.OrderResponse;
 import org.lutra.cpa.response.put.DeliveryResponse;
 import org.lutra.cpa.service.Market;
@@ -61,17 +64,27 @@ public class ChangeDeliveryHandler implements HttpHandler
 			{
 				Map<String, String> post = new HashMap<>();
 				for(String key : rx.postParamKeys())
-				{
 					post.put(key, rx.postParam(key));
-				}
-				Delivery d = Helpers.castMap(post, "delivery", "-", Delivery.class);
+				Delivery dlv = Helpers.castMap(post, "delivery", "-", Delivery.class);
 				DeliveryResponse dr = new DeliveryResponse();
-				dr.delivery = d;
-				String json = Main.g.toJson(dr);
+				String json = "";
+				switch(dlv.getType())
+				{
+					case DELIVERY:
+						dr.delivery = Helpers.castMap(post, "delivery", "-", DeliveryDelivery.class);
+						break;
+					case PICKUP:
+						dr.delivery = Helpers.castMap(post, "delivery", "-", DeliveryPickup.class);
+						break;
+					case POST:
+						dr.delivery = Helpers.castMap(post, "delivery", "-", DeliveryPost.class);
+						break;
+				}
 				try
 				{
 					int id = Integer.parseInt(post.get("order-id"));
 					String path = String.format("/campaigns/%s/orders/%s/delivery.json", Config.campaignId, id);
+					json = Main.g.toJson(dr);
 					String or_json = Market.putRequest(path, json);
 
 					OrderResponse or = Main.g.fromJson(or_json, OrderResponse.class);

@@ -31,4 +31,17 @@ public class Dates
 	{
 		return Main.fmt.format(toDate);
 	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(!(obj instanceof Dates))
+			return false;
+		Dates that = (Dates)obj;
+
+		return
+					that.fromDate.equals(this.fromDate)
+			&& 	that.toDate.equals(this.toDate);
+	}
 }
+

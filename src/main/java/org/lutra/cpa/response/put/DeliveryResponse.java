@@ -1,7 +1,5 @@
 package org.lutra.cpa.response.put;
 
-import org.lutra.cpa.model.Delivery;
-
 /**
  * Structure of PUT /campaigns/{campaignId}/orders/{orderId}/delivery response
  *
@@ -9,5 +7,5 @@ import org.lutra.cpa.model.Delivery;
  */
 public class DeliveryResponse
 {
-	public Delivery delivery;
+	public Object delivery;
 }
