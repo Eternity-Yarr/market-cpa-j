@@ -141,28 +141,27 @@ public class Helpers
 				try
 				{
 					if(t == int.class || t == Integer.class)
-						f.setInt(ret, Integer.parseInt(value));
+						f.setInt(ret, Integer.parseInt(value != null ? value : "0"));
 					else if(t == double.class || t == Double.class)
-						f.setDouble(ret, Double.parseDouble(value));
+						f.setDouble(ret, Double.parseDouble(value != null ? value : "0.0"));
 					else if(t == boolean.class || t == Boolean.class)
 						f.setBoolean(ret, Boolean.valueOf(value));
 					else if(t == char.class || t == Character.class)
-						f.setChar(ret, value.charAt(0));
+						f.setChar(ret, value != null ? value.charAt(0) : '\0');
 					else if(t == long.class || t == Long.class)
-						f.setLong(ret, Long.parseLong(value));
+						f.setLong(ret, Long.parseLong(value != null ? value : "0"));
 					else if(t == float.class || t == Float.class)
-						f.setFloat(ret, Float.parseFloat(value));
+						f.setFloat(ret, Float.parseFloat(value != null ? value : "0.0"));
 					else if(t == short.class || t == Short.class)
-						f.setShort(ret, Short.parseShort(value));
+						f.setShort(ret, Short.parseShort(value != null ? value : "0"));
+					else if(Enum.class.isAssignableFrom((Class)t))
+						f.set(ret, Enum.valueOf((Class)t, value));
 					else if(t == String.class)
 						f.set(ret, value);
 					else
-					{
-						Class	subClass = f.getType();
-						f.set(ret,castMap(fromMap, keyPrefix + separator + key, separator, subClass));
-					}
+						f.set(ret,castMap(fromMap, keyPrefix + separator + key, separator, (Class)t));
 				}
-				catch(NumberFormatException e)
+				catch(IllegalArgumentException e)
 				{
 					log.error(e.toString(), e);
 				}
