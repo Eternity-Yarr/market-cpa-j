@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Map;
 
 public class Helpers
@@ -154,14 +155,16 @@ public class Helpers
 						f.setFloat(ret, Float.parseFloat(value != null ? value : "0.0"));
 					else if(t == short.class || t == Short.class)
 						f.setShort(ret, Short.parseShort(value != null ? value : "0"));
-					else if(Enum.class.isAssignableFrom((Class)t))
+					else if(Enum.class.isAssignableFrom((Class)t) && value != null)
 						f.set(ret, Enum.valueOf((Class)t, value));
+					else if(t == Date.class)
+						f.set(ret, value != null ? Main.fmt.parse(value) : new java.util.Date());
 					else if(t == String.class)
 						f.set(ret, value);
 					else
 						f.set(ret,castMap(fromMap, keyPrefix + separator + key, separator, (Class)t));
 				}
-				catch(IllegalArgumentException e)
+				catch(IllegalArgumentException | ParseException e)
 				{
 					log.error(e.toString(), e);
 				}

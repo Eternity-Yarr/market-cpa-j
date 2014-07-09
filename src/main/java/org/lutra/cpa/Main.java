@@ -18,6 +18,7 @@ public class Main
 {
     private static Logger log = LoggerFactory.getLogger("Main");
     public static Gson g = setUpGson();
+		final public static DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
     public static Gson setUpGson()
     {
         GsonBuilder gb = new GsonBuilder();
@@ -28,7 +29,6 @@ public class Main
                             @Override
                             public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context)
                             {
-                                final DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
                                 return new JsonPrimitive(fmt.format(src));
                             }
                         }
@@ -39,7 +39,6 @@ public class Main
                         {
                             @Override
                             public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                                final DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
                                 Date d = null;
                                 try
                                 {

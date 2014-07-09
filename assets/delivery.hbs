@@ -54,6 +54,10 @@
 								{{/delivery_type}}
 							</select>
 						</div>
+						<div class="text-danger form-group col-md-12">
+							<label for="delivery-price">Стоимость доставки</label>
+							<input type="text" class="form-control" name="delivery-price" value="{{delivery.price}}">
+						</div>
 						<div class="form-group col-md-12">
 							<label for="delivery-outlet">Точка самовывоза</label>
 							<select id="delivery-outlet" class="form-control" name="delivery-outletId">
@@ -118,9 +122,9 @@
 						</div>
 						<div class="form-group input-daterange col-md-12" id="datepicker">
 							<div class="input-group">
-								<input type="text" class="input-md form-control" name="delivery-fromDate"  value="{{delivery.fromDate}}"/>
+								<input type="text" class="input-md form-control" name="delivery-dates-fromDate"  value="{{delivery.dates.getFromDate}}"/>
 								<span class="input-group-addon">&nbsp;--&nbsp;</span>
-								<input type="text" class="input-md form-control" name="delivery-toDate" value="{{delivery.toDate}}"/>
+								<input type="text" class="input-md form-control" name="delivery-dates-toDate" value="{{delivery.dates.getToDate}}"/>
 							</div>
 						</div>
 						<div class="form-group col-md-12">

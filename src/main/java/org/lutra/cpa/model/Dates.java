@@ -8,8 +8,8 @@ public class Dates {
 
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
-	Date fromDate;
-	Date toDate;
+	public Date fromDate;
+	public Date toDate;
 
 	public Dates setFromDate(Date fromDate)
 	{

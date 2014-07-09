@@ -83,7 +83,7 @@ public class ChangeDeliveryHandler implements HttpHandler
 							Set<OrderStatus> status_transitions =	OrderStatusService.possibleTransitions
 							(
 								o.getStatus(),
-								o.getDelivery().getDeliveryType()
+								o.getDelivery().getType()
 							);
 							if(status_transitions.contains(OrderStatus.CANCELLED))
 								data.put("cancellable", true);
