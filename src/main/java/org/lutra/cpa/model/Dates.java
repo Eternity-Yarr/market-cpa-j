@@ -1,14 +1,13 @@
 package org.lutra.cpa.model;
 
+import org.lutra.cpa.Main;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Dates
 {
-
-	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
 	public Date fromDate;
 	public Date toDate;
 
@@ -26,10 +25,10 @@ public class Dates
 	}
 	public String getFromDate()
 	{
-		return df.format(fromDate);
+		return Main.fmt.format(fromDate);
 	}
 	public String getToDate()
 	{
-		return df.format(toDate);
+		return Main.fmt.format(toDate);
 	}
 }

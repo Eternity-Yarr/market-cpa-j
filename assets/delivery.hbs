@@ -45,7 +45,8 @@
 					<h3>Изменение условий доставки заказа {{order.id}}</h3>
 					<hr/>
 					{{#order}}
-					<form role="form" method="POST" action="/loopback">
+					<form role="form" method="POST" action="/change_delivery">
+						<input type="hidden" name="order-id" value="{{order.id}}">
 						<div class="form-group col-md-12">
 							<label for="delivery-type">Способ доставки</label>
 							<select id="delivery-type" class="form-control" name="delivery-type">

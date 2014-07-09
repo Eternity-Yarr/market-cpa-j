@@ -8,6 +8,7 @@ import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.model.OrderStatus;
+import org.lutra.cpa.model.Pager;
 import org.lutra.cpa.response.get.OrdersResponse;
 import org.lutra.cpa.service.OrdersService;
 import org.lutra.cpa.wrapper.MyHandlebars;
@@ -69,6 +70,12 @@ public class OrdersHandler implements HttpHandler
 			{
 				log.error(e.toString(), e);
 			}
+			Pager pager = or.getPager();
+			data.put("pager", pager);
+			String prev_page_link = String.format("/orders?pageSize=%s&page=%s&status=%s",pageSize, pager.previousPage(), status == null ? "" : status.name());
+			String next_page_link = String.format("/orders?pageSize=%s&page=%s&status=%s",pageSize, pager.nextPage(), status == null ? "" : status.name());
+			data.put("prev_page_link", prev_page_link);
+			data.put("next_page_link", next_page_link);
 			data.put("orders", or);
 			data.put("order_status", OrderStatus.values());
 			Context c = Context
