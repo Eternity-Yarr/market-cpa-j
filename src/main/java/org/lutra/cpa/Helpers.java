@@ -158,15 +158,7 @@ public class Helpers
 						f.set(ret, value);
 					else
 					{
-						Class	subClass = null;
-						try
-						{
-							subClass = Class.forName(f.getType().getName());
-						}
-						catch(ClassNotFoundException e)
-						{
-							log.error(e.toString(), e);
-						}
+						Class	subClass = f.getType();
 						f.set(ret,castMap(fromMap, keyPrefix + separator + key, separator, subClass));
 					}
 				}
