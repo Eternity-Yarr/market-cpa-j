@@ -7,26 +7,7 @@
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/orders">Покупка на маркете</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
+      	{{>navbar}}
       </div>
     </div>
     <div class="container-fluid">
@@ -42,7 +23,7 @@
 					</ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-					<h3>Изменение условий доставки заказа {{order.id}}</h3>
+					<h3><a href="/order?id={{order.id}}&back_url={{back_url}}"><i class="glyphicon glyphicon-arrow-left"></i></a>&nbsp;Изменение условий доставки заказа {{order.id}}</h3>
 					<hr/>
 					{{#order}}
 					<form role="form" method="POST" action="/change_delivery">
@@ -143,7 +124,7 @@
 		$('.input-daterange').datepicker
 		(
 			{
-				format: "mm-dd-yyyy",
+				format: "dd-mm-yyyy",
 				weekStart: 1,
 				todayBtn: "linked",
 				language: "ru"
