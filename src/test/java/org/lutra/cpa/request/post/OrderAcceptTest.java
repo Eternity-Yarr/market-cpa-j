@@ -20,6 +20,6 @@ public class OrderAcceptTest
         URL url = OrderAcceptTest.class.getResource("orderAcceptRequest.json");
         String json = Helpers.readFile(url, StandardCharsets.UTF_8);
         OrderAccept o = Main.g.fromJson(json, OrderAcceptRequest.class).uw();
-        assertNotNull(o);
+        assertNotNull(o.currency);
     }
 }

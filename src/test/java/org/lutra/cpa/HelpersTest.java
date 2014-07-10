@@ -31,10 +31,8 @@ public class HelpersTest
 		testMap.put("prefix-c", "123");
 		testMap.put("prefix-b", "sdfdsfd");
 		testMap.put("prefix-d-dd", "blabab");
-
-
 		TestClass ts = Helpers.castMap(testMap, "prefix", "-", TestClass.class);
-		System.out.println(ts);
+        System.out.println(ts);
 	}
 
 
