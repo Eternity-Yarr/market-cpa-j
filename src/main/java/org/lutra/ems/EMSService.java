@@ -20,16 +20,63 @@ public class EMSService
 {
 	final private static Logger log = LoggerFactory.getLogger(EMSService.class);
 	final private List<Location> locations;
+	final private double maxWeight;
 
 	public EMSService()
 	{
 		locations = getLocations();
-		log.info("EMS initialized, {} available locations", locations.size());
+		maxWeight = getMaxWeight();
+		log.info("EMS initialized, {} available locations, {} max weight", locations.size(), maxWeight);
+	}
+	private double getMaxWeight()
+	{
+		double ret = 0;
+		Response rsp = null;
+		try
+		{
+			rsp = new Gson().fromJson(Request.asJSON("http://emspost.ru/api/rest/?method=ems.get.max.weight"), ResponseWrapper.class).uw();
+		}
+		catch(Exception e)
+		{
+			log.error(e.toString(), e);
+		}
+		if(rsp != null && rsp.stat.equals("ok"))
+			try
+			{
+				ret = Double.parseDouble(rsp.max_weight);
+			}
+			catch(NumberFormatException e)
+			{
+				log.error(e.toString(), e);
+			}
+
+		return ret;
 	}
 
-	public int getPrice(String from, String to, double weight)
+	public int getPrice(Location from, Location to, double weight)
 	{
-		return 0;
+		int price = 0;
+		String url = String.format("http://emspost.ru/api/rest?method=ems.calculate&from=%s&to=%s&weight=%0.2f&type=att", from.value, to.value, weight);
+		Response rsp = null;
+		try
+		{
+			rsp = new Gson().fromJson(Request.asJSON(url), ResponseWrapper.class).uw();
+		}
+		catch(Exception e)
+		{
+			log.error(e.toString(), e);
+		}
+		if(rsp != null && rsp.stat.equals("ok"))
+			try
+			{
+					price = Integer.parseInt(rsp.price);
+			}
+			catch(NumberFormatException e)
+			{
+				log.error(e.toString(), e);
+			}
+
+		return price;
 	}
 
 	private List<Location> getLocations()

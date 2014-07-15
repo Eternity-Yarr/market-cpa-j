@@ -18,5 +18,6 @@ public class Response
 	public String msg;
 	public List<Location> locations;
 	public String price;
+	public String max_weight;
 	public Map<String,String> term;
 }
