@@ -8,7 +8,7 @@ package org.lutra.ems;
  */
 public class Location
 {
-	String value;
-	String name;
-	Type type;
+	public String value;
+	public String name;
+	public Type type;
 }

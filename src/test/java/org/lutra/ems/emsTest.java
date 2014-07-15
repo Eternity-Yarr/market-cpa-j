@@ -23,8 +23,17 @@ public class emsTest
 	@Test
 	public void connectionTest()
 	{
-
 		Assert.assertTrue(es.testConnection());
 	}
+
+	@Test
+	public void deliveryTest()
+	{
+		Location from = es.findLocation("Москва");
+		Location to = es.findLocation("Воронеж");
+		int price = es.getPrice(from, to, 5);
+		Assert.assertEquals(price, 790);
+	}
+
 
 }

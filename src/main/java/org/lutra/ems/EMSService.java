@@ -56,7 +56,8 @@ public class EMSService
 	public int getPrice(Location from, Location to, double weight)
 	{
 		int price = 0;
-		String url = String.format("http://emspost.ru/api/rest?method=ems.calculate&from=%s&to=%s&weight=%0.2f&type=att", from.value, to.value, weight);
+		assert(weight < maxWeight);
+		String url = String.format("http://emspost.ru/api/rest?method=ems.calculate&from=%s&to=%s&weight=%s&type=att", from.value, to.value, weight);
 		Response rsp = null;
 		try
 		{
@@ -77,6 +78,15 @@ public class EMSService
 			}
 
 		return price;
+	}
+	public Location findLocation(String name)
+	{
+		Location ret = null;
+		for(Location l : locations)
+			if(l.name.equalsIgnoreCase(name))
+				ret = l;
+
+		return ret;
 	}
 
 	private List<Location> getLocations()
