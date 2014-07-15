@@ -34,6 +34,7 @@
                   <th>Доставка</th>
                   <th>Оплата</th>
                   <th></th>
+									<th></th>
                 </tr>
               </thead>
               <tbody>
@@ -42,8 +43,8 @@
                   <td>{{id}}</td>
                   <td>{{creationDate}}</td>
                   <td>
-                      <span class="visible-md visible-lg hidden-sm hidden-xs">{{status.desc}}</span>
-                      <span class="hidden-md hidden-lg visible-sm visible-xs">{{status.brief}}</span>
+                      <span class="visible-md visible-lg hidden-sm hidden-xs">{{status.desc}}{{#notes}}&nbsp;<a title="{{notes}}" href="/order?id={{id}}&back_url={{back_url}}"><i class="glyphicon glyphicon-info-sign"></i></a>&nbsp;{{/notes}}</span>
+                      <span class="hidden-md hidden-lg visible-sm visible-xs">{{status.brief}}{{#notes}}&nbsp;<a title="{{notes}}" href="/order?id={{id}}&back_url={{back_url}}"><i class="glyphicon glyphicon-info-sign"></i></a>&nbsp;{{/notes}}</span>
                       {{#if fake}}[ТЕСТОВЫЙ]{{/if}}
                   <td>{{currency total}}&nbsp;руб.</td>
                   <td>{{delivery.type.desc}}</td>
@@ -52,6 +53,7 @@
                       <span class="hidden-md hidden-lg visible-sm visible-xs">{{paymentMethod.brief}}</span>
                   </td>
                   <td><a class="btn btn-small btn-default" href="/order?id={{id}}&back_url={{back_url}}">Подробнее</a></td>
+									<td></td>
                 </tr>
               {{/orders.orders}}
              </tbody>
