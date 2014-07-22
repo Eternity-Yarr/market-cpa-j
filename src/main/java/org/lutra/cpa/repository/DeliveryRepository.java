@@ -38,7 +38,7 @@ public class DeliveryRepository
 		try
 			(
 				Connection con = Db.ds.getConnection();
-				PreparedStatement ps = Helpers.createStatement(con, q, params);
+				PreparedStatement ps = Helpers.createStatement(con, q, params); //FIXME
 				ResultSet rs = ps.executeQuery()
 			)
 		{

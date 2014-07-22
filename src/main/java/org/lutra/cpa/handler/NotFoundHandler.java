@@ -11,12 +11,12 @@ public class NotFoundHandler implements HttpHandler
 {
 	private static Logger log = LoggerFactory.getLogger("404");
 	@Override
-	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
+	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		log.info(request.uri());
-		response.content("NOT FOUND");
-		response.status(404);
-		response.end();
+		log.info(rx.uri());
+		tx.content("NOT FOUND");
+		tx.status(404);
+		tx.end();
 		log.info("leaving");
 	}
 }

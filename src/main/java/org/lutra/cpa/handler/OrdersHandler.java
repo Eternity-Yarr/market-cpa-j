@@ -27,9 +27,9 @@ public class OrdersHandler implements HttpHandler
 {
 	private static Logger log = LoggerFactory.getLogger("Orders");
 	@Override
-	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
+	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		new Thread(new OrdersRunner(request, response, control)).start();
+		new Thread(new OrdersRunner(rx, tx, ct)).start();
 		log.info("leaving");
 	}
 	public static class OrdersRunner implements Runnable

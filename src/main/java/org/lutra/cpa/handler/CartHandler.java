@@ -16,9 +16,9 @@ public class CartHandler implements HttpHandler
 {
 	private static Logger log = LoggerFactory.getLogger("Cart");
 	@Override
-	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
+	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		new Thread(new CartRunner(request, response, control)).start();
+		new Thread(new CartRunner(rx, tx, ct)).start();
 		log.info("leaving");
 	}
 	public static class CartRunner implements Runnable
@@ -38,10 +38,8 @@ public class CartHandler implements HttpHandler
 		public void run()
 		{
 			log.info("working");
-
 			if(rx.method().equals("POST") && Helpers.authorize(rx))
 			{
-
 				String raw_post = rx.body();
 				CartRequest cr = null;
 				try
@@ -53,7 +51,7 @@ public class CartHandler implements HttpHandler
 					log.error(e.toString(), e);
 				}
 				if(cr == null)
-					Helpers.error_500(tx, "Cannot deserialize JSON");
+					Helpers.error_500(tx, "Cannot de-serialize JSON");
 				else
 				{
 					CartResponse response = CartService.process(cr);
@@ -64,7 +62,6 @@ public class CartHandler implements HttpHandler
 			{
 				// Wrong method
 			}
-
 
 			tx.status(200);
 			tx.end();

@@ -17,23 +17,23 @@ public class LoopbackHandler implements HttpHandler
 {
 	private static Logger log = LoggerFactory.getLogger("Loopback");
 	@Override
-	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
+	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		log.info(request.uri());
-		String body = request.body();
-		response.header("Content-Type", "text/html");
-		log.info(String.format("Method : %s", request.method()));
+		log.info(rx.uri());
+		String body = rx.body();
+		tx.header("Content-Type", "text/html");
+		log.info(String.format("Method : %s", rx.method()));
 		log.info("---");
 		log.info(String.format("%s", body));
 		Map<String, String> post = new HashMap<>();
-		for(String key : request.postParamKeys())
+		for(String key : rx.postParamKeys())
 		{
-			post.put(key, request.postParam(key));
+			post.put(key, rx.postParam(key));
 		}
 		Delivery d = Helpers.castMap(post, "delivery", "-", Delivery.class);
 		System.out.println(d);
-		response.status(200);
-		response.end();
+		tx.status(200);
+		tx.end();
 		log.info("leaving");
 	}
 }
