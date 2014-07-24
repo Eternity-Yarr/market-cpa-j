@@ -12,13 +12,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-public class RegionConstraint implements Callable<Set<DeliveryOption>>
+public class RegionConstraint extends AbstractConstraint implements Callable<Set<DeliveryOption>>
 {
 	final private static Logger log = LoggerFactory.getLogger(RegionConstraint.class);
-	final private Cart rx;
 	public RegionConstraint(Cart rx)
 	{
-		this.rx = rx;
+		super(rx);
 	}
 
 	@Override
@@ -26,20 +25,18 @@ public class RegionConstraint implements Callable<Set<DeliveryOption>>
 	{
 		Set<DeliveryOption> xs = new HashSet<>();
 		String city_name = null;
-		int city_id = 0;
 		Region r;
 		while((r = rx.delivery.getRegion()) != null)
 		{
 			if(r.getType() == RegionType.CITY)
 			{
 				city_name = r.getName();
-				city_id = r.getId();
 				break;
 			}
 		}
 		if(city_name == null)
 		{
-			// by region?
+			//TODO: by region?
 		}
 		else
 		{

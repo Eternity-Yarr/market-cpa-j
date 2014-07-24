@@ -1,6 +1,5 @@
 package org.lutra.cpa.model;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 
 public class DeliveryOption
