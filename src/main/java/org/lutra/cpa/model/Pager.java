@@ -26,6 +26,6 @@ public class Pager
 
 	public int previousPage()
 	{
-		return currentPage - 1 >= 1  ? currentPage - 1 : 1;
+		return currentPage - 1 >= 1 ? currentPage - 1 : 1;
 	}
 }

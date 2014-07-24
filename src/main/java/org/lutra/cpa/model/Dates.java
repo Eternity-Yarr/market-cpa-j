@@ -2,8 +2,6 @@ package org.lutra.cpa.model;
 
 import org.lutra.cpa.Main;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Dates
@@ -40,8 +38,8 @@ public class Dates
 		Dates that = (Dates)obj;
 
 		return
-					that.fromDate.equals(this.fromDate)
-			&& 	that.toDate.equals(this.toDate);
+			that.fromDate.equals(this.fromDate)
+				&& that.toDate.equals(this.toDate);
 	}
 }
 

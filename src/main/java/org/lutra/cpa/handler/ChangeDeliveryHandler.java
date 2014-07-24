@@ -99,7 +99,7 @@ public class ChangeDeliveryHandler implements HttpHandler
 						log.error(or_json);
 					}
 					tx.status(307);
-					tx.header("Location",String.format("/order?id=%s",id));
+					tx.header("Location", String.format("/order?id=%s", id));
 				}
 				catch(Exception e)
 				{

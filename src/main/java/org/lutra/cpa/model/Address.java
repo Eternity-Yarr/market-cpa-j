@@ -28,19 +28,19 @@ public class Address
 			return false;
 		Address that = (Address)obj;
 		return
-					this.country.equals(that.country)
-			&&	this.postcode.equals(that.postcode)
-			&&	this.city.equals(that.city)
-			&&	this.subway.equals(that.subway)
-			&&	this.street.equals(that.street)
-			&&	this.house.equals(that.house)
-			&&	this.block.equals(that.block)
-			&&	this.entrance.equals(that.entrance)
-			&&	this.entryphone.equals(that.entryphone)
-			&&	this.floor.equals(that.floor)
-			&&	this.apartment.equals(that.apartment)
-			&&	this.recipient.equals(that.recipient)
-			&&	this.phone.equals(that.phone);
+			this.country.equals(that.country)
+				&& this.postcode.equals(that.postcode)
+				&& this.city.equals(that.city)
+				&& this.subway.equals(that.subway)
+				&& this.street.equals(that.street)
+				&& this.house.equals(that.house)
+				&& this.block.equals(that.block)
+				&& this.entrance.equals(that.entrance)
+				&& this.entryphone.equals(that.entryphone)
+				&& this.floor.equals(that.floor)
+				&& this.apartment.equals(that.apartment)
+				&& this.recipient.equals(that.recipient)
+				&& this.phone.equals(that.phone);
 
 	}
 }
