@@ -7,6 +7,7 @@ import org.lutra.cpa.Main;
 import org.lutra.cpa.model.DeliveryOption;
 import org.lutra.cpa.request.post.Cart;
 import org.lutra.cpa.request.post.CartRequest;
+import org.lutra.cpa.service.delivery.AmountConstraint;
 import org.lutra.cpa.service.delivery.RegionConstraint;
 
 import java.net.URL;
@@ -30,5 +31,8 @@ public class DeliveryOptionsTest
 		Cart c = Main.g.fromJson(json, CartRequest.class).uw();
 		Set<DeliveryOption> xs = new RegionConstraint(c).call();
 		System.out.println(xs);
+		Set<DeliveryOption> xs2 = new AmountConstraint(c).call();
+		System.out.println(xs2);
+
 	}
 }

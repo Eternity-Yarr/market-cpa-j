@@ -16,7 +16,7 @@ public class Cart
 	public Currency currency;
 	public List<Item> items;
 	public DeliveryRequest delivery;
-	private double total;
+	private double total = 0;
 
 	public double getTotal()
 	{
@@ -25,6 +25,6 @@ public class Cart
 		{
 			ret = i.getCount() * i.getPrice();
 		}
-		return total;
+		return total == 0 ? ret : total;
 	}
 }

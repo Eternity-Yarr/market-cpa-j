@@ -5,6 +5,8 @@ import org.lutra.cpa.model.Region;
 import org.lutra.cpa.model.RegionType;
 import org.lutra.cpa.repository.DeliveryRepository;
 import org.lutra.cpa.request.post.Cart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +14,7 @@ import java.util.concurrent.Callable;
 
 public class RegionConstraint implements Callable<Set<DeliveryOption>>
 {
-	final private int MOSCOW_CITY_ID = 213;
+	final private static Logger log = LoggerFactory.getLogger(RegionConstraint.class);
 	final private Cart rx;
 	public RegionConstraint(Cart rx)
 	{
@@ -43,6 +45,7 @@ public class RegionConstraint implements Callable<Set<DeliveryOption>>
 		{
 			xs.addAll(DeliveryRepository.i().getByCityName(city_name));
 		}
+		log.info("Got {} methods of delivery", xs.size());
 
 		return xs;
 	}
