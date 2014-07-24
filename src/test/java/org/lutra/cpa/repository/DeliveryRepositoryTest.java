@@ -33,7 +33,7 @@ public class DeliveryRepositoryTest
             .setAddress(address)
             .setRegion(region)
         ;
-        List<DeliveryOption> options = dr.getAll(target, 5000.0);
+        List<DeliveryOption> options = dr.getAll();
 
         Db.ds.close();
     }

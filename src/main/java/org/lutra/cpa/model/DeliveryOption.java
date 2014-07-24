@@ -9,6 +9,7 @@ public class DeliveryOption
 	String serviceName;
 	double price;
 	Dates dates;
+	int sort;
 	List<Outlet> outlets;
 
 	public int getId()
@@ -19,6 +20,16 @@ public class DeliveryOption
 	public DeliveryOption setId(int id)
 	{
 		this.id = id;
+
+		return this;
+	}
+	public int getSort()
+	{
+		return sort;
+	}
+	public DeliveryOption setSort(int sort)
+	{
+		this.sort = sort;
 
 		return this;
 	}
@@ -87,5 +98,19 @@ public class DeliveryOption
 	public boolean equals(Object obj)
 	{
 		return (obj instanceof DeliveryOption && ((DeliveryOption)obj).getId() == id);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "DeliveryOption{" +
+			"id=" + id +
+			", type=" + type +
+			", serviceName='" + serviceName + '\'' +
+			", price=" + price +
+			", dates=" + dates +
+			", sort=" + sort +
+			", outlets=" + outlets +
+			'}';
 	}
 }

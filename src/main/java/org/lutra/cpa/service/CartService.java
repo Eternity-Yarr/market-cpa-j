@@ -17,7 +17,7 @@ public class CartService
 	{
 		DeliveryRequest target = cr.uw().delivery;
 		Cart cart = new Cart();
-		List<DeliveryOption> deliveryOptions = DeliveryService.getAll(target, cr.uw().getTotal());
+		List<DeliveryOption> deliveryOptions = DeliveryService.getAll();
 		Set<DeliveryOption> feasibleDeliveryOptions = new HashSet<>(deliveryOptions);
 		for(Item i : cr.uw().items)
 		{
