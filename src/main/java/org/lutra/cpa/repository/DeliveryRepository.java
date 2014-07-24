@@ -18,14 +18,11 @@ import java.util.List;
 public class DeliveryRepository
 {
 	private static Logger log = LoggerFactory.getLogger("DeliveryRepo");
-	public List<DeliveryOption> getAll(DeliveryRequest target, double total)
+	public List<DeliveryOption> getAll()
 	{
 		List<DeliveryOption> options = new ArrayList<>();
-		//1. Pickup
-		if(target.getAddress().getCity().equals("Москва"))
-			options.addAll(getPickupOption(total));
 
-		//TODO:
+
 		return options;
 	}
 
