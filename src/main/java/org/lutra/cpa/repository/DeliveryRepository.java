@@ -152,7 +152,7 @@ FROM b_sale_location_city_lang AS bsll
 LEFT JOIN b_sale_location AS bsl ON bsll.city_id = bsl.city_id
 LEFT JOIN b_sale_delivery2location AS bsdl ON bsl.id = bsdl.location_id
 LEFT JOIN b_sale_delivery AS bsd ON bsdl.delivery_id = bsd.id
-WHERE bsd.order_price_from <= ? AND (bsd.order_price_to >= ? OR bsd.order_price_to = 0) AND bsll.lid = 'ru' AND bsdl.location_type = 'L' AND active = 'Y'
+WHERE bsd.order_price_from <= ? AND (bsd.order_price_to > ? OR bsd.order_price_to = 0) AND bsll.lid = 'ru' AND bsdl.location_type = 'L' AND active = 'Y'
 GROUP BY bsd.name
 */
 		String q =
@@ -164,7 +164,7 @@ GROUP BY bsd.name
 			"LEFT JOIN b_sale_location AS bsl ON bsll.city_id = bsl.city_id\n" +
 			"LEFT JOIN b_sale_delivery2location AS bsdl ON bsl.id = bsdl.location_id\n" +
 			"LEFT JOIN b_sale_delivery AS bsd ON bsdl.delivery_id = bsd.id\n" +
-			"WHERE bsd.order_price_from <= ? AND (bsd.order_price_to >= ? OR bsd.order_price_to = 0) AND bsll.lid = 'ru' AND bsdl.location_type = 'L' AND active = 'Y' \n" +
+			"WHERE bsd.order_price_from <= ? AND (bsd.order_price_to > ? OR bsd.order_price_to = 0) AND bsll.lid = 'ru' AND bsdl.location_type = 'L' AND active = 'Y' \n" +
 			"GROUP BY bsd.name";
 		Object[] params = {total, total};
 		try
