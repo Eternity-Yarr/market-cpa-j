@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +30,72 @@ public class DeliveryRepository
 		return instance;
 	}
 
+	private List<DeliveryOption> formList(ResultSet rs) throws SQLException
+	{
+		List<DeliveryOption> xs = new ArrayList<>();
+
+		while(rs.next())
+		{
+			DateTime dt = new DateTime();
+			DateTime fromDate = dt.plusDays(rs.getInt("period_from"));
+			DateTime toDate = dt.plusDays(rs.getInt("period_to"));
+			Dates dates = new Dates()
+				.setFromDate(fromDate.toDate())
+				.setToDate(toDate.toDate());
+			List<Outlet> outlets = new ArrayList<>();
+			DeliveryOption d = new DeliveryOption();
+			d
+				.setId(rs.getInt("delivery_id"))
+				.setDates(dates)
+				.setOutlets(outlets)
+				.setPrice(rs.getDouble("price"))
+				.setServiceName(rs.getString("name"))
+				.setType(Config.deliveryType_mapping.get(rs.getInt("delivery_id")));
+			xs.add(d);
+		}
+		return xs;
+	}
 	public List<DeliveryOption> getAll()
 	{
-		List<DeliveryOption> options = new ArrayList<>();
+		List<DeliveryOption> xs = new ArrayList<>();
+/*
+SELECT
+bsdl.delivery_id, bsd.name,
+bsd.price, bsd.period_from,
+bsd.period_to, bsd.sort
+FROM b_sale_location_city_lang AS bsll
+LEFT JOIN b_sale_location AS bsl ON bsll.city_id = bsl.city_id
+LEFT JOIN b_sale_delivery2location AS bsdl ON bsl.id = bsdl.location_id
+LEFT JOIN b_sale_delivery AS bsd ON bsdl.delivery_id = bsd.id
+WHERE bsll.lid = 'ru' AND bsdl.location_type = 'L' AND bsd.active = 'Y'
+GROUP BY bsd.name
+*/
+		String q =
+			"SELECT\n" +
+			"bsdl.delivery_id, bsd.name,\n" +
+			"bsd.price, bsd.period_from,\n" +
+			"bsd.period_to, bsd.sort\n" +
+			"FROM b_sale_location_city_lang AS bsll\n" +
+			"LEFT JOIN b_sale_location AS bsl ON bsll.city_id = bsl.city_id\n" +
+			"LEFT JOIN b_sale_delivery2location AS bsdl ON bsl.id = bsdl.location_id\n" +
+			"LEFT JOIN b_sale_delivery AS bsd ON bsdl.delivery_id = bsd.id\n" +
+			"WHERE bsll.lid = 'ru' AND bsdl.location_type = 'L' AND bsd.active = 'Y'\n" +
+			"GROUP BY bsd.name";
+		try
+			(
+				Connection con = Db.ds.getConnection();
+				PreparedStatement ps = con.prepareStatement(q);
+				ResultSet rs = ps.executeQuery()
+			)
+		{
+			xs.addAll(formList(rs));
+		}
+		catch(Exception e)
+		{
+			log.error(e.toString(), e);
+		}
 
-
-		return options;
+		return xs;
 	}
 
 	public List<DeliveryOption> getByCityName(String city_name)
@@ -69,25 +130,7 @@ WHERE bsll.name LIKE ? AND bsll.lid = 'ru' AND bsdl.location_type = 'L' AND bsd.
 				ResultSet rs = ps.executeQuery()
 			)
 		{
-			while(rs.next())
-			{ //TODO: remove copypaste!
-				DateTime dt = new DateTime();
-				DateTime fromDate = dt.plusDays(rs.getInt("period_from"));
-				DateTime toDate = dt.plusDays(rs.getInt("period_to"));
-				Dates dates = new Dates()
-					.setFromDate(fromDate.toDate())
-					.setToDate(toDate.toDate());
-				List<Outlet> outlets = new ArrayList<>();//OutletsCache.get().get();
-				DeliveryOption d = new DeliveryOption();
-				d
-					.setId(rs.getInt("delivery_id"))
-					.setDates(dates)
-					.setOutlets(outlets)
-					.setPrice(rs.getDouble("price"))
-					.setServiceName(rs.getString("name"))
-					.setType(Config.deliveryType_mapping.get(rs.getInt("delivery_id")));
-				xs.add(d);
-			}
+			xs.addAll(formList(rs));
 		}
 		catch(Exception e)
 		{
@@ -131,25 +174,7 @@ GROUP BY bsd.name
 			ResultSet rs = ps.executeQuery()
 		)
 		{
-			while(rs.next())
-			{ //TODO: remove copypaste!
-				DateTime dt = new DateTime();
-				DateTime fromDate = dt.plusDays(rs.getInt("period_from"));
-				DateTime toDate = dt.plusDays(rs.getInt("period_to"));
-				Dates dates = new Dates()
-					.setFromDate(fromDate.toDate())
-					.setToDate(toDate.toDate());
-				List<Outlet> outlets = new ArrayList<>();//OutletsCache.get().get();
-				DeliveryOption d = new DeliveryOption();
-				d
-					.setId(rs.getInt("delivery_id"))
-					.setDates(dates)
-					.setOutlets(outlets)
-					.setPrice(rs.getDouble("price"))
-					.setServiceName(rs.getString("name"))
-					.setType(Config.deliveryType_mapping.get(rs.getInt("delivery_id")));
-				xs.add(d);
-			}
+			xs.addAll(formList(rs));
 		}
 		catch(Exception e)
 		{

@@ -1,5 +1,6 @@
 package org.lutra.cpa.model;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class DeliveryOption
@@ -94,6 +95,11 @@ public class DeliveryOption
 		return this;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		return getId();
+	}
 	@Override
 	public boolean equals(Object obj)
 	{
