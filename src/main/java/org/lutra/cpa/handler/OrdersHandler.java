@@ -71,6 +71,7 @@ public class OrdersHandler implements HttpHandler
 				log.error(e.toString(), e);
 			}
 			Pager pager = or.getPager();
+			data.put("raw_back_url", rx.uri());
 			data.put("pager", pager);
 			String prev_page_link = String.format("/orders?pageSize=%s&page=%s&status=%s", pageSize, pager.previousPage(), status == null ? "" : status.name());
 			String next_page_link = String.format("/orders?pageSize=%s&page=%s&status=%s", pageSize, pager.nextPage(), status == null ? "" : status.name());
