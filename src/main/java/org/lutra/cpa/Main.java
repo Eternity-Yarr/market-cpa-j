@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Main
 {
-	private static Logger log = LoggerFactory.getLogger("Main");
+	private static Logger log = LoggerFactory.getLogger(Main.class);
 	public static Gson g = setUpGson();
 	final public static DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
 	public static Gson setUpGson()

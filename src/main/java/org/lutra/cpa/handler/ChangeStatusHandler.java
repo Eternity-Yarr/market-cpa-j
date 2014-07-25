@@ -25,7 +25,7 @@ import org.webbitserver.HttpResponse;
  */
 public class ChangeStatusHandler implements HttpHandler
 {
-	private static Logger log = LoggerFactory.getLogger("ChangeStatus");
+	private static Logger log = LoggerFactory.getLogger(ChangeStatusHandler.class);
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{

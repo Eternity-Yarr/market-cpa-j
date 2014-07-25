@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class OutletsCache
 {
-	final private static Logger log = LoggerFactory.getLogger("OutletsCache");
+	final private static Logger log = LoggerFactory.getLogger(OutletsCache.class);
 	final private static Cache<Integer, Outlet> cache = CacheBuilder
 		.newBuilder()
 		.expireAfterWrite(60, TimeUnit.MINUTES)

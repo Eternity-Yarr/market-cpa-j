@@ -27,7 +27,7 @@ public class Ws
 	}
 
 	public static WebServer ws;
-	final static Logger log = LoggerFactory.getLogger("WS");
+	final static Logger log = LoggerFactory.getLogger(Ws.class);
 
 	public static void run()
 	{

@@ -14,7 +14,7 @@ import org.webbitserver.HttpResponse;
 
 public class CartHandler implements HttpHandler
 {
-	private static Logger log = LoggerFactory.getLogger("Cart");
+	private static Logger log = LoggerFactory.getLogger(CartHandler.class);
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{

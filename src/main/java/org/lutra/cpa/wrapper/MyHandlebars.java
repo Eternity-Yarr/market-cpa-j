@@ -14,7 +14,7 @@ import java.util.Locale;
 
 public class MyHandlebars extends Handlebars
 {
-	private static Logger log = LoggerFactory.getLogger("HBS");
+	private static Logger log = LoggerFactory.getLogger(MyHandlebars.class);
 	private static NumberFormat nf = NumberFormat.getNumberInstance(Locale.forLanguageTag("RU"));
 	private static DecimalFormat df = (DecimalFormat)nf;
 	public MyHandlebars()

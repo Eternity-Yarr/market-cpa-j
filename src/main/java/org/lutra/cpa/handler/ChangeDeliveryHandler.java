@@ -36,7 +36,7 @@ import java.util.Set;
 
 public class ChangeDeliveryHandler implements HttpHandler
 {
-	private static Logger log = LoggerFactory.getLogger("Delivery");
+	private static Logger log = LoggerFactory.getLogger(ChangeDeliveryHandler.class);
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{

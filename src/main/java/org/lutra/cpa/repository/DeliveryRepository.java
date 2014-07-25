@@ -21,7 +21,7 @@ import java.util.Set;
 
 public class DeliveryRepository
 {
-	final private static Logger log = LoggerFactory.getLogger("DeliveryRepo");
+	final private static Logger log = LoggerFactory.getLogger(DeliveryRepository.class);
 	private static DeliveryRepository instance;
 
 	public static DeliveryRepository i()
