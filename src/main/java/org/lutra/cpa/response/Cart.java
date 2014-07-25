@@ -2,7 +2,6 @@ package org.lutra.cpa.response;
 
 import org.lutra.cpa.model.DeliverableItem;
 import org.lutra.cpa.model.DeliveryOption;
-import org.lutra.cpa.model.Item;
 import org.lutra.cpa.model.PaymentMethod;
 
 import java.util.Collection;

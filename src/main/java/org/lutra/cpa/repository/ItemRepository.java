@@ -2,7 +2,6 @@ package org.lutra.cpa.repository;
 
 import org.lutra.cpa.Db;
 import org.lutra.cpa.Helpers;
-import org.lutra.cpa.model.Outlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

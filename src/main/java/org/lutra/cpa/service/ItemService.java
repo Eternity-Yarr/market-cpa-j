@@ -1,18 +1,12 @@
 package org.lutra.cpa.service;
 
 import org.lutra.cpa.Config;
-import org.lutra.cpa.Db;
-import org.lutra.cpa.Helpers;
 import org.lutra.cpa.cache.OutletsCache;
 import org.lutra.cpa.model.Outlet;
 import org.lutra.cpa.repository.ItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
