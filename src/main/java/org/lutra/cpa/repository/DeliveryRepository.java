@@ -6,6 +6,7 @@ import org.lutra.cpa.Db;
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.model.Dates;
 import org.lutra.cpa.model.DeliveryOption;
+import org.lutra.cpa.model.DeliveryType;
 import org.lutra.cpa.model.Outlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DeliveryRepository
 {
@@ -42,12 +45,12 @@ public class DeliveryRepository
 			Dates dates = new Dates()
 				.setFromDate(fromDate.toDate())
 				.setToDate(toDate.toDate());
-			List<Outlet> outlets = new ArrayList<>();
+			Set<Integer> outlets = new HashSet<>();
 			DeliveryOption d = new DeliveryOption();
 			d
 				.setId(rs.getInt("delivery_id"))
 				.setDates(dates)
-				.setOutlets(outlets)
+				.setOutlets(Config.deliveryType_mapping.get(rs.getInt("delivery_id")).equals(DeliveryType.PICKUP) ? outlets : null)
 				.setPrice(rs.getDouble("price"))
 				.setServiceName(rs.getString("name"))
 				.setType(Config.deliveryType_mapping.get(rs.getInt("delivery_id")));

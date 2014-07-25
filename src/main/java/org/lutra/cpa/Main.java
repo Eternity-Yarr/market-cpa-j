@@ -52,6 +52,8 @@ public class Main
 					}
 				}
 			);
+		gb.setPrettyPrinting();
+
 		return gb.create();
 	}
 

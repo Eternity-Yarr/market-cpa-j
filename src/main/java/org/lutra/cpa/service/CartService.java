@@ -1,31 +1,50 @@
 package org.lutra.cpa.service;
 
-import org.lutra.cpa.model.DeliverableItem;
-import org.lutra.cpa.model.DeliveryOption;
-import org.lutra.cpa.model.Item;
+import org.lutra.cpa.Config;
+import org.lutra.cpa.cache.OutletsCache;
+import org.lutra.cpa.model.*;
 import org.lutra.cpa.repository.ItemRepository;
 import org.lutra.cpa.request.post.CartRequest;
 import org.lutra.cpa.response.Cart;
 import org.lutra.cpa.response.CartResponse;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CartService
 {
 	public static CartResponse process(CartRequest cr)
 	{
+		List<DeliverableItem> items = new ArrayList<>();
+		Set<Integer> outlets = new HashSet<>();
+		for(Integer outlet_id: Config.outlets_mapping.values())
+			outlets.add(outlet_id);
+
+		for(Item i : cr.uw().items)
+		{
+			Set<Integer> item_outlets = new HashSet<>();
+			List<Integer> store_ids = ItemRepository.i().getAvailability(i.getOfferId());
+			for(Integer store_id: store_ids)
+				if (Config.outlets_mapping.get(store_id) != null)
+					item_outlets.add(Config.outlets_mapping.get(store_id));
+			outlets.retainAll(item_outlets);
+			DeliverableItem di = new DeliverableItem(i);
+			di.setDelivery(!store_ids.isEmpty());
+			items.add(di);
+		}
 		List<DeliveryOption> deliveryOptions = DeliveryService.i().getFeasible(cr.uw());
 		Set<DeliveryOption> feasibleDeliveryOptions = new HashSet<>(deliveryOptions);
 		Cart cart = new Cart().setDeliveryOptions(feasibleDeliveryOptions);
-		List<DeliverableItem> items = new ArrayList<>();
-		for(Item i : cr.uw().items)
+		Iterator<DeliveryOption> iter = cart.getDeliveryOptions().iterator();
+		while(iter.hasNext())
 		{
-			DeliverableItem di = new DeliverableItem(i);
-			di.setDelivery(!ItemRepository.i().getAvailability(i.getOfferId()).isEmpty());
-			items.add(di);
+			DeliveryOption option = iter.next();
+			if(option.getType().equals(DeliveryType.PICKUP) && outlets.isEmpty())
+				iter.remove();
+			else if(!outlets.isEmpty())
+				option.setOutlets(outlets);
+
+			if(!option.getType().equals(DeliveryType.PICKUP))
+				option.setOutlets(null);
 		}
 		cart.setItems(items);
 

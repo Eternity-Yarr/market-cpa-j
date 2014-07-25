@@ -9,13 +9,16 @@ public class Item
 	String offerId;
 	String feedCategoryId;
 	String offerName;
-	double price = 0;
+	double price;
 	int count;
 
 	public double getPrice()
 	{
 		//TODO: 0 price?
-		return price == 0 ? ItemService.i().getPrice(offerId) : price;
+		if(price == 0)
+			price = ItemService.i().getPrice(offerId);
+
+		return price;
 	}
 
 	public double getCount()

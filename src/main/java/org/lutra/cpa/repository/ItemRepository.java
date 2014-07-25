@@ -52,6 +52,7 @@ SELECT price FROM b_catalog_price WHERE id = ?
 		{
 			log.error(e.toString(), e);
 		}
+		log.info("Got price {} for {}", ret, id);
 
 		return  ret;
 	}

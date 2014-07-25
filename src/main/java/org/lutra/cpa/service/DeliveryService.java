@@ -56,7 +56,7 @@ public class DeliveryService
 		for(Class<? extends AbstractConstraint> clazz : constraintClasses)
 			try
 			{
-				Callable<Set<DeliveryOption>> constraint = clazz
+				AbstractConstraint constraint = clazz
 					.getConstructor(rx.getClass())
 					.newInstance(rx);
 				options.add(constraint.call());

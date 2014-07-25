@@ -1,6 +1,6 @@
 package org.lutra.cpa.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class DeliveryOption
 {
@@ -9,8 +9,7 @@ public class DeliveryOption
 	String serviceName;
 	double price;
 	Dates dates;
-	int sort;
-	List<Outlet> outlets;
+	Set<Integer> outlets;
 
 	public int getId()
 	{
@@ -20,16 +19,6 @@ public class DeliveryOption
 	public DeliveryOption setId(int id)
 	{
 		this.id = id;
-
-		return this;
-	}
-	public int getSort()
-	{
-		return sort;
-	}
-	public DeliveryOption setSort(int sort)
-	{
-		this.sort = sort;
 
 		return this;
 	}
@@ -82,12 +71,12 @@ public class DeliveryOption
 		return this;
 	}
 
-	public List<Outlet> getOutlets()
+	public Set<Integer> getOutlets()
 	{
 		return outlets;
 	}
 
-	public DeliveryOption setOutlets(List<Outlet> outlets)
+	public DeliveryOption setOutlets(Set<Integer> outlets)
 	{
 		this.outlets = outlets;
 
@@ -114,7 +103,6 @@ public class DeliveryOption
 			", serviceName='" + serviceName + '\'' +
 			", price=" + price +
 			", dates=" + dates +
-			", sort=" + sort +
 			", outlets=" + outlets +
 			'}';
 	}

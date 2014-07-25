@@ -7,7 +7,7 @@ public class DeliverableItem
 
 	int feedId;
 	String offerId;
-	double price = 0;
+	private double price;
 	int count;
 	boolean delivery;
 
@@ -16,12 +16,19 @@ public class DeliverableItem
 		feedId = i.feedId;
 		offerId = i.offerId;
 		count = i.count;
+		price =  ItemService.i().getPrice(offerId);
 	}
 
 	public double getPrice()
 	{
-		//TODO: 0 price?
-		return price == 0 ? ItemService.i().getPrice(offerId) : price;
+		return price;
+	}
+
+	public DeliverableItem setPrice(double price)
+	{
+		this.price = price;
+
+		return this;
 	}
 
 	public double getCount()
