@@ -2,15 +2,21 @@ package org.lutra.cpa.model;
 
 import org.lutra.cpa.service.ItemService;
 
-public class Item
+public class DeliverableItem
 {
 
 	int feedId;
 	String offerId;
-	String feedCategoryId;
-	String offerName;
 	double price = 0;
 	int count;
+	boolean delivery;
+
+	public DeliverableItem(Item i)
+	{
+		feedId = i.feedId;
+		offerId = i.offerId;
+		count = i.count;
+	}
 
 	public double getPrice()
 	{
@@ -23,8 +29,16 @@ public class Item
 		return count;
 	}
 
-	public String getOfferId()
+	public boolean isDelivery()
 	{
-		return offerId;
+		return delivery;
 	}
+
+	public DeliverableItem setDelivery(boolean delivery)
+	{
+		this.delivery = delivery;
+
+		return this;
+	}
+
 }
