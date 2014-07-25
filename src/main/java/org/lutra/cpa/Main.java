@@ -17,45 +17,71 @@ import java.util.List;
 public class Main
 {
 	private static Logger log = LoggerFactory.getLogger(Main.class);
-	public static Gson g = setUpGson();
-	final public static DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
-	public static Gson setUpGson()
+	public static GsonWrapper g = new GsonWrapper();
+	public static class GsonWrapper
 	{
-		GsonBuilder gb = new GsonBuilder();
-		gb.registerTypeAdapter
-			(
-				Date.class, new JsonSerializer<Date>()
-				{
-					@Override
-					public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context)
-					{
-						return new JsonPrimitive(fmt.format(src));
-					}
-				}
-			);
-		gb.registerTypeAdapter
-			(
-				Date.class, new JsonDeserializer<Date>()
-				{
-					@Override
-					public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
-					{
-						Date d = null;
-						try
-						{
-							d = json == null ? null : fmt.parse(json.getAsString());
-						}
-						catch(ParseException e)
-						{
-						}
-						return d;
-					}
-				}
-			);
-		gb.setPrettyPrinting();
+		private static Logger log = LoggerFactory.getLogger("G:");
+		private static Gson gson = setUpGson();
+		GsonWrapper()
+		{
+			this.gson = setUpGson();
+		}
 
-		return gb.create();
+		public static Gson setUpGson()
+		{
+			GsonBuilder gb = new GsonBuilder();
+			gb.registerTypeAdapter
+				(
+					Date.class, new JsonSerializer<Date>()
+					{
+						@Override
+						public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context)
+						{
+							return new JsonPrimitive(fmt.format(src));
+						}
+					}
+				);
+			gb.registerTypeAdapter
+				(
+					Date.class, new JsonDeserializer<Date>()
+					{
+						@Override
+						public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+						{
+							Date d = null;
+							try
+							{
+								d = json == null ? null : fmt.parse(json.getAsString());
+							}
+							catch(ParseException e)
+							{
+							}
+							return d;
+						}
+					}
+				);
+
+			return gb.create();
+		}
+
+		public <T> T fromJson(String json, Class<T> classOfT) throws JsonSyntaxException
+		{
+			log.info("<{}> f: {}", classOfT, json);
+
+			return gson.fromJson(json, classOfT);
+		}
+
+		public String toJson(Object src)
+		{
+			String ret = gson.toJson(src);
+			log.info("<{}> t: {}", src.getClass(), ret);
+
+			return  ret;
+		}
+
 	}
+
+	final public static DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
 
 	public static void main(String[] args)
 	{

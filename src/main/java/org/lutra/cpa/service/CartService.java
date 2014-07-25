@@ -20,7 +20,6 @@ public class CartService
 		Set<Integer> outlets = new HashSet<>();
 		for(Integer outlet_id: Config.outlets_mapping.values())
 			outlets.add(outlet_id);
-
 		for(Item i : cr.uw().items)
 		{
 			Set<Integer> item_outlets = new HashSet<>();
@@ -29,8 +28,8 @@ public class CartService
 				if (Config.outlets_mapping.get(store_id) != null)
 					item_outlets.add(Config.outlets_mapping.get(store_id));
 			outlets.retainAll(item_outlets);
-			DeliverableItem di = new DeliverableItem(i);
-			di.setDelivery(!store_ids.isEmpty());
+			DeliverableItem di =	new DeliverableItem(i)
+				.setDelivery(!store_ids.isEmpty());
 			items.add(di);
 		}
 		List<DeliveryOption> deliveryOptions = DeliveryService.i().getFeasible(cr.uw());
@@ -44,7 +43,6 @@ public class CartService
 				iter.remove();
 			else if(!outlets.isEmpty())
 				option.setOutlets(outlets);
-
 			if(!option.getType().equals(DeliveryType.PICKUP))
 				option.setOutlets(null);
 		}
