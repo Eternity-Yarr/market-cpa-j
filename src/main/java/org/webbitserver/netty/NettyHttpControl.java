@@ -5,14 +5,7 @@ import org.jboss.netty.channel.ChannelHandler;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.handler.codec.http.HttpResponseStatus;
-import org.webbitserver.EventSourceHandler;
-import org.webbitserver.HttpControl;
-import org.webbitserver.HttpHandler;
-import org.webbitserver.HttpRequest;
-import org.webbitserver.HttpResponse;
-import org.webbitserver.WebSocketConnection;
-import org.webbitserver.WebSocketHandler;
-import org.webbitserver.WebbitException;
+import org.webbitserver.*;
 
 import java.util.Iterator;
 import java.util.concurrent.Executor;

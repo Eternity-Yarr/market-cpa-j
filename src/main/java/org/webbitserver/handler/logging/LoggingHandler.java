@@ -1,13 +1,6 @@
 package org.webbitserver.handler.logging;
 
-import org.webbitserver.EventSourceConnection;
-import org.webbitserver.EventSourceHandler;
-import org.webbitserver.HttpControl;
-import org.webbitserver.HttpHandler;
-import org.webbitserver.HttpRequest;
-import org.webbitserver.HttpResponse;
-import org.webbitserver.WebSocketConnection;
-import org.webbitserver.WebSocketHandler;
+import org.webbitserver.*;
 import org.webbitserver.wrapper.HttpControlWrapper;
 import org.webbitserver.wrapper.HttpResponseWrapper;
 

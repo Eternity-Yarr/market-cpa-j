@@ -1,12 +1,6 @@
 package org.webbitserver.wrapper;
 
-import org.webbitserver.EventSourceConnection;
-import org.webbitserver.EventSourceHandler;
-import org.webbitserver.HttpControl;
-import org.webbitserver.HttpRequest;
-import org.webbitserver.HttpResponse;
-import org.webbitserver.WebSocketConnection;
-import org.webbitserver.WebSocketHandler;
+import org.webbitserver.*;
 
 import java.util.concurrent.Executor;
 

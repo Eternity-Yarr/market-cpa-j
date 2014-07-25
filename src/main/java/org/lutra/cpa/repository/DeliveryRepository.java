@@ -7,7 +7,6 @@ import org.lutra.cpa.Helpers;
 import org.lutra.cpa.model.Dates;
 import org.lutra.cpa.model.DeliveryOption;
 import org.lutra.cpa.model.DeliveryType;
-import org.lutra.cpa.model.Outlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

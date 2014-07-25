@@ -1,20 +1,16 @@
 package org.webbitserver.stub;
 
-import org.webbitserver.HttpResponse;
-import org.webbitserver.helpers.DateHelper;
 import org.jboss.netty.handler.codec.http.HttpHeaders.Names;
 import org.jboss.netty.handler.codec.http.HttpHeaders.Values;
+import org.webbitserver.HttpResponse;
+import org.webbitserver.helpers.DateHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpCookie;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Implementation of HttpResponse that is easy to construct manually, and inspect results.

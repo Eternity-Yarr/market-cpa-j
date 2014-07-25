@@ -3,7 +3,6 @@ package org.lutra.cpa.request.post;
 import org.lutra.cpa.model.Currency;
 import org.lutra.cpa.model.DeliveryRequest;
 import org.lutra.cpa.model.Item;
-import org.lutra.cpa.service.ItemService;
 
 import java.util.List;
 

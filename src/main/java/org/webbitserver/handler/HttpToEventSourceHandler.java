@@ -1,10 +1,6 @@
 package org.webbitserver.handler;
 
-import org.webbitserver.EventSourceHandler;
-import org.webbitserver.HttpControl;
-import org.webbitserver.HttpHandler;
-import org.webbitserver.HttpRequest;
-import org.webbitserver.HttpResponse;
+import org.webbitserver.*;
 
 public class HttpToEventSourceHandler implements HttpHandler {
     private final EventSourceHandler handler;

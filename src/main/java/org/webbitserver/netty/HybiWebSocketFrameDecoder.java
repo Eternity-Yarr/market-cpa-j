@@ -12,16 +12,8 @@ import org.jboss.netty.handler.codec.replay.ReplayingDecoder;
 import org.webbitserver.helpers.UTF8Exception;
 import org.webbitserver.helpers.UTF8Output;
 
-import static org.webbitserver.netty.HybiWebSocketFrameDecoder.State.CORRUPT;
-import static org.webbitserver.netty.HybiWebSocketFrameDecoder.State.FRAME_START;
-import static org.webbitserver.netty.HybiWebSocketFrameDecoder.State.MASKING_KEY;
-import static org.webbitserver.netty.HybiWebSocketFrameDecoder.State.PAYLOAD;
-import static org.webbitserver.netty.Opcodes.OPCODE_BINARY;
-import static org.webbitserver.netty.Opcodes.OPCODE_CLOSE;
-import static org.webbitserver.netty.Opcodes.OPCODE_CONT;
-import static org.webbitserver.netty.Opcodes.OPCODE_PING;
-import static org.webbitserver.netty.Opcodes.OPCODE_PONG;
-import static org.webbitserver.netty.Opcodes.OPCODE_TEXT;
+import static org.webbitserver.netty.HybiWebSocketFrameDecoder.State.*;
+import static org.webbitserver.netty.Opcodes.*;
 
 public class HybiWebSocketFrameDecoder extends ReplayingDecoder<HybiWebSocketFrameDecoder.State> {
     private final UTF8Output utf8Output = new UTF8Output();

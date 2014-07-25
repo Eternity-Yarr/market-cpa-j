@@ -1,10 +1,6 @@
 package org.webbitserver.handler;
 
-import org.webbitserver.HttpControl;
-import org.webbitserver.HttpHandler;
-import org.webbitserver.HttpRequest;
-import org.webbitserver.HttpResponse;
-import org.webbitserver.WebSocketHandler;
+import org.webbitserver.*;
 
 public class HttpToWebSocketHandler implements HttpHandler {
     private final WebSocketHandler handler;

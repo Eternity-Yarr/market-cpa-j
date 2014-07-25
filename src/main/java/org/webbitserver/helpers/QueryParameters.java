@@ -2,13 +2,7 @@ package org.webbitserver.helpers;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class QueryParameters {
     private static final List<String> EMPTY = Collections.emptyList();
