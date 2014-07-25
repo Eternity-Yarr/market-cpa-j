@@ -30,6 +30,7 @@ public class ItemRepository
 
 		return instance;
 	}
+
 	public double getPrice(String id)
 	{
 		double ret = 0;
@@ -56,13 +57,17 @@ SELECT price FROM b_catalog_price WHERE id = ?
 		return  ret;
 	}
 
+	/**
+	 * @param id item id to check availability
+	 * @return list of store ids with non-zero quantity of items available
+	 */
 	public List<Integer> getAvailability(String id)
 	{
 		List<Integer> ret = new ArrayList<>();
 /*
-SELECT price FROM b_catalog_price WHERE id = ?
+SELECT store_id FROM my_availability WHERE item_id = ? AND aviable > 0
 */
-		String q = "";
+		String q = "SELECT store_id FROM my_availability WHERE item_id = ? AND aviable > 0"; // Yeah, i know.
 		Object[] params = {id};
 		try
 			(
@@ -72,7 +77,7 @@ SELECT price FROM b_catalog_price WHERE id = ?
 			)
 		{
 			if(rs.next())
-				ret.add(rs.getInt(""));
+				ret.add(rs.getInt("store_id"));
 		}
 		catch(Exception e)
 		{
