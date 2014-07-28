@@ -83,7 +83,7 @@ public class ChangeDeliveryHandler implements HttpHandler
 				try
 				{
 					int id = Integer.parseInt(post.get("order-id"));
-					String path = String.format("/campaigns/%s/orders/%s/delivery.json", Config.campaignId, id);
+					String path = String.format("/campaigns/%s/orders/%s/delivery.json", Config.i().campaignId, id);
 					json = Main.g.toJson(dr);
 					String or_json = Market.putRequest(path, json);
 

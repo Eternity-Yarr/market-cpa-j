@@ -25,7 +25,7 @@ public class AuthorizedHttpHandler implements HttpHandler
 	@Override
 	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
 	{
-		if(request.hasHeader("Authorized") && request.header("Authorized").equals(Config.oauth_token))
+		if(request.hasHeader("Authorized") && request.header("Authorized").equals(Config.i().oauth_token))
 		{
 			log.info("Authorized");
 			h.handleHttpRequest(request, response, control);

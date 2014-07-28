@@ -1,7 +1,19 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title text-center">
-            <strong>Доставка на {{delivery.dates.getToDate}}</strong>&nbsp;({{currency delivery.price}}&nbsp;руб.)
+			{{#delivery}}
+				{{#address.street}}
+					<a
+						class="pull-left text-success"
+						rel="noreferer"
+						target="_blank"
+						href="http://maps.yandex.ru/?text={{address.street}}{{#address.house}}%20{{address.house}}{{/address.house}}{{#address.block}}%20{{address.block}}{{/address.block}}"
+						title="Показать на карте">
+						<i class="glyphicon glyphicon-screenshot"></i>
+					</a>
+				{{/address.street}}
+			{{/delivery}}
+			<h3 class="panel-title text-center">
+					<strong>Доставка на {{delivery.dates.getToDate}}</strong>&nbsp;({{currency delivery.price}}&nbsp;руб.)
 					<span class="pull-right"><a href="/change_delivery?id={{id}}"><i class="glyphicon glyphicon-cog"></i></a></span>
         </h3>
     </div>

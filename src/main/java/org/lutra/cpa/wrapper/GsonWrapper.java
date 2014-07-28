@@ -60,9 +60,7 @@ public class GsonWrapper
 						{
 							d = json == null ? null : Main.fmt.parse(json.getAsString());
 						}
-						catch(ParseException e)
-						{
-						}
+						catch(ParseException e)	{ /*don't care*/ }
 						return d;
 					}
 				}

@@ -112,7 +112,7 @@ public class Helpers
 	}
 	public static boolean authorize(HttpRequest rx)
 	{
-		return rx.hasHeader("Authorization") && rx.header("Authorization").equals(Config.oauth_token);
+		return rx.hasHeader("Authorization") && rx.header("Authorization").equals(Config.i().oauth_token);
 	}
 
 	public static <T> T castMap(Map<String, String> fromMap, Class<T> clazz)

@@ -3,5 +3,5 @@ out/
 *.iws
 config/
 target/
-src/main/java/org/lutra/cpa/Config.java
+deploy.sh
 dump.json

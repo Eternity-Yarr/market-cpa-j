@@ -52,7 +52,7 @@ public class ChangeStatusHandler implements HttpHandler
 
 				String back_url = Helpers.queryGetString(rx, "back_url", "/orders");
 				int id = Helpers.queryGetInt(rx, "id", -1);
-				String path = String.format("/campaigns/%s/orders/%s/status.json", Config.campaignId, id);
+				String path = String.format("/campaigns/%s/orders/%s/status.json", Config.i().campaignId, id);
 				OrderStatus status = null;
 				OrderSubstatus substatus = null;
 				String str_status = null;

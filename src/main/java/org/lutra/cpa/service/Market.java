@@ -28,7 +28,7 @@ public class Market
 				String.format
 					(
 						"OAuth oauth_token=\"%s\", oauth_client_id=\"%s\", oauth_login=\"%s\"",
-						Config.oauth_token, Config.oauth_client_id, Config.oauth_login
+						Config.i().oauth_token, Config.i().oauth_client_id, Config.i().oauth_login
 					);
 			con.setRequestProperty("Authorization", OAuth);
 			con.setRequestMethod("GET");
@@ -70,7 +70,7 @@ public class Market
 				String.format
 					(
 						"OAuth oauth_token=\"%s\", oauth_client_id=\"%s\", oauth_login=\"%s\"",
-						Config.oauth_token, Config.oauth_client_id, Config.oauth_login
+						Config.i().oauth_token, Config.i().oauth_client_id, Config.i().oauth_login
 					);
 			con.setRequestProperty("Authorization", OAuth);
 			con.setRequestProperty("Content-Type", "application/json");

@@ -23,9 +23,9 @@ public class Db
 		{
 			log.error(e.toString(), e);
 		}
-		cpds.setJdbcUrl(Config.DB_uri);
-		cpds.setUser(Config.DB_user);
-		cpds.setPassword(Config.DB_pass);
+		cpds.setJdbcUrl(Config.i().DB_uri);
+		cpds.setUser(Config.i().DB_user);
+		cpds.setPassword(Config.i().DB_pass);
 
 
 		ds = cpds; //FIXME: lol

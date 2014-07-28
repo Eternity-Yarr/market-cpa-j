@@ -20,7 +20,7 @@ public class OrdersService
 	{
 		int ps = pageSize > 50 || pageSize < 1 ? 50 : pageSize;
 		int p = page < 0 || page > 100 ? 0 : page;
-		String path = String.format("/campaigns/%s/orders.json?pageSize=%s&page=%s", Config.campaignId, ps, p);
+		String path = String.format("/campaigns/%s/orders.json?pageSize=%s&page=%s", Config.i().campaignId, ps, p);
 		if(status != null)
 			path += "&status=" + status.name();
 		String json = Market.getRequest(path);
