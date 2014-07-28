@@ -5,3 +5,5 @@ campaignId = 0000000
 DB_uri = jdbc:mysql://localhost/cpadb
 DB_user = dev
 DB_pass = abcdef
+disable_ssl = true
+listening_port = 9986

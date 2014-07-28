@@ -14,6 +14,8 @@ public class Config
 	final public String DB_uri;
 	final public String DB_user;
 	final public String DB_pass;
+	final public boolean disable_ssl;
+	final public int listening_port;
 	final public static HashMap<Integer, Integer> outlets_mapping = new HashMap<>();
 	static
 	{
@@ -56,5 +58,7 @@ public class Config
 		DB_uri = p.getProperty("DB_uri");
 		DB_user = p.getProperty("DB_user");
 		DB_pass = p.getProperty("DB_pass");
+		disable_ssl = Boolean.valueOf(p.getProperty("disable_ssl"));
+		listening_port = Integer.parseInt(p.getProperty("listening_port"));
 	}
 }

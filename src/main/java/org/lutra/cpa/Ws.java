@@ -7,8 +7,6 @@ import org.webbitserver.WebServer;
 import org.webbitserver.WebServers;
 import org.webbitserver.handler.StaticFileHandler;
 
-import java.io.FileInputStream;
-
 public class Ws
 {
 	static
@@ -31,18 +29,21 @@ public class Ws
 
 	public static void run()
 	{
-		ws = WebServers.createWebServer(10433);
-		try
-		{
-			// To generate new certificate use smth like:
-			// $ keytool -genkey -alias webCrt -keystore keystore -keysize 1024 -validity 3600
-			ws.setupSsl(new FileInputStream("src/test/resources/ssl/keystore"), "password");
-		}
-		catch(Exception e)
-		{
-			log.error("Certificate not found. Not going to SSL", e);
-			ws = WebServers.createWebServer(9888);
-		}
+		ws = WebServers.createWebServer(Config.i().listening_port);
+		if(Config.i().disable_ssl)
+			log.info("SSL disabled in config");
+		else
+			try
+			{
+				// To generate new certificate use smth like:
+				// $ keytool -genkey -alias webCrt -keystore keystore -keysize 1024 -validity 3600
+				ws.setupSsl(Ws.class.getResourceAsStream("keystore"), "password");
+			}
+			catch(Exception e)
+			{
+				log.error("Certificate not found. Not going to SSL", e);
+				ws = WebServers.createWebServer(Config.i().listening_port);
+			}
 		ws
 			.add(new StaticFileHandler("./var"))
 		;
