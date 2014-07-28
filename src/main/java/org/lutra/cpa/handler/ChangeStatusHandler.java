@@ -29,7 +29,10 @@ public class ChangeStatusHandler implements HttpHandler
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		new Thread(new ChangeStatus(rx, tx, ct)).start();
+		if(Helpers.authorize(rx))
+			new Thread(new ChangeStatus(rx, tx, ct)).start();
+		else
+			ct.nextHandler();
 		log.info("leaving");
 	}
 	public static class ChangeStatus implements Runnable

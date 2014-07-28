@@ -48,6 +48,7 @@ public class Ws
 			.add(new StaticFileHandler("./var"))
 		;
 		ws
+			.add("/", new LoginHandler())
 			.add("/orders", new OrdersHandler())
 			.add("/order", new OrderHandler())
 			.add("/cart", new CartHandler())

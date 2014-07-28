@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.WeakHashMap;
 
 public class Main
 {
@@ -25,6 +26,7 @@ public class Main
 		log.info("Started");
 		DateTime dt = new DateTime();
 		List<Outlet> os = OutletsService.get();
+		Db.setupDriver();
 		Ws.run();
 	}
 }

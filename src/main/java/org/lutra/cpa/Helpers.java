@@ -1,5 +1,6 @@
 package org.lutra.cpa;
 
+import org.lutra.cpa.cache.SessionsCache;
 import org.lutra.cpa.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,9 +111,16 @@ public class Helpers
 
 		return ps;
 	}
+
 	public static boolean authorize(HttpRequest rx)
 	{
-		return rx.hasHeader("Authorization") && rx.header("Authorization").equals(Config.i().oauth_token);
+		boolean ret;
+		if(rx.method().equals("POST") && rx.cookieValue("CPA") != null)
+			ret = rx.hasHeader("Authorization") && rx.header("Authorization").equals(Config.i().oauth_token);
+		else
+			ret = SessionsCache.contains(rx.cookieValue("CPA"));
+
+		return ret;
 	}
 
 	public static <T> T castMap(Map<String, String> fromMap, Class<T> clazz)

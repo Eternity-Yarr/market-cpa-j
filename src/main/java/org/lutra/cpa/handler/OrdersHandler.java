@@ -29,7 +29,10 @@ public class OrdersHandler implements HttpHandler
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		new Thread(new OrdersRunner(rx, tx, ct)).start();
+		if(Helpers.authorize(rx))
+			new Thread(new OrdersRunner(rx, tx, ct)).start();
+		else
+			ct.nextHandler();
 		log.info("leaving");
 	}
 	public static class OrdersRunner implements Runnable

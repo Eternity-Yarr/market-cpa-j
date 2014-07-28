@@ -31,9 +31,13 @@ public class OrderHandler implements HttpHandler
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		new Thread(new OrderRunner(rx, tx, ct)).start();
+		if(Helpers.authorize(rx))
+			new Thread(new OrderRunner(rx, tx, ct)).start();
+		else
+			ct.nextHandler();
 		log.info("leaving");
 	}
+
 	public static class OrderRunner implements Runnable
 	{
 		HttpRequest rx;
