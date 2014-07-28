@@ -4,4 +4,5 @@ out/
 config/
 target/
 deploy.sh
+src/main/resources/org/lutra/cpa/config.properties
 dump.json
