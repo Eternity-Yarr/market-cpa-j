@@ -77,6 +77,7 @@ public class LoginHandler implements HttpHandler
 
 			if(redirect)
 			{
+				// Status should be something like 303 because we need to change request type to GET from whatever
 				tx.status(303);
 				tx.header("Location", target == null ? "/orders" : target);
 			}

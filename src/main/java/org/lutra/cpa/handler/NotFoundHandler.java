@@ -14,6 +14,7 @@ public class NotFoundHandler implements HttpHandler
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
 		log.info(rx.uri());
+		// change request type to GET from whatever
 		tx.status(303);
 		tx.header("Location", "/");
 		tx.end();
