@@ -78,9 +78,9 @@ public class AuthorizationService
 		return SessionsCache.contains(token);
 	}
 
-	public static boolean authorized(String email, String password)
+	public static int authorized(String email, String password)
 	{
-		boolean ret = false;
+		int ret = -1;
 /*
 
 SELECT id, password, group_id
@@ -110,7 +110,7 @@ WHERE login = ? AND group_id = 1 AND active = 'Y'
 					byte[] hash = Hex.decodeHex(hash_string.toCharArray());
 					boolean match = Arrays.equals(hash, (md.digest((salt + password).getBytes())));
 					if(match)
-						ret = true;
+						ret = rs.getInt("id");
 				}
 				else
 					log.info("No such user {}", email);

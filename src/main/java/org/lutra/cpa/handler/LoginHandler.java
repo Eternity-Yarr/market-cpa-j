@@ -63,7 +63,7 @@ public class LoginHandler implements HttpHandler
 				String login = rx.postParam("inputEmail");
 				String password = rx.postParam("inputPassword");
 				target = rx.postParam("back_url");
-				boolean authorized = AuthorizationService.authorized(login, password);
+				boolean authorized = AuthorizationService.authorized(login, password) > 0;
 				if(authorized)
 				{
 					token = AuthorizationService.generateToken();

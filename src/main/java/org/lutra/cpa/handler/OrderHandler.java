@@ -9,8 +9,11 @@ import com.github.jknack.handlebars.context.MethodValueResolver;
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.cache.OutletsCache;
+import org.lutra.cpa.model.HistoryEntry;
 import org.lutra.cpa.model.Order;
 import org.lutra.cpa.model.OrderStatus;
+import org.lutra.cpa.model.User;
+import org.lutra.cpa.service.HistoryService;
 import org.lutra.cpa.service.OrderStatusService;
 import org.lutra.cpa.wrapper.MyHandlebars;
 import org.slf4j.Logger;
@@ -21,9 +24,7 @@ import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
 
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class OrderHandler implements HttpHandler
 {
@@ -58,11 +59,10 @@ public class OrderHandler implements HttpHandler
 			Map<String, Object> data = new HashMap<>();
 			int id = Helpers.queryGetInt(rx, "id", 0); //TODO: default? i dont think so. Spit an error.
 			String back_url = Helpers.queryGetString(rx, "back_url", "/orders");
-
-
 			Order o = OrdersCache.get(id);
-			Handlebars h = new MyHandlebars();
+			List<HistoryEntry> history = HistoryService.i().get(id);
 
+			data.put("history", history);
 			data.put("raw_back_url", back_url);
 			try
 			{
@@ -94,6 +94,7 @@ public class OrderHandler implements HttpHandler
 				.newBuilder(data)
 				.resolver(FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE)
 				.build();
+			Handlebars h = new MyHandlebars();
 			try
 			{
 				Template t = h.compile("order");
