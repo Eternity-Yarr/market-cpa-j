@@ -14,9 +14,10 @@ import java.util.Locale;
 
 public class MyHandlebars extends Handlebars
 {
-	private static Logger log = LoggerFactory.getLogger(MyHandlebars.class);
-	private static NumberFormat nf = NumberFormat.getNumberInstance(Locale.forLanguageTag("RU"));
-	private static DecimalFormat df = (DecimalFormat)nf;
+	final private static Logger log = LoggerFactory.getLogger(MyHandlebars.class);
+	final private static NumberFormat nf = NumberFormat.getNumberInstance(Locale.forLanguageTag("RU"));
+	final private static DecimalFormat df = (DecimalFormat)nf;
+
 	public MyHandlebars()
 	{
 		super(new MyFileTemplateLoader());

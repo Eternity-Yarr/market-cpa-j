@@ -8,12 +8,11 @@ import java.beans.PropertyVetoException;
 
 public class Db
 {
+	final private static Logger log = LoggerFactory.getLogger(Db.class);
 	public static ComboPooledDataSource ds;
-	public static Logger log = LoggerFactory.getLogger(Db.class);
 
 	public static void setupDriver()
 	{
-
 		ComboPooledDataSource cpds = new ComboPooledDataSource();
 		try
 		{
@@ -26,7 +25,6 @@ public class Db
 		cpds.setJdbcUrl(Config.i().DB_uri);
 		cpds.setUser(Config.i().DB_user);
 		cpds.setPassword(Config.i().DB_pass);
-
 
 		ds = cpds; //FIXME: lol
 	}

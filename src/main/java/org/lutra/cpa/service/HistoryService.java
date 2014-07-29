@@ -25,6 +25,7 @@ public class HistoryService
 {
 	final private static Logger log = LoggerFactory.getLogger(HistoryService.class);
 	private static HistoryService instance;
+
 	public static HistoryService i()
 	{
 		if(instance == null)

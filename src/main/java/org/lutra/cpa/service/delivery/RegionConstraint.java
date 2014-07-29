@@ -15,6 +15,7 @@ import java.util.concurrent.Callable;
 public class RegionConstraint extends AbstractConstraint implements Callable<Set<DeliveryOption>>
 {
 	final private static Logger log = LoggerFactory.getLogger(RegionConstraint.class);
+
 	public RegionConstraint(Cart rx)
 	{
 		super(rx);

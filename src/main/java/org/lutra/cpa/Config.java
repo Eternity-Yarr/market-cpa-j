@@ -34,7 +34,7 @@ public class Config
 		deliveryType_mapping.put(4, DeliveryType.DELIVERY);
 		deliveryType_mapping.put(11, DeliveryType.DELIVERY);
 	}
-	public static Config instance;
+	private static Config instance;
 	public static Config i()
 	{
 		if(instance == null)
@@ -50,7 +50,11 @@ public class Config
 		{
 			p.load(Config.class.getResourceAsStream("config.properties"));
 		}
-		catch(Exception e){	}
+		catch(Exception e)
+		{
+			System.err.println("Config not found");
+			System.exit(-1);
+		}
 		oauth_token = p.getProperty("oauth_token");
 		oauth_client_id = p.getProperty("oauth_client_id");
 		oauth_login = p.getProperty("oauth_login");

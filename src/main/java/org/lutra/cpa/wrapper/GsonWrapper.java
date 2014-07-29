@@ -17,14 +17,11 @@ import java.util.Date;
  */
 public class GsonWrapper
 {
-	private static Logger log = LoggerFactory.getLogger("G:");
-	private static Gson gson = setUpGson();
+	final private static Logger log = LoggerFactory.getLogger("G:");
+	final private static Gson gson = setUpGson();
 	private static GsonWrapper instance;
 
-	GsonWrapper()
-	{
-		gson = setUpGson();
-	}
+	private GsonWrapper(){}
 
 	public static GsonWrapper i()
 	{

@@ -30,7 +30,8 @@ import java.util.Set;
 
 public class LoginHandler implements HttpHandler
 {
-	private static Logger log = LoggerFactory.getLogger(LoginHandler.class);
+	final private static Logger log = LoggerFactory.getLogger(LoginHandler.class);
+
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{

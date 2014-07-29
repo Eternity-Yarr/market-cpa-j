@@ -25,7 +25,6 @@ public class OrdersService
 			path += "&status=" + status.name();
 		String json = Market.getRequest(path);
 		OrdersResponse or = Main.g.fromJson(json, OrdersResponse.class);
-
 		if(or != null)
 		{
 			List<Order> os = or.getOrders();

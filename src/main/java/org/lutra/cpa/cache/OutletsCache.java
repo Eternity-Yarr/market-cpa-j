@@ -52,6 +52,7 @@ public class OutletsCache
 		{
 			log.error(e.toString(), e);
 		}
+
 		return o;
 	}
 }

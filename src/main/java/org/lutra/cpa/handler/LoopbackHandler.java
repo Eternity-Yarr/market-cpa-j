@@ -15,7 +15,8 @@ import java.util.Map;
 //TODO: Delete me
 public class LoopbackHandler implements HttpHandler
 {
-	private static Logger log = LoggerFactory.getLogger("Loopback");
+	final private static Logger log = LoggerFactory.getLogger(LoopbackHandler.class);
+
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{

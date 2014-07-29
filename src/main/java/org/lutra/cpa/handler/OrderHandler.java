@@ -28,7 +28,7 @@ import java.util.*;
 
 public class OrderHandler implements HttpHandler
 {
-	private static Logger log = LoggerFactory.getLogger(OrderHandler.class);
+	final private static Logger log = LoggerFactory.getLogger(OrderHandler.class);
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{

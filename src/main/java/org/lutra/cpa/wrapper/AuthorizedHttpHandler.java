@@ -18,10 +18,12 @@ public class AuthorizedHttpHandler implements HttpHandler
 {
 	final private HttpHandler h;
 	final private static Logger log = LoggerFactory.getLogger(AuthorizedHttpHandler.class);
+
 	public AuthorizedHttpHandler(HttpHandler h)
 	{
 		this.h = h;
 	}
+
 	@Override
 	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) throws Exception
 	{

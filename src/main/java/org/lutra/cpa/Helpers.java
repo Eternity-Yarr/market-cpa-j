@@ -24,6 +24,7 @@ import java.util.Map;
 public class Helpers
 {
 	final private static Logger log = LoggerFactory.getLogger(Helpers.class);
+
 	public static int queryGetInt(HttpRequest req, String key, int def)
 	{
 		int ret = def;
@@ -188,6 +189,7 @@ public class Helpers
 		{
 			log.error(e.toString(), e);
 		}
+
 		return ret;
 	}
 }
