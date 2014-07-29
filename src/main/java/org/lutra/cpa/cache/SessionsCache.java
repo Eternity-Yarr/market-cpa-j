@@ -13,17 +13,22 @@ import java.util.concurrent.TimeUnit;
  */
 public class SessionsCache
 {
-	final private static Cache<String, Boolean> cache = CacheBuilder
+	final private static Cache<String, Integer> cache = CacheBuilder
 		.newBuilder()
 		.expireAfterAccess(90, TimeUnit.MINUTES)
 		.build();
 
-	public static void put(String hash)
+	public static void put(String hash, Integer user_id)
 	{
-		cache.put(hash, true);
+		cache.put(hash, user_id);
 	}
 	public static boolean contains(String hash)
 	{
 		return hash != null && cache.getIfPresent(hash) != null;
+	}
+
+	public static Integer get(String hash)
+	{
+		return cache.getIfPresent(hash);
 	}
 }
