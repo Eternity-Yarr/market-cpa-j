@@ -13,7 +13,7 @@ public enum OrderSubstatus
 	REPLACING_ORDER("Покупатель изменяет состав заказа"),
 	PROCESSING_EXPIRED("Магазин не обработал заказ вовремя");
 
-	final String desc;
+	final public String desc;
 	OrderSubstatus(String desc)
 	{
 		this.desc = desc;

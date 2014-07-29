@@ -2,6 +2,7 @@ package org.lutra.cpa.service;
 
 import org.lutra.cpa.Db;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.cache.SessionsCache;
 import org.lutra.cpa.model.HistoryEntry;
 import org.lutra.cpa.model.User;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +31,15 @@ public class HistoryService
 			instance = new HistoryService();
 
 		return instance;
+	}
+
+	public void add(String hash, int order_id, String message)
+	{
+		User u = UserService.i().get(SessionsCache.get(hash));
+		if(u != null)
+			add(u, order_id, message);
+		else
+			log.info("Hash {} is obsolete", hash);
 	}
 
 	public void add(User user, int order_id, String message)
@@ -64,7 +75,7 @@ public class HistoryService
 			while(rs.next())
 			{
 				HistoryEntry he = new HistoryEntry();
-				he.date_added = rs.getDate("date_added");
+				he.date_added = new Date(rs.getTimestamp("date_added").getTime());
 				he.message = rs.getString("message");
 				he.user = UserService.i().get(rs.getInt("user_id"));
 				ret.add(he);

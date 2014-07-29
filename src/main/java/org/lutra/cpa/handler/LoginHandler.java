@@ -63,11 +63,11 @@ public class LoginHandler implements HttpHandler
 				String login = rx.postParam("inputEmail");
 				String password = rx.postParam("inputPassword");
 				target = rx.postParam("back_url");
-				boolean authorized = AuthorizationService.authorized(login, password) > 0;
-				if(authorized)
+				int authorizedAs = AuthorizationService.authorized(login, password);
+				if(authorizedAs > 0)
 				{
 					token = AuthorizationService.generateToken();
-					SessionsCache.put(token);
+					SessionsCache.put(token, authorizedAs);
 					tx.cookie(CookieService.setCookie("CPA", token));
 					redirect = true;
 				}

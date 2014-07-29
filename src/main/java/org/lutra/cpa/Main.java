@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.WeakHashMap;
 
 public class Main
@@ -23,6 +24,7 @@ public class Main
 		//	System.setProperty("javax.net.ssl.trustStore","/home/dvrbuntu/work/market-cpa/src/test/resources/ssl/keystore");
 		//	System.setProperty("javax.net.ssl.trustStorePassword","password");
 		//	System.setProperty("javax.net.debug","SSL");
+		TimeZone.setDefault(TimeZone.getTimeZone("MSK"));
 		log.info("Started");
 		DateTime dt = new DateTime();
 		List<Outlet> os = OutletsService.get();

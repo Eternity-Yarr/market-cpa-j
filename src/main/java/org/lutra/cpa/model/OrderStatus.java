@@ -9,9 +9,9 @@ public enum OrderStatus
 	PICKUP("Заказ доставлен в пункт самовывоза", "Самовывоз", "warning"),
 	DELIVERED("Заказ получен покупателем", "Выполнен", "success");
 
-	final String desc;
-	final String brief;
-	final String css_class;
+	final public String desc;
+	final public String brief;
+	final public String css_class;
 	OrderStatus(String desc, String brief, String css_class)
 	{
 		this.desc = desc;

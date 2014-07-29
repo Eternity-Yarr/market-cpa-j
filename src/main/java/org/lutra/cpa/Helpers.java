@@ -123,6 +123,11 @@ public class Helpers
 		return ret;
 	}
 
+	public static String currentSession(HttpRequest rx)
+	{
+		return rx.cookieValue("CPA");
+	}
+
 	public static <T> T castMap(Map<String, String> fromMap, Class<T> clazz)
 	{
 		return castMap(fromMap, "", "-", clazz);

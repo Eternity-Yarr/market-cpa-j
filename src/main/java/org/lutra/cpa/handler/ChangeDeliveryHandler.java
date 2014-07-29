@@ -17,6 +17,7 @@ import org.lutra.cpa.model.deliveries.DeliveryPickup;
 import org.lutra.cpa.model.deliveries.DeliveryPost;
 import org.lutra.cpa.response.get.OrderResponse;
 import org.lutra.cpa.response.put.DeliveryResponse;
+import org.lutra.cpa.service.HistoryService;
 import org.lutra.cpa.service.Market;
 import org.lutra.cpa.service.OrderStatusService;
 import org.lutra.cpa.service.OutletsService;
@@ -89,10 +90,11 @@ public class ChangeDeliveryHandler implements HttpHandler
 					String path = String.format("/campaigns/%s/orders/%s/delivery.json", Config.i().campaignId, id);
 					json = Main.g.toJson(dr);
 					String or_json = Market.putRequest(path, json);
-
 					OrderResponse or = Main.g.fromJson(or_json, OrderResponse.class);
 					if(or != null)
 					{
+						String message = String.format("Измены условия доставки."); //TODO: Figure out some diff
+						HistoryService.i().add(Helpers.currentSession(rx), id, message);
 						log.info("Replacing order {} in cache", or.uw().getId());
 						OrdersCache.put(or.uw());
 					}
