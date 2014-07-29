@@ -10,7 +10,7 @@ import org.lutra.cpa.request.put.Status;
 import org.lutra.cpa.request.put.StatusRequest;
 import org.lutra.cpa.response.get.OrderResponse;
 import org.lutra.cpa.service.HistoryService;
-import org.lutra.cpa.service.Market;
+import org.lutra.cpa.service.MarketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.webbitserver.HttpControl;
@@ -95,7 +95,7 @@ public class ChangeStatusHandler implements HttpHandler
 				else
 				{
 					String body = Main.g.toJson(sr);
-					String or_json = Market.putRequest(path, body);
+					String or_json = MarketService.i().putRequest(path, body);
 					OrderResponse or = Main.g.fromJson(or_json, OrderResponse.class);
 					if(or != null)
 					{

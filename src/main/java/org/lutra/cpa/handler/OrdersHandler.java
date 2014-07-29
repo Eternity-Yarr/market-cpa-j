@@ -64,7 +64,7 @@ public class OrdersHandler implements HttpHandler
 			catch(IllegalArgumentException e)
 			{ /* dont care. that's perfectly fine. FIXME: however */ }
 
-			OrdersResponse or = OrdersService.get(status, pageSize, page);
+			OrdersResponse or = OrdersService.i().get(status, pageSize, page);
 			Handlebars h = new MyHandlebars();
 			try
 			{

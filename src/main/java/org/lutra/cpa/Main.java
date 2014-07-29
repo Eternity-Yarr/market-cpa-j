@@ -24,7 +24,7 @@ public class Main
 		TimeZone.setDefault(TimeZone.getTimeZone("MSK"));
 		log.info("Started");
 		DateTime dt = new DateTime();
-		List<Outlet> os = OutletsService.get();
+		List<Outlet> os = OutletsService.i().get();
 		Db.setupDriver();
 		Ws.run();
 	}

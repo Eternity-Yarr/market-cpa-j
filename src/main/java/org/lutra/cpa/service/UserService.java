@@ -20,6 +20,7 @@ public class UserService
 {
 	final private static Logger log = LoggerFactory.getLogger(UserService.class);
 	private static UserService instance;
+
 	public static UserService i()
 	{
 		if(instance == null)

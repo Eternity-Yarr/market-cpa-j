@@ -39,7 +39,7 @@ public class OutletsCache
 						public Outlet call() throws Exception
 						{
 							log.info("Querying API for {}", id);
-							OutletResponse o = OutletService.get(id);
+							OutletResponse o = OutletService.i().get(id);
 							if(o != null)
 								return o.uw();
 							else

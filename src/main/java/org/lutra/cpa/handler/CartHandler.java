@@ -55,7 +55,7 @@ public class CartHandler implements HttpHandler
 					Helpers.error_500(tx, "Cannot de-serialize JSON");
 				else
 				{
-					CartResponse response = CartService.process(cr);
+					CartResponse response = CartService.i().process(cr);
 					Helpers.ok_200(tx, response);
 				}
 			}

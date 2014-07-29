@@ -18,7 +18,7 @@ import org.lutra.cpa.model.deliveries.DeliveryPost;
 import org.lutra.cpa.response.get.OrderResponse;
 import org.lutra.cpa.response.put.DeliveryResponse;
 import org.lutra.cpa.service.HistoryService;
-import org.lutra.cpa.service.Market;
+import org.lutra.cpa.service.MarketService;
 import org.lutra.cpa.service.OrderStatusService;
 import org.lutra.cpa.service.OutletsService;
 import org.lutra.cpa.wrapper.MyHandlebars;
@@ -90,7 +90,7 @@ public class ChangeDeliveryHandler implements HttpHandler
 					int id = Integer.parseInt(post.get("order-id"));
 					String path = String.format("/campaigns/%s/orders/%s/delivery.json", Config.i().campaignId, id);
 					json = Main.g.toJson(dr);
-					String or_json = Market.putRequest(path, json);
+					String or_json = MarketService.i().putRequest(path, json);
 					OrderResponse or = Main.g.fromJson(or_json, OrderResponse.class);
 					if(or != null)
 					{
@@ -134,14 +134,14 @@ public class ChangeDeliveryHandler implements HttpHandler
 				}
 				if(o != null)
 				{
-					List<Outlet> or = OutletsService.get();
+					List<Outlet> or = OutletsService.i().get();
 					data.put("order", o);
 					data.put("delivery_type", DeliveryType.values());
 					data.put("order_status", OrderStatus.values());
 					data.put("outlets", or);
 					if(o.getDelivery().is_pickup())
 						data.put("outlet", OutletsCache.get(o.getDelivery().getOutletId()));
-					Set<OrderStatus> status_transitions = OrderStatusService.possibleTransitions
+					Set<OrderStatus> status_transitions = OrderStatusService.i().possibleTransitions
 						(
 							o.getStatus(),
 							o.getDelivery().getType()
@@ -151,7 +151,7 @@ public class ChangeDeliveryHandler implements HttpHandler
 					status_transitions.remove(OrderStatus.CANCELLED);
 
 					data.put("status_transitions", status_transitions);
-					data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
+					data.put("cancellation_reasons", OrderStatusService.i().possibleCancellationReasons(o.getStatus()));
 				}
 				Context c = Context
 					.newBuilder(data)

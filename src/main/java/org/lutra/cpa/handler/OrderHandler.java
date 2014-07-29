@@ -78,7 +78,7 @@ public class OrderHandler implements HttpHandler
 				data.put("order_status", OrderStatus.values());
 				if(o.getDelivery().is_pickup())
 					data.put("outlet", OutletsCache.get(o.getDelivery().getOutletId()));
-				Set<OrderStatus> status_transitions = OrderStatusService.possibleTransitions
+				Set<OrderStatus> status_transitions = OrderStatusService.i().possibleTransitions
 					(
 						o.getStatus(),
 						o.getDelivery().getType()
@@ -88,7 +88,7 @@ public class OrderHandler implements HttpHandler
 				status_transitions.remove(OrderStatus.CANCELLED);
 
 				data.put("status_transitions", status_transitions);
-				data.put("cancellation_reasons", OrderStatusService.possibleCancellationReasons(o.getStatus()));
+				data.put("cancellation_reasons", OrderStatusService.i().possibleCancellationReasons(o.getStatus()));
 			}
 			Context c = Context
 				.newBuilder(data)

@@ -11,7 +11,17 @@ import static org.lutra.cpa.model.OrderSubstatus.*;
 
 public class OrderStatusService
 {
-	public static Set<OrderStatus> possibleTransitions(OrderStatus from_status, DeliveryType for_deliveryType)
+	private static OrderStatusService instance;
+
+	public static OrderStatusService i()
+	{
+		if(instance == null)
+			instance = new OrderStatusService();
+
+		return instance;
+	}
+
+	public Set<OrderStatus> possibleTransitions(OrderStatus from_status, DeliveryType for_deliveryType)
 	{
 		Set<OrderStatus> ret = new HashSet<>();
 		switch(from_status)
@@ -34,7 +44,7 @@ public class OrderStatusService
 		return ret;
 	}
 
-	public static List<OrderSubstatus> possibleCancellationReasons(OrderStatus for_status)
+	public List<OrderSubstatus> possibleCancellationReasons(OrderStatus for_status)
 	{
 		List<OrderSubstatus> ret = new ArrayList<>();
 		switch(for_status)

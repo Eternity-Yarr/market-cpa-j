@@ -26,6 +26,7 @@ public class AuthorizationService
 	final private static Logger log = LoggerFactory.getLogger(AuthorizationService.class);
 	final static char[] dictionary = "abcdefghijklnmopqrstuvwxyzABCDEFGHIJKLNMOPQRSTUVWXYZ0123456789,.<>/?;:[]{}\\|~!@#$%^&*()-_+=".toCharArray();
 	final static SecureRandom r = new SecureRandom();
+	private static AuthorizationService instance;
 	final static MessageDigest md;
 	static
 	{
@@ -41,7 +42,15 @@ public class AuthorizationService
 		md = m;
 	}
 
-	public static String generateToken()
+	public static AuthorizationService i()
+	{
+		if(instance == null)
+			instance = new AuthorizationService();
+
+		return instance;
+	}
+
+	public String generateToken()
 	{
 		String hash;
 		String sid  = String.valueOf(r.nextInt());
@@ -53,7 +62,7 @@ public class AuthorizationService
 		return hash;
 	}
 
-	public static String generateSalt()
+	public String generateSalt()
 	{
 		StringBuilder sb = new StringBuilder(8);
 		Random r = new Random();
@@ -66,7 +75,7 @@ public class AuthorizationService
 		return sb.toString();
 	}
 
-	public static String generateHash(String password)
+	public String generateHash(String password)
 	{
 		String salt = generateSalt();
 

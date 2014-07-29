@@ -11,12 +11,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 
-public class Market
+public class MarketService
 {
-	final static String BaseURL = "https://api.partner.market.yandex.ru/v2";
-	final static Logger log = LoggerFactory.getLogger(Market.class);
+	final private static String BaseURL = "https://api.partner.market.yandex.ru/v2";
+	final private static Logger log = LoggerFactory.getLogger(MarketService.class);
+	private static MarketService instance;
 
-	public static String getRequest(String path)
+	public static MarketService i()
+	{
+		if(instance == null)
+			instance = new MarketService();
+
+		return instance;
+	}
+
+	public String getRequest(String path)
 	{
 		URL url;
 		StringBuilder content = new StringBuilder();
@@ -58,7 +67,7 @@ public class Market
 		return content.toString();
 	}
 
-	public static String putRequest(String path, String body)
+	public String putRequest(String path, String body)
 	{
 		URL url;
 		StringBuilder content = new StringBuilder();

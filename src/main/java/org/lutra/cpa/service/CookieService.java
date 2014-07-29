@@ -10,7 +10,16 @@ import java.net.HttpCookie;
  */
 public class CookieService
 {
-	public static HttpCookie setCookie(String key, String value)
+	private static CookieService instance;
+	public static CookieService i()
+	{
+		if(instance == null)
+			instance = new CookieService();
+
+		return instance;
+	}
+	
+	public HttpCookie setCookie(String key, String value)
 	{
 		HttpCookie c = new HttpCookie(key, value);
 		c.setMaxAge(12 * 30 * 24 * 60 * 60); // About an year of MaxAge
@@ -19,7 +28,8 @@ public class CookieService
 
 		return c;
 	}
-	public static HttpCookie delCookie(String key, String value)
+
+	public HttpCookie delCookie(String key, String value)
 	{
 		HttpCookie c = new HttpCookie(key, value);
 		c.setMaxAge(0); // A zero value causes the cookie to be deleted.

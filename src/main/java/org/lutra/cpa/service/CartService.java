@@ -14,7 +14,16 @@ import java.util.*;
 
 public class CartService
 {
-	public static CartResponse process(CartRequest cr)
+	private static CartService instance;
+	public static CartService i()
+	{
+		if(instance == null)
+			instance = new CartService();
+
+		return instance;
+	}
+
+	public CartResponse process(CartRequest cr)
 	{
 		List<DeliverableItem> items = new ArrayList<>();
 		Set<Integer> outlets = new HashSet<>();

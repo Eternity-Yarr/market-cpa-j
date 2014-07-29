@@ -36,7 +36,7 @@ public class DeliveryService
 		return instance;
 	}
 
-	public static List<DeliveryOption> getAll()
+	public List<DeliveryOption> getAll()
 	{
 		return dr.getAll();
 	}

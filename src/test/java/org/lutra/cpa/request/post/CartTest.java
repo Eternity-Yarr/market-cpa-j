@@ -33,7 +33,7 @@ public class CartTest
 		URL url = CartTest.class.getResource("realCartRequest1.json");
 		String json = Helpers.readFile(url, StandardCharsets.UTF_8);
 		CartRequest rx = Main.g.fromJson(json, CartRequest.class);
-		CartResponse response = CartService.process(rx);
+		CartResponse response = CartService.i().process(rx);
 		System.out.println(Main.g.toJson(response));
 	}
 
@@ -44,7 +44,7 @@ public class CartTest
 		URL url = CartTest.class.getResource("realCartRequest2.json");
 		String json = Helpers.readFile(url, StandardCharsets.UTF_8);
 		CartRequest rx = Main.g.fromJson(json, CartRequest.class);
-		CartResponse response = CartService.process(rx);
+		CartResponse response = CartService.i().process(rx);
 		System.out.println(Main.g.toJson(response));
 	}
 
@@ -55,7 +55,7 @@ public class CartTest
 		URL url = CartTest.class.getResource("realCartRequest3.json");
 		String json = Helpers.readFile(url, StandardCharsets.UTF_8);
 		CartRequest rx = Main.g.fromJson(json, CartRequest.class);
-		CartResponse response = CartService.process(rx);
+		CartResponse response = CartService.i().process(rx);
 		System.out.println(Main.g.toJson(response));
 	}
 }

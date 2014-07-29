@@ -6,11 +6,20 @@ import org.lutra.cpa.response.get.OutletResponse;
 
 public class OutletService
 {
-	public static OutletResponse get(int id)
+	private static OutletService instance;
+	public static OutletService i()
+	{
+		if(instance == null)
+			instance = new OutletService();
+
+		return instance;
+	}
+
+	public OutletResponse get(int id)
 	{
 		assert (id != 0); //TODO: Meh..
 		String path = String.format("/campaigns/%s/outlets/%s.json", Config.i().campaignId, id);
-		String json = Market.getRequest(path);
+		String json = MarketService.i().getRequest(path);
 
 		return Main.g.fromJson(json, OutletResponse.class);
 	}

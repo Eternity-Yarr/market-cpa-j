@@ -67,9 +67,9 @@ public class LoginHandler implements HttpHandler
 				int authorizedAs = AuthorizationService.authorized(login, password);
 				if(authorizedAs > 0)
 				{
-					token = AuthorizationService.generateToken();
+					token = AuthorizationService.i().generateToken();
 					SessionsCache.put(token, authorizedAs);
-					tx.cookie(CookieService.setCookie("CPA", token));
+					tx.cookie(CookieService.i().setCookie("CPA", token));
 					redirect = true;
 				}
 				else

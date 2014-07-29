@@ -11,13 +11,23 @@ import java.util.List;
 
 public class OutletsService
 {
-	public static List<Outlet> get()
+	private static OutletsService instance;
+
+	public static OutletsService i()
+	{
+		if(instance == null)
+			instance = new OutletsService();
+
+		return instance;
+	}
+
+	public List<Outlet> get()
 	{
 		List<Outlet> ret = new ArrayList<>();
 		int ps = 50;
 		int p = 0;
 		String path = String.format("/campaigns/%s/outlets.json?pageSize=%s&page=%s", Config.i().campaignId, ps, p);
-		String json = Market.getRequest(path);
+		String json = MarketService.i().getRequest(path);
 		OutletsResponse or = Main.g.fromJson(json, OutletsResponse.class);
 
 		if(or != null)
