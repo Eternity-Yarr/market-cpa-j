@@ -94,10 +94,18 @@ public class ChangeDeliveryHandler implements HttpHandler
 					OrderResponse or = Main.g.fromJson(or_json, OrderResponse.class);
 					if(or != null)
 					{
-						String message = String.format("Изменил условия доставки."); //TODO: Figure out some diff
-						HistoryService.i().add(Helpers.currentSession(rx), id, message);
-						log.info("Replacing order {} in cache", or.uw().getId());
-						OrdersCache.put(or.uw());
+						if(or.hasError())
+						{
+							log.info("Got error from API:");
+							log.info("[{}] {}", or.error.code, or.error.message);
+						}
+						else
+						{
+							String message = String.format("Изменил условия доставки."); //TODO: Figure out some diff
+							HistoryService.i().add(Helpers.currentSession(rx), id, message);
+							log.info("Replacing order {} in cache", or.uw().getId());
+							OrdersCache.put(or.uw());
+						}
 					}
 					else
 					{

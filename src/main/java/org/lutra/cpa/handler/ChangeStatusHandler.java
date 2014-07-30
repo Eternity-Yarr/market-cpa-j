@@ -99,12 +99,20 @@ public class ChangeStatusHandler implements HttpHandler
 					OrderResponse or = Main.g.fromJson(or_json, OrderResponse.class);
 					if(or != null)
 					{
-						String message = String.format("Изменен статус заказа. Новый статус %s (%s)", status.desc, status.name());
-						if(substatus != null)
-							message += String.format(" - %s (%s)", substatus.desc, substatus.name());
-						HistoryService.i().add(Helpers.currentSession(rx), id, message);
-						log.info("Replacing order {} in cache", or.uw().getId());
-						OrdersCache.put(or.uw());
+						if(or.hasError())
+						{
+							log.info("Got error from API:");
+							log.info("[{}] {}", or.error.code, or.error.message);
+						}
+						else
+						{
+							String message = String.format("Изменен статус заказа. Новый статус %s (%s)", status.desc, status.name());
+							if(substatus != null)
+								message += String.format(" - %s (%s)", substatus.desc, substatus.name());
+							HistoryService.i().add(Helpers.currentSession(rx), id, message);
+							log.info("Replacing order {} in cache", or.uw().getId());
+							OrdersCache.put(or.uw());
+						}
 					}
 					else
 					{
