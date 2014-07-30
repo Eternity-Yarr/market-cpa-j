@@ -22,13 +22,22 @@ public class SessionsCache
 	{
 		cache.put(hash, user_id);
 	}
+
 	public static boolean contains(String hash)
 	{
 		return hash != null && cache.getIfPresent(hash) != null;
 	}
 
-	public static Integer get(String hash)
+	public static int get(String hash)
 	{
-		return cache.getIfPresent(hash);
+		int ret = -1;
+		if(hash != null)
+		{
+			final Integer v = cache.getIfPresent(hash);
+			if(v != null)
+				ret = v;
+		}
+
+		return ret;
 	}
 }

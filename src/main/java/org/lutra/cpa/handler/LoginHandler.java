@@ -59,22 +59,27 @@ public class LoginHandler implements HttpHandler
 			boolean redirect = false;
 			String target = "/orders";
 			String token = rx.cookieValue("CPA");
-			if(rx.method().equals("POST") || (token != null && AuthorizationService.authorized(token)))
+			int authorizedAs = -1;
+			if(rx.method().equals("POST"))
 			{
 				String login = rx.postParam("inputEmail");
 				String password = rx.postParam("inputPassword");
 				target = rx.postParam("back_url");
-				int authorizedAs = AuthorizationService.authorized(login, password);
-				if(authorizedAs > 0)
-				{
-					token = AuthorizationService.i().generateToken();
-					SessionsCache.put(token, authorizedAs);
-					tx.cookie(CookieService.i().setCookie("CPA", token));
-					redirect = true;
-				}
-				else
-					data.put("error",true);
+				authorizedAs = AuthorizationService.authorized(login, password);
 			}
+			else if(token != null)
+				authorizedAs = AuthorizationService.authorized(token);
+
+			if(authorizedAs > 0)
+			{
+				token = AuthorizationService.i().generateToken();
+				SessionsCache.put(token, authorizedAs);
+				tx.cookie(CookieService.i().setCookie("CPA", token));
+				redirect = true;
+			}
+			else
+				data.put("error",true);
+
 
 			if(redirect)
 			{

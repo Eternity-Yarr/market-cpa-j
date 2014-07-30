@@ -82,9 +82,9 @@ public class AuthorizationService
 		return salt + String.valueOf(Hex.encodeHex(md.digest((salt + password).getBytes())));
 	}
 
-	public static boolean authorized(String token)
+	public static int authorized(String token)
 	{
-		return SessionsCache.contains(token);
+		return SessionsCache.get(token);
 	}
 
 	public static int authorized(String email, String password)
