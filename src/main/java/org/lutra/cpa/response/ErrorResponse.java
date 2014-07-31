@@ -11,6 +11,6 @@ public class ErrorResponse
 	public Error error;
 	public boolean hasError()
 	{
-		return error == null;
+		return error != null;
 	}
 }
