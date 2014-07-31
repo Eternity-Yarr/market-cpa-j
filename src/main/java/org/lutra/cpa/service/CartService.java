@@ -44,12 +44,12 @@ public class CartService
 		List<DeliveryOption> deliveryOptions = DeliveryService.i().getFeasible(cr.uw());
 		Set<DeliveryOption> feasibleDeliveryOptions = new HashSet<>(deliveryOptions);
 		Cart cart = new Cart().setDeliveryOptions(feasibleDeliveryOptions);
-		Iterator<DeliveryOption> iter = cart.getDeliveryOptions().iterator();
-		while(iter.hasNext())
+		Iterator<DeliveryOption> it = cart.getDeliveryOptions().iterator();
+		while(it.hasNext())
 		{
-			DeliveryOption option = iter.next();
+			DeliveryOption option = it.next();
 			if(option.getType().equals(DeliveryType.PICKUP) && outlets.isEmpty())
-				iter.remove();
+				it.remove();
 			else if(!outlets.isEmpty())
 				option.setOutlets(outlets);
 			if(!option.getType().equals(DeliveryType.PICKUP))
