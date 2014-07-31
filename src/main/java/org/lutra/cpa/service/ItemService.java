@@ -20,6 +20,7 @@ import java.util.Set;
 public class ItemService
 {
 	final private static Logger log = LoggerFactory.getLogger(ItemService.class);
+	final private static ItemRepository ir = new ItemRepository();
 	private static ItemService instance;
 
 	public static ItemService i()
@@ -33,7 +34,7 @@ public class ItemService
 	public Set<Outlet> getAvailability(String id)
 	{
 		Set<Outlet> ret = new HashSet<>();
-		List<Integer> store_ids = ItemRepository.i().getAvailability(id);
+		List<Integer> store_ids = ir.getAvailability(id);
 		for(Integer store_id : store_ids)
 		{
 			Integer outlet_id = Config.outlets_mapping.get(store_id);
@@ -48,6 +49,6 @@ public class ItemService
 
 	public double getPrice(String id)
 	{
-		return ItemRepository.i().getPrice(id);
+		return ir.getPrice(id);
 	}
 }
