@@ -6,6 +6,7 @@ import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.context.FieldValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
+import org.lutra.cpa.Mt;
 import org.lutra.cpa.cache.SessionsCache;
 import org.lutra.cpa.repository.AuthorizationRepository;
 import org.lutra.cpa.service.AuthorizationService;
@@ -28,7 +29,7 @@ public class LoginHandler implements HttpHandler
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		new Thread(new LoginRunner(rx, tx, ct)).start();
+		Mt.execute(new LoginRunner(rx, tx, ct));
 		log.info("leaving");
 	}
 	public static class LoginRunner implements Runnable

@@ -3,6 +3,7 @@ package org.lutra.cpa.handler;
 import org.lutra.cpa.Config;
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.Main;
+import org.lutra.cpa.Mt;
 import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.model.OrderSubstatus;
@@ -31,7 +32,7 @@ public class ChangeStatusHandler implements HttpHandler
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
 		if(Helpers.authorize(rx))
-			new Thread(new ChangeStatus(rx, tx, ct)).start();
+			Mt.execute(new ChangeStatus(rx, tx, ct));
 		else
 			ct.nextHandler();
 		log.info("leaving");

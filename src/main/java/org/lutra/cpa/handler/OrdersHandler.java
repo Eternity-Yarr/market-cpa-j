@@ -7,6 +7,7 @@ import com.github.jknack.handlebars.context.FieldValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
 import org.lutra.cpa.Helpers;
+import org.lutra.cpa.Mt;
 import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.model.Pager;
 import org.lutra.cpa.response.get.OrdersResponse;
@@ -31,7 +32,7 @@ public class OrdersHandler implements HttpHandler
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
 		if(Helpers.authorize(rx))
-			new Thread(new OrdersRunner(rx, tx, ct)).start();
+			Mt.execute(new OrdersRunner(rx, tx, ct));
 		else
 			ct.nextHandler();
 		log.info("leaving");

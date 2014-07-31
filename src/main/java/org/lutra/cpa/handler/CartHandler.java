@@ -2,6 +2,7 @@ package org.lutra.cpa.handler;
 
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.Main;
+import org.lutra.cpa.Mt;
 import org.lutra.cpa.request.post.CartRequest;
 import org.lutra.cpa.response.CartResponse;
 import org.lutra.cpa.service.CartService;
@@ -19,7 +20,7 @@ public class CartHandler implements HttpHandler
 	@Override
 	public void handleHttpRequest(HttpRequest rx, HttpResponse tx, HttpControl ct) throws Exception
 	{
-		new Thread(new CartRunner(rx, tx, ct)).start();
+		Mt.execute(new CartRunner(rx, tx, ct));
 		log.info("leaving");
 	}
 	public static class CartRunner implements Runnable
