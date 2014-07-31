@@ -2,6 +2,7 @@ package org.lutra.cpa.service;
 
 
 import org.lutra.cpa.Config;
+import org.lutra.cpa.cache.APICache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +27,11 @@ public class MarketService
 	}
 
 	public String getRequest(String path)
+	{
+		return APICache.get(path);
+	}
+
+	public String getRequestUncached(String path)
 	{
 		URL url;
 		StringBuilder content = new StringBuilder();
