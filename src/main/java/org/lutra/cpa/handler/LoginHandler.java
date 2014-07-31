@@ -6,16 +6,10 @@ import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.context.FieldValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
-import org.lutra.cpa.Helpers;
-import org.lutra.cpa.cache.OrdersCache;
-import org.lutra.cpa.cache.OutletsCache;
 import org.lutra.cpa.cache.SessionsCache;
-import org.lutra.cpa.model.Order;
-import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.repository.AuthorizationRepository;
 import org.lutra.cpa.service.AuthorizationService;
 import org.lutra.cpa.service.CookieService;
-import org.lutra.cpa.service.OrderStatusService;
 import org.lutra.cpa.wrapper.MyHandlebars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +18,8 @@ import org.webbitserver.HttpHandler;
 import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class LoginHandler implements HttpHandler
 {

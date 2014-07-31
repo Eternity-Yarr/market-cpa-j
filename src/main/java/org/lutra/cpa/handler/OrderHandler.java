@@ -12,7 +12,6 @@ import org.lutra.cpa.cache.OutletsCache;
 import org.lutra.cpa.model.HistoryEntry;
 import org.lutra.cpa.model.Order;
 import org.lutra.cpa.model.OrderStatus;
-import org.lutra.cpa.model.User;
 import org.lutra.cpa.service.HistoryService;
 import org.lutra.cpa.service.OrderStatusService;
 import org.lutra.cpa.wrapper.MyHandlebars;
@@ -24,7 +23,10 @@ import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
 
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class OrderHandler implements HttpHandler
 {
