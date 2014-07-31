@@ -34,7 +34,6 @@ public class ItemService
 	{
 		Set<Outlet> ret = new HashSet<>();
 		List<Integer> store_ids = ItemRepository.i().getAvailability(id);
-
 		for(Integer store_id : store_ids)
 		{
 			Integer outlet_id = Config.outlets_mapping.get(store_id);

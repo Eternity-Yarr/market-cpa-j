@@ -88,7 +88,6 @@ public class MarketService
 			con.setRequestMethod("PUT");
 			con.setDoOutput(true);
 			con.setDoInput(true);
-
 			OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
 			out.write(body);
 			out.close();

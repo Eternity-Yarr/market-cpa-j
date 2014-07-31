@@ -28,21 +28,18 @@ public class RegionConstraint extends AbstractConstraint implements Callable<Set
 		String city_name = null;
 		Region r;
 		while((r = rx.delivery.getRegion()) != null)
-		{
 			if(r.getType() == RegionType.CITY)
 			{
 				city_name = r.getName();
 				break;
 			}
-		}
+
 		if(city_name == null)
 		{
 			//TODO: by region?
 		}
 		else
-		{
 			xs.addAll(DeliveryRepository.i().getByCityName(city_name));
-		}
 		log.info("Got {} methods of delivery", xs.size());
 
 		return xs;

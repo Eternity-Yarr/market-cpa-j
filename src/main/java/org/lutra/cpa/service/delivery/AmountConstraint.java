@@ -24,7 +24,6 @@ public class AmountConstraint extends AbstractConstraint implements Callable<Set
 	{
 		Set<DeliveryOption> xs = new HashSet<>();
 		xs.addAll(DeliveryRepository.i().getByTotalAmount(rx.getTotal()));
-
 		log.info("Got {} methods of delivery for amount = {}", xs.size(), rx.getTotal());
 
 		return xs;

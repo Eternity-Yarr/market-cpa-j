@@ -17,7 +17,6 @@ public class AuthorizationService
 	final private static AuthorizationRepository ar = AuthorizationRepository.i();
 	private static AuthorizationService instance;
 
-
 	public static AuthorizationService i()
 	{
 		if(instance == null)

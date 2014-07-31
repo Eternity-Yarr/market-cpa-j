@@ -27,7 +27,6 @@ public class MyHandlebars extends Handlebars
 			{
 				public CharSequence apply(Double price, Options options)
 				{
-
 					return df.format(price);
 				}
 			});
@@ -47,7 +46,6 @@ public class MyHandlebars extends Handlebars
 					{
 						log.error(e.toString(), e);
 					}
-
 					if(!ret.isEmpty())
 						ret = "<style>" + ret + "</style>";
 

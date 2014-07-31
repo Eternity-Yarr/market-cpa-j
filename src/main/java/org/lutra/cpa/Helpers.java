@@ -29,12 +29,10 @@ public class Helpers
 	{
 		int ret = def;
 		String val = null;
-
 		if(req.method().equals("GET"))
 			val = req.queryParam(key);
 		else if(req.method().equals("POST"))
 			val = req.postParam(key);
-
 		if(val != null)
 			try
 			{
@@ -52,7 +50,6 @@ public class Helpers
 	{
 		String ret;
 		String val = null;
-
 		if(req.method().equals("GET"))
 			val = req.queryParam(key);
 		else if(req.method().equals("POST"))
@@ -94,7 +91,6 @@ public class Helpers
 	public static PreparedStatement createStatement(Connection con, String query, Object... params) throws SQLException
 	{
 		PreparedStatement ps = con.prepareStatement(query);
-
 		int index = 0;
 		for(Object o : params)
 		{

@@ -50,7 +50,6 @@ public class DeliveryService
 	{
 		Set<DeliveryOption> ret = new HashSet<>(getAll());
 		log.info("Filtering total {} options", ret.size());
-
 		List<Set<DeliveryOption>> options = new ArrayList<>();
 		for(Class<? extends AbstractConstraint> clazz : constraintClasses)
 			try
