@@ -54,18 +54,15 @@ public class ChangeStatusHandler implements HttpHandler
 		public void run()
 		{
 			{
-
 				String back_url = Helpers.queryGetString(rx, "back_url", "/orders");
 				int id = Helpers.queryGetInt(rx, "id", -1);
 				String path = String.format("/campaigns/%s/orders/%s/status.json", Config.i().campaignId, id);
 				OrderStatus status = null;
 				OrderSubstatus substatus = null;
-				String str_status = null;
-				String str_substatus = null;
+				String str_status = rx.queryParam("status");
+				String str_substatus = rx.queryParam("substatus");
 				try
 				{
-					str_status = rx.queryParam("status");
-					str_substatus = rx.queryParam("substatus");
 					status = OrderStatus.valueOf(str_status);
 					if(status == OrderStatus.CANCELLED && str_substatus != null)
 						substatus = OrderSubstatus.valueOf(str_substatus);
@@ -85,15 +82,9 @@ public class ChangeStatusHandler implements HttpHandler
 					s.setSubstatus(substatus);
 				}
 				else
-				{
 					has_error = true;
-				}
 				sr.setStatus(s);
-				if(has_error)
-				{
-					//TODO: wtf
-				}
-				else
+				if(!has_error)
 				{
 					String body = Main.g.toJson(sr);
 					String or_json = MarketService.i().putRequest(path, body);

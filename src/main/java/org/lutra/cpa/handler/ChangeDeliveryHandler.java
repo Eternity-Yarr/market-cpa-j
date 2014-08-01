@@ -94,7 +94,6 @@ public class ChangeDeliveryHandler implements HttpHandler
 					String or_json = MarketService.i().putRequest(path, json);
 					OrderResponse or = Main.g.fromJson(or_json, OrderResponse.class);
 					if(or != null)
-					{
 						if(or.hasError())
 						{
 							log.info("Got error from API:");
@@ -107,7 +106,6 @@ public class ChangeDeliveryHandler implements HttpHandler
 							log.info("Replacing order {} in cache", or.uw().getId());
 							OrdersCache.put(or.uw());
 						}
-					}
 					else
 					{
 						log.error("Malformed order response:");

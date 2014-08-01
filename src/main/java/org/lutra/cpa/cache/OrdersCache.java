@@ -20,10 +20,8 @@ public class OrdersCache
 		.build();
 	public static void put(Order o)
 	{
-		assert (o != null);
-		assert (o.getId() != 0); //TODO: Meh..
-
-		cache.put(o.getId(), o);
+		if(o != null && o.getId() != 0)
+			cache.put(o.getId(), o);
 	}
 
 	public static Order get(final int id)

@@ -64,7 +64,6 @@ public class OrderHandler implements HttpHandler
 			String back_url = Helpers.queryGetString(rx, "back_url", "/orders");
 			Order o = OrdersCache.get(id);
 			List<HistoryEntry> history = HistoryService.i().get(id);
-
 			data.put("history", history);
 			data.put("raw_back_url", back_url);
 			try

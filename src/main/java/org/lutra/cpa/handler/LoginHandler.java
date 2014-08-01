@@ -73,8 +73,6 @@ public class LoginHandler implements HttpHandler
 			}
 			else
 				data.put("error",true);
-
-
 			if(redirect)
 			{
 				// Status should be something like 303 because we need to change request type to GET from whatever

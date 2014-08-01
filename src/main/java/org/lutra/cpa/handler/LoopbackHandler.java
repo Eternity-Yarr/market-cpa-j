@@ -28,9 +28,7 @@ public class LoopbackHandler implements HttpHandler
 		log.info(String.format("%s", body));
 		Map<String, String> post = new HashMap<>();
 		for(String key : rx.postParamKeys())
-		{
 			post.put(key, rx.postParam(key));
-		}
 		Delivery d = Helpers.castMap(post, "delivery", "-", Delivery.class);
 		System.out.println(d);
 		tx.status(200);

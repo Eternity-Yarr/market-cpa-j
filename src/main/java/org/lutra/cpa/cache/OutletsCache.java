@@ -20,9 +20,7 @@ public class OutletsCache
 		.build();
 	public static void put(Outlet o)
 	{
-		assert (o != null);
-		assert (o.getId() != 0); //TODO: Meh..
-
+		if(o != null && o.getId() != 0)
 		cache.put(o.getId(), o);
 	}
 

@@ -39,10 +39,10 @@ public class HistoryRepository
 		String q = "INSERT INTO market_cpa_log (user_id, order_id, message) VALUES (?,?,?)";
 		Object[] params = {user_id, order_id, message};
 		try
-			(
-				Connection con = Db.ds.getConnection();
-				PreparedStatement ps = Helpers.createStatement(con, q, params)
-			)
+		(
+			Connection con = Db.ds.getConnection();
+			PreparedStatement ps = Helpers.createStatement(con, q, params)
+		)
 		{
 			ps.execute();
 		}
@@ -58,11 +58,11 @@ public class HistoryRepository
 		String q = "SELECT user_id, message, date_added FROM market_cpa_log WHERE order_id = ? ORDER BY date_added ASC";
 		Object[] params = {order_id};
 		try
-			(
-				Connection con = Db.ds.getConnection();
-				PreparedStatement ps = Helpers.createStatement(con, q, params);
-				ResultSet rs = ps.executeQuery()
-			)
+		(
+			Connection con = Db.ds.getConnection();
+			PreparedStatement ps = Helpers.createStatement(con, q, params);
+			ResultSet rs = ps.executeQuery()
+		)
 		{
 			while(rs.next())
 			{

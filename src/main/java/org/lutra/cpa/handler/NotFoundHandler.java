@@ -19,7 +19,6 @@ public class NotFoundHandler implements HttpHandler
 		tx.status(303);
 		tx.header("Location", "/");
 		tx.end();
-
 		log.info("leaving");
 	}
 }

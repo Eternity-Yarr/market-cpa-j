@@ -93,11 +93,11 @@ WHERE login = ? AND group_id = 1 AND active = 'Y'
 		Object[] params = {email};
 		if(email != null && password != null)
 			try
-				(
-					Connection con = Db.ds.getConnection();
-					PreparedStatement ps = Helpers.createStatement(con, q, params);
-					ResultSet rs = ps.executeQuery()
-				)
+			(
+				Connection con = Db.ds.getConnection();
+				PreparedStatement ps = Helpers.createStatement(con, q, params);
+				ResultSet rs = ps.executeQuery()
+			)
 			{
 				if(rs.next())
 				{

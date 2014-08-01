@@ -64,7 +64,6 @@ public class CartHandler implements HttpHandler
 			{
 				// Wrong method
 			}
-
 			tx.status(200);
 			tx.end();
 		}

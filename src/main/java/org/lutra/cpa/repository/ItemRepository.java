@@ -39,11 +39,11 @@ SELECT price FROM b_catalog_price WHERE id = ?
 		String q = "SELECT price FROM b_catalog_price WHERE product_id = ?";
 		Object[] params = {id};
 		try
-			(
-				Connection con = Db.ds.getConnection();
-				PreparedStatement ps = Helpers.createStatement(con, q, params);
-				ResultSet rs = ps.executeQuery()
-			)
+		(
+			Connection con = Db.ds.getConnection();
+			PreparedStatement ps = Helpers.createStatement(con, q, params);
+			ResultSet rs = ps.executeQuery()
+		)
 		{
 			if(rs.next())
 				ret = rs.getDouble("price");
@@ -70,11 +70,11 @@ SELECT store_id FROM my_availability WHERE item_id = ? AND aviable > 0
 		String q = "SELECT store_id FROM my_availability WHERE item_id = ? AND aviable > 0"; // Yeah, i know.
 		Object[] params = {id};
 		try
-			(
-				Connection con = Db.ds.getConnection();
-				PreparedStatement ps = Helpers.createStatement(con, q, params);
-				ResultSet rs = ps.executeQuery()
-			)
+		(
+			Connection con = Db.ds.getConnection();
+			PreparedStatement ps = Helpers.createStatement(con, q, params);
+			ResultSet rs = ps.executeQuery()
+		)
 		{
 			if(rs.next())
 				ret.add(rs.getInt("store_id"));

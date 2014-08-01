@@ -35,11 +35,11 @@ public class UserRepository
 		String q = "SELECT login, name, last_name FROM b_user WHERE id = ?";
 		Object[] params = {user_id};
 		try
-			(
-				Connection con = Db.ds.getConnection();
-				PreparedStatement ps = Helpers.createStatement(con, q, params);
-				ResultSet rs = ps.executeQuery()
-			)
+		(
+			Connection con = Db.ds.getConnection();
+			PreparedStatement ps = Helpers.createStatement(con, q, params);
+			ResultSet rs = ps.executeQuery()
+		)
 		{
 			if(rs.next())
 			{
