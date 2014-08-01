@@ -50,6 +50,8 @@ public class Ws
 		ws
 			.add("/orders", new OrdersHandler())
 			.add("/order", new OrderHandler())
+			.add("/order/status", new OrderStatusHandler())
+			.add("/order/accept", new OrderAcceptHandler())
 			.add("/cart", new CartHandler())
 			.add("/", new LoginHandler())
 			.add("/change_status", new ChangeStatusHandler())

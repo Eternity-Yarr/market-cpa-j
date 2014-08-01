@@ -2,6 +2,8 @@ package org.lutra.cpa.service;
 
 import org.lutra.cpa.Config;
 import org.lutra.cpa.Main;
+import org.lutra.cpa.model.OrderStatus;
+import org.lutra.cpa.model.OrderSubstatus;
 import org.lutra.cpa.response.get.OrderResponse;
 
 public class OrderService
@@ -23,5 +25,9 @@ public class OrderService
 		String json = MarketService.i().getRequest(path);
 
 		return Main.g.fromJson(json, OrderResponse.class);
+	}
+	public static void updateStatus(int id, OrderStatus status, OrderSubstatus substatus)
+	{
+
 	}
 }

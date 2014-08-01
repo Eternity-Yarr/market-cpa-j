@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class OrderStatus
 {
-	int id;
-	org.lutra.cpa.model.OrderStatus status;
-	OrderSubstatus substatus;
+	public int id;
+	public org.lutra.cpa.model.OrderStatus status;
+	public OrderSubstatus substatus;
 	String creationDate; //TODO: Write appropriate deserializer
 	int itemsTotal;
 	int total;
