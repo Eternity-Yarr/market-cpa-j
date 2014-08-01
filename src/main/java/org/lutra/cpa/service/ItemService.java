@@ -3,6 +3,7 @@ package org.lutra.cpa.service;
 import org.lutra.cpa.Config;
 import org.lutra.cpa.cache.OutletsCache;
 import org.lutra.cpa.model.Outlet;
+import org.lutra.cpa.repository.CustomizedBitrixItemRepository;
 import org.lutra.cpa.repository.ItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ import java.util.Set;
 public class ItemService
 {
 	final private static Logger log = LoggerFactory.getLogger(ItemService.class);
-	final private static ItemRepository ir = new ItemRepository();
+	final private static ItemRepository ir = new CustomizedBitrixItemRepository();
 	private static ItemService instance;
 
 	public static ItemService i()

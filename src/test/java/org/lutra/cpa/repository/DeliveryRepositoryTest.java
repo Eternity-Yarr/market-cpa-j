@@ -26,7 +26,7 @@ public class DeliveryRepositoryTest
         String address_json =
                 "{\"country\":\"Россия\", \"postcode\":\"119313\", \"city\":\"Москва\", \"subway\":\"Проспект Вернадского\", \"street\":\"Ленинский проспект\", \"house\":\"90\", \"floor\":\"6\"}";
         Db.setupDriver();
-        DeliveryRepository dr = new DeliveryRepository();
+        DeliveryRepository dr = new BitrixDeliveryRepository();
         Region region = Main.g.fromJson(region_json, Region.class);
         Address address = Main.g.fromJson(address_json, Address.class);
         DeliveryRequest target = new DeliveryRequest()

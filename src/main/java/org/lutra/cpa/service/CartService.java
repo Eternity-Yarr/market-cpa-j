@@ -5,7 +5,7 @@ import org.lutra.cpa.model.DeliverableItem;
 import org.lutra.cpa.model.DeliveryOption;
 import org.lutra.cpa.model.DeliveryType;
 import org.lutra.cpa.model.Item;
-import org.lutra.cpa.repository.ItemRepository;
+import org.lutra.cpa.repository.CustomizedBitrixItemRepository;
 import org.lutra.cpa.request.post.CartRequest;
 import org.lutra.cpa.response.Cart;
 import org.lutra.cpa.response.CartResponse;
@@ -33,7 +33,7 @@ public class CartService
 			for(Item i : cr.uw().items)
 			{
 				Set<Integer> item_outlets = new HashSet<>();
-				List<Integer> store_ids = ItemRepository.i().getAvailability(i.getOfferId());
+				List<Integer> store_ids = CustomizedBitrixItemRepository.i().getAvailability(i.getOfferId());
 				for(Integer store_id: store_ids)
 					if (Config.outlets_mapping.get(store_id) != null)
 						item_outlets.add(Config.outlets_mapping.get(store_id));

@@ -3,6 +3,7 @@ package org.lutra.cpa.service;
 import org.lutra.cpa.cache.SessionsCache;
 import org.lutra.cpa.model.HistoryEntry;
 import org.lutra.cpa.model.User;
+import org.lutra.cpa.repository.GenericHistoryRepository;
 import org.lutra.cpa.repository.HistoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ import java.util.List;
 public class HistoryService
 {
 	final private static Logger log = LoggerFactory.getLogger(HistoryService.class);
-	final private static HistoryRepository hr = HistoryRepository.i();
+	final private static HistoryRepository hr = GenericHistoryRepository.i();
 	private static HistoryService instance;
 
 	public static HistoryService i()

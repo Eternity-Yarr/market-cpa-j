@@ -1,6 +1,7 @@
 package org.lutra.cpa.service;
 
 import org.lutra.cpa.model.DeliveryOption;
+import org.lutra.cpa.repository.BitrixDeliveryRepository;
 import org.lutra.cpa.repository.DeliveryRepository;
 import org.lutra.cpa.request.post.Cart;
 import org.lutra.cpa.service.delivery.AbstractConstraint;
@@ -18,8 +19,7 @@ public class DeliveryService
 {
 	private final static Logger log = LoggerFactory.getLogger(DeliveryService.class);
 	private static DeliveryService instance;
-
-	static DeliveryRepository dr = new DeliveryRepository(); //TODO: interface
+	static DeliveryRepository dr = new BitrixDeliveryRepository();
 	private List<Class<? extends AbstractConstraint>> constraintClasses = new ArrayList<>();
 
 	private DeliveryService()

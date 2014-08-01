@@ -3,7 +3,7 @@ package org.lutra.cpa.service.delivery;
 import org.lutra.cpa.model.DeliveryOption;
 import org.lutra.cpa.model.Region;
 import org.lutra.cpa.model.RegionType;
-import org.lutra.cpa.repository.DeliveryRepository;
+import org.lutra.cpa.repository.BitrixDeliveryRepository;
 import org.lutra.cpa.request.post.Cart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class RegionConstraint extends AbstractConstraint implements Callable<Set
 			//TODO: by region?
 		}
 		else
-			xs.addAll(DeliveryRepository.i().getByCityName(city_name));
+			xs.addAll(BitrixDeliveryRepository.i().getByCityName(city_name));
 		log.info("Got {} methods of delivery", xs.size());
 
 		return xs;

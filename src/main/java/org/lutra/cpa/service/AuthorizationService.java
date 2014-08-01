@@ -2,6 +2,7 @@ package org.lutra.cpa.service;
 
 import org.lutra.cpa.cache.SessionsCache;
 import org.lutra.cpa.repository.AuthorizationRepository;
+import org.lutra.cpa.repository.BitrixAuthorizationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class AuthorizationService
 {
 	final private static Logger log = LoggerFactory.getLogger(AuthorizationService.class);
-	final private static AuthorizationRepository ar = AuthorizationRepository.i();
+	final private static AuthorizationRepository ar = BitrixAuthorizationRepository.i();
 	private static AuthorizationService instance;
 
 	public static AuthorizationService i()

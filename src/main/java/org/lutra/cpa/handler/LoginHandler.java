@@ -8,7 +8,7 @@ import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
 import org.lutra.cpa.Mt;
 import org.lutra.cpa.cache.SessionsCache;
-import org.lutra.cpa.repository.AuthorizationRepository;
+import org.lutra.cpa.repository.BitrixAuthorizationRepository;
 import org.lutra.cpa.service.AuthorizationService;
 import org.lutra.cpa.service.CookieService;
 import org.lutra.cpa.wrapper.MyHandlebars;
@@ -66,7 +66,7 @@ public class LoginHandler implements HttpHandler
 
 			if(authorizedAs > 0)
 			{
-				token = AuthorizationRepository.i().generateToken();
+				token = BitrixAuthorizationRepository.i().generateToken();
 				SessionsCache.put(token, authorizedAs);
 				tx.cookie(CookieService.i().setCookie("CPA", token));
 				redirect = true;
