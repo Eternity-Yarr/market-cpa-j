@@ -43,4 +43,23 @@ public class Address
 				&& this.phone.equals(that.phone);
 
 	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = country != null ? country.hashCode() : 0;
+		result = 31 * result + (postcode != null ? postcode.hashCode() : 0);
+		result = 31 * result + (city != null ? city.hashCode() : 0);
+		result = 31 * result + (subway != null ? subway.hashCode() : 0);
+		result = 31 * result + (street != null ? street.hashCode() : 0);
+		result = 31 * result + (house != null ? house.hashCode() : 0);
+		result = 31 * result + (block != null ? block.hashCode() : 0);
+		result = 31 * result + (entrance != null ? entrance.hashCode() : 0);
+		result = 31 * result + (entryphone != null ? entryphone.hashCode() : 0);
+		result = 31 * result + (floor != null ? floor.hashCode() : 0);
+		result = 31 * result + (apartment != null ? apartment.hashCode() : 0);
+		result = 31 * result + (recipient != null ? recipient.hashCode() : 0);
+		result = 31 * result + (phone != null ? phone.hashCode() : 0);
+		return result;
+	}
 }

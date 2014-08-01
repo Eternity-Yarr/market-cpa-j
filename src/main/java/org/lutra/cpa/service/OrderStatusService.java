@@ -24,22 +24,24 @@ public class OrderStatusService
 	public Set<OrderStatus> possibleTransitions(OrderStatus from_status, DeliveryType for_deliveryType)
 	{
 		Set<OrderStatus> ret = new HashSet<>();
-		switch(from_status)
-		{
-			case PROCESSING:
-				ret.addAll(Arrays.asList(DELIVERY, CANCELLED));
-				break;
-			case DELIVERY:
-				if(for_deliveryType == DeliveryType.PICKUP)
-					ret.addAll(Arrays.asList(PICKUP, CANCELLED));
-				else if(for_deliveryType == DeliveryType.DELIVERY)
+		if(from_status != null)
+			switch(from_status)
+			{
+				case PROCESSING:
+					ret.addAll(Arrays.asList(DELIVERY, CANCELLED));
+					break;
+				case DELIVERY:
+					if(for_deliveryType == DeliveryType.PICKUP)
+						ret.addAll(Arrays.asList(PICKUP, CANCELLED));
+					else if(for_deliveryType == DeliveryType.DELIVERY)
+						ret.addAll(Arrays.asList(DELIVERED, CANCELLED));
+					break;
+				case PICKUP:
 					ret.addAll(Arrays.asList(DELIVERED, CANCELLED));
-				break;
-			case PICKUP:
-				ret.addAll(Arrays.asList(DELIVERED, CANCELLED));
-			default:
-				break;
-		}
+					break;
+				default:
+					break;
+			}
 
 		return ret;
 	}

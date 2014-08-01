@@ -41,7 +41,7 @@ public class GsonWrapper
 					@Override
 					public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context)
 					{
-						return new JsonPrimitive(Main.fmt.format(src));
+						return new JsonPrimitive(Main.fmt().format(src));
 					}
 				}
 			);
@@ -55,7 +55,7 @@ public class GsonWrapper
 						Date d = null;
 						try
 						{
-							d = json == null ? null : Main.fmt.parse(json.getAsString());
+							d = json == null ? null : Main.fmt().parse(json.getAsString());
 						}
 						catch(ParseException e)	{ /*don't care*/ }
 						return d;

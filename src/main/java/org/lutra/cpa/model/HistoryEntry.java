@@ -12,14 +12,18 @@ import java.util.Date;
  */
 public class HistoryEntry
 {
-	final private static DateFormat fmt = new SimpleDateFormat("HH:mm:ss dd/MM/yy");
 	public Date date_added;
 	public User user;
 	public String message;
 
+	private static DateFormat fmt()
+	{
+		return new SimpleDateFormat("HH:mm:ss dd/MM/yy");
+	}
+
 	public String getTextDate()
 	{
-		return fmt.format(date_added);
+		return fmt().format(date_added);
 	}
 
 }

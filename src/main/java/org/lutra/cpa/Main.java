@@ -15,7 +15,10 @@ import java.util.TimeZone;
 public class Main
 {
 	final private static Logger log = LoggerFactory.getLogger(Main.class);
-	final public static DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+	public static DateFormat fmt()
+	{
+		return new SimpleDateFormat("dd-MM-yyyy");
+	}
 	final public static GsonWrapper g = GsonWrapper.i();
 
 	public static void main(String[] args)

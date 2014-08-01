@@ -169,7 +169,7 @@ public class Helpers
 					else if(Enum.class.isAssignableFrom((Class)t) && value != null)
 						f.set(ret, Enum.valueOf((Class)t, value));
 					else if(t == Date.class)
-						f.set(ret, value != null ? Main.fmt.parse(value) : new java.util.Date());
+						f.set(ret, value != null ? Main.fmt().parse(value) : new java.util.Date());
 					else if(t == String.class)
 						f.set(ret, value);
 					else

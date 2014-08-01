@@ -29,18 +29,19 @@ public class CartService
 		Set<Integer> outlets = new HashSet<>();
 		for(Integer outlet_id: Config.outlets_mapping.values())
 			outlets.add(outlet_id);
-		for(Item i : cr.uw().items)
-		{
-			Set<Integer> item_outlets = new HashSet<>();
-			List<Integer> store_ids = ItemRepository.i().getAvailability(i.getOfferId());
-			for(Integer store_id: store_ids)
-				if (Config.outlets_mapping.get(store_id) != null)
-					item_outlets.add(Config.outlets_mapping.get(store_id));
-			outlets.retainAll(item_outlets);
-			DeliverableItem di =	new DeliverableItem(i)
-				.setDelivery(!store_ids.isEmpty());
-			items.add(di);
-		}
+		if(cr.uw() != null && cr.uw().items != null)
+			for(Item i : cr.uw().items)
+			{
+				Set<Integer> item_outlets = new HashSet<>();
+				List<Integer> store_ids = ItemRepository.i().getAvailability(i.getOfferId());
+				for(Integer store_id: store_ids)
+					if (Config.outlets_mapping.get(store_id) != null)
+						item_outlets.add(Config.outlets_mapping.get(store_id));
+				outlets.retainAll(item_outlets);
+				DeliverableItem di =	new DeliverableItem(i)
+					.setDelivery(!store_ids.isEmpty());
+				items.add(di);
+			}
 		List<DeliveryOption> deliveryOptions = DeliveryService.i().getFeasible(cr.uw());
 		Set<DeliveryOption> feasibleDeliveryOptions = new HashSet<>(deliveryOptions);
 		Cart cart = new Cart().setDeliveryOptions(feasibleDeliveryOptions);

@@ -23,11 +23,11 @@ public class Dates
 	}
 	public String getFromDate()
 	{
-		return Main.fmt.format(fromDate);
+		return Main.fmt().format(fromDate);
 	}
 	public String getToDate()
 	{
-		return Main.fmt.format(toDate);
+		return Main.fmt().format(toDate);
 	}
 
 	@Override
@@ -40,6 +40,13 @@ public class Dates
 		return
 			that.fromDate.equals(this.fromDate)
 				&& that.toDate.equals(this.toDate);
+	}
+	@Override
+	public int hashCode()
+	{
+		int result = fromDate != null ? fromDate.hashCode() : 0;
+		result = 31 * result + (toDate != null ? toDate.hashCode() : 0);
+		return result;
 	}
 }
 

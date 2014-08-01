@@ -27,12 +27,13 @@ public class RegionConstraint extends AbstractConstraint implements Callable<Set
 		Set<DeliveryOption> xs = new HashSet<>();
 		String city_name = null;
 		Region r;
-		while((r = rx.delivery.getRegion()) != null)
-			if(r.getType() == RegionType.CITY)
-			{
-				city_name = r.getName();
-				break;
-			}
+		if(rx.delivery != null)
+			while((r = rx.delivery.getRegion()) != null)
+				if(r.getType() == RegionType.CITY)
+				{
+					city_name = r.getName();
+					break;
+				}
 
 		if(city_name == null)
 		{

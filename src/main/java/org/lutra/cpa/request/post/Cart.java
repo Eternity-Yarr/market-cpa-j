@@ -21,10 +21,10 @@ public class Cart
 	public double getTotal()
 	{
 		double ret = 0;
-		for(Item i : items)
-		{
-			ret += i.getCount() * i.getPrice();
-		}
+		if(items != null)
+			for(Item i : items)
+				ret += i.getCount() * i.getPrice();
+
 		return total == 0 ? ret : total;
 	}
 }

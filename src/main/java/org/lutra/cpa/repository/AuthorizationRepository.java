@@ -6,6 +6,7 @@ import org.lutra.cpa.Helpers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -54,7 +55,7 @@ public class AuthorizationRepository
 		String hash;
 		String sid  = String.valueOf(r.nextInt());
 		if (md != null)
-			hash = String.valueOf(Hex.encodeHex(md.digest(sid.getBytes())));
+			hash = String.valueOf(Hex.encodeHex(md.digest(sid.getBytes(StandardCharsets.UTF_8))));
 		else
 			hash = String.valueOf(sid);
 
@@ -104,7 +105,7 @@ WHERE login = ? AND group_id = 1 AND active = 'Y'
 					String salt = saltnhash.substring(0,8);
 					String hash_string = saltnhash.substring(8);
 					byte[] hash = Hex.decodeHex(hash_string.toCharArray());
-					boolean match = Arrays.equals(hash, (md.digest((salt + password).getBytes())));
+					boolean match = Arrays.equals(hash, (md.digest((salt + password).getBytes(StandardCharsets.UTF_8))));
 					if(match)
 						ret = rs.getInt("id");
 				}

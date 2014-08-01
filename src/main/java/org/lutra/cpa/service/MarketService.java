@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -48,22 +49,29 @@ public class MarketService
 			con.setRequestProperty("Authorization", OAuth);
 			con.setRequestMethod("GET");
 			con.setDoInput(true);
-			BufferedReader br;
+			InputStream is;
 			if(con.getResponseCode() != 200)
 			{
 				log.info("Failed getRequest to {}", path);
-				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				is = con.getErrorStream();
 			}
 			else
 			{
 				log.info("Succeed getRequest to {}", path);
-				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				is = con.getInputStream();
 			}
 			String input;
-			while((input = br.readLine()) != null)
-				content.append(input);
-			if(con.getResponseCode() != 200)
-				log.error(content.toString());
+			try
+			(
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr)
+			)
+			{
+				while((input = br.readLine()) != null)
+					content.append(input);
+				if(con.getResponseCode() != 200)
+					log.error(content.toString());
+			}
 		}
 		catch(Exception e)
 		{
@@ -94,25 +102,34 @@ public class MarketService
 			con.setRequestMethod("PUT");
 			con.setDoOutput(true);
 			con.setDoInput(true);
-			OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
-			out.write(body);
-			out.close();
-			BufferedReader br;
+			try(OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream()))
+			{
+				out.write(body);
+			}
+
+			InputStream is;
 			if(con.getResponseCode() != 200)
 			{
 				log.info("Failed getRequest to {}", path);
-				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				is = con.getErrorStream();
 			}
 			else
 			{
 				log.info("Succeed getRequest to {}", path);
-				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				is = con.getInputStream();
 			}
 			String input;
-			while((input = br.readLine()) != null)
-				content.append(input);
-			if(con.getResponseCode() != 200)
-				log.error(content.toString());
+			try
+			(
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr)
+			)
+			{
+				while((input = br.readLine()) != null)
+					content.append(input);
+				if(con.getResponseCode() != 200)
+					log.error(content.toString());
+			}
 		}
 		catch(Exception e)
 		{

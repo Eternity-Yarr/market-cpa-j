@@ -91,7 +91,7 @@ public class ChangeStatusHandler implements HttpHandler
 				sr.setStatus(s);
 				if(has_error)
 				{
-
+					//TODO: wtf
 				}
 				else
 				{
@@ -102,7 +102,7 @@ public class ChangeStatusHandler implements HttpHandler
 					{
 						if(or.hasError())
 						{
-							log.info("Got error from API:");
+							log.info("Got an error from API:");
 							log.info("[{}] {}", or.error.code, or.error.message);
 						}
 						else

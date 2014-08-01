@@ -2,6 +2,7 @@ package org.lutra.cpa;
 
 import org.lutra.cpa.model.DeliveryType;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -46,14 +47,13 @@ public class Config
 	private Config()
 	{
 		Properties p = new Properties();
-		try
+		try(InputStream is = Config.class.getResourceAsStream("config.properties"))
 		{
-			p.load(Config.class.getResourceAsStream("config.properties"));
+			p.load(is);
 		}
 		catch(Exception e)
 		{
-			System.err.println("Config not found");
-			System.exit(-1);
+			throw new RuntimeException("Config not found", e);
 		}
 		oauth_token = p.getProperty("oauth_token");
 		oauth_client_id = p.getProperty("oauth_client_id");
