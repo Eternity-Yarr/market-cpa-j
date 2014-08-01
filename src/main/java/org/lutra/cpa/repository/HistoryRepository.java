@@ -83,7 +83,7 @@ public class HistoryRepository
 	public List<HistoryEntry> getRecent()
 	{
 		List<HistoryEntry> ret = new ArrayList<>();
-		String q = "SELECT user_id, order_id, message, date_added FROM market_cpa_log ORDER BY date_added ASC LIMIT 30";
+		String q = "SELECT user_id, order_id, message, date_added FROM market_cpa_log ORDER BY date_added DESC LIMIT 30";
 		try
 		(
 			Connection con = Db.ds.getConnection();
