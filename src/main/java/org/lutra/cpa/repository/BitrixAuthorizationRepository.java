@@ -48,6 +48,7 @@ public class BitrixAuthorizationRepository implements AuthorizationRepository
 		return instance;
 	}
 
+	/* TODO: move to service, wrong layer */
 	@Override
 	public String generateToken()
 	{
