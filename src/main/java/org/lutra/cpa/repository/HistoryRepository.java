@@ -80,4 +80,32 @@ public class HistoryRepository
 
 		return ret;
 	}
+	public List<HistoryEntry> getRecent()
+	{
+		List<HistoryEntry> ret = new ArrayList<>();
+		String q = "SELECT user_id, order_id, message, date_added FROM market_cpa_log ORDER BY date_added ASC LIMIT 30";
+		try
+		(
+			Connection con = Db.ds.getConnection();
+			PreparedStatement ps = con.prepareStatement(q);
+			ResultSet rs = ps.executeQuery()
+		)
+		{
+			while(rs.next())
+			{
+				HistoryEntry he = new HistoryEntry();
+				he.order_id = rs.getInt("order_id");
+				he.date_added = new Date(rs.getTimestamp("date_added").getTime());
+				he.message = rs.getString("message");
+				he.user = UserService.i().get(rs.getInt("user_id"));
+				ret.add(he);
+			}
+		}
+		catch(Exception e)
+		{
+			log.error(e.toString(), e);
+		}
+
+		return ret;
+	}
 }

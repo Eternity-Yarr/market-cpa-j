@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class HistoryEntry
 {
+	public int order_id;
 	public Date date_added;
 	public User user;
 	public String message;

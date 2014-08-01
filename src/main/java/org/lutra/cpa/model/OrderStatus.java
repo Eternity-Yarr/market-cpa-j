@@ -3,7 +3,7 @@ package org.lutra.cpa.model;
 public enum OrderStatus
 {
 	UNPAID("Заказ оформлен, но еще не оплачен", "Не оплачен", "warning"),
-	PROCESSING("Заказ можно выполнять", "Выполняется", "danger"),
+	PROCESSING("Заказ можно выполнять", "Новый", "danger"),
 	CANCELLED("Заказ отменен", "Отменен", ""),
 	DELIVERY("Заказ передан в доставку", "Доставка", "warning"),
 	PICKUP("Заказ доставлен в пункт самовывоза", "Самовывоз", "warning"),

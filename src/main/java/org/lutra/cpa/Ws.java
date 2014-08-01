@@ -53,6 +53,7 @@ public class Ws
 			.add("/order/status", new OrderStatusHandler())
 			.add("/order/accept", new OrderAcceptHandler())
 			.add("/cart", new CartHandler())
+			.add("/history", new HistoryHandler())
 			.add("/", new LoginHandler())
 			.add("/change_status", new ChangeStatusHandler())
 			.add("/change_delivery", new ChangeDeliveryHandler())

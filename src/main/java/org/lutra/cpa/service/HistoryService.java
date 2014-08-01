@@ -47,4 +47,8 @@ public class HistoryService
 	{
 		return hr.get(order_id);
 	}
+	public List<HistoryEntry> getRecent()
+	{
+		return hr.getRecent();
+	}
 }
