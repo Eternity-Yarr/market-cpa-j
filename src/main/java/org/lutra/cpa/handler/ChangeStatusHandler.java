@@ -4,6 +4,7 @@ import org.lutra.cpa.Config;
 import org.lutra.cpa.Helpers;
 import org.lutra.cpa.Main;
 import org.lutra.cpa.Mt;
+import org.lutra.cpa.cache.APICache;
 import org.lutra.cpa.cache.OrdersCache;
 import org.lutra.cpa.model.OrderStatus;
 import org.lutra.cpa.model.OrderSubstatus;
@@ -104,6 +105,7 @@ public class ChangeStatusHandler implements HttpHandler
 							HistoryService.i().add(Helpers.currentSession(rx), id, message);
 							log.info("Replacing order {} in cache", or.uw().getId());
 							OrdersCache.put(or.uw());
+							APICache.invalidate();
 						}
 					}
 					else

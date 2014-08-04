@@ -23,6 +23,11 @@ public class APICache
 		.expireAfterWrite(1, TimeUnit.MINUTES)
 		.build();
 
+	public static void invalidate()
+	{
+		cache.invalidateAll();
+	}
+
 	public static String get(final String req)
 	{
 		String ret = "";
