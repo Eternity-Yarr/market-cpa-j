@@ -2,15 +2,15 @@ package org.lutra.cpa.request.put;
 
 public class StatusRequest
 {
-	private Status status;
+	private Status order;
 	public Status uw()
 	{
-		return status;
+		return order;
 	}
 
-	public StatusRequest setStatus(Status status)
+	public StatusRequest setStatus(Status order)
 	{
-		this.status = status;
+		this.order = order;
 
 		return this;
 	}

@@ -18,6 +18,7 @@ public class OrdersCache
 		.newBuilder()
 		.expireAfterWrite(3, TimeUnit.MINUTES)
 		.build();
+
 	public static void put(Order o)
 	{
 		if(o != null && o.getId() != 0)
